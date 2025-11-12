@@ -145,11 +145,11 @@
     .art-domains{
       display: flex;
       gap: 2rem;
-      flex-wrap: wrap;
+      flex-wrap: wrap; /* wrap domains */
       justify-content: center;
       padding-bottom: 2rem;
       cursor: default;
-      overflow: visible;
+      overflow: visible; /* remove scrolling */
     }
     .art-domain{
       flex: 0 0 auto;
@@ -173,67 +173,79 @@
       color:#fff;
     }
 
-    /* Overlay for domain content */
+    /* ===== Overlay (modal) ===== */
     .domain-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.9);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .4s ease;
-      z-index:9999;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+      z-index: 9999;
     }
     .domain-overlay.active{
-      opacity:1;
-      pointer-events:auto;
+      opacity: 1;
+      pointer-events: auto;
     }
     .domain-overlay-content{
-      max-width:90vw;
-      max-height:90vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background: #111;
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 80vw;
+      max-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-direction: column;
     }
     .domain-overlay-content img,
     .domain-overlay-content video{
-      max-width:100%;
-      max-height:100%;
-      border-radius:10px;
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
     }
     .domain-overlay-content pre{
-      white-space:pre-wrap;
-      color:#fff;
-      font-size:1.2rem;
-      line-height:1.8;
-      text-align:left;
-      max-width:80vw;
-      overflow:auto;
+      white-space: pre-wrap;
+      color: #fff;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      text-align: left;
+      max-width: 80vw;
+      overflow: auto;
     }
     .domain-close{
-      position:absolute;
-      top:2rem;
-      right:2rem;
-      font-size:2.5rem;
-      cursor:pointer;
-      color:#fff;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .domain-nav {
+    .domain-nav{
+      font-size: 2rem;
+      color: #fff;
+      user-select: none;
+      padding: 0.5rem;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      cursor: pointer;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 3rem;
-      cursor: pointer;
-      color: #fff;
-      user-select: none;
-      padding: 1rem;
-      transition: opacity 0.3s;
     }
-    .domain-nav:hover { opacity: 0.6; }
-    .domain-prev { left: 1.5rem; }
-    .domain-next { right: 1.5rem; }
+    .domain-prev { left: -50px; }
+    .domain-next { right: -50px; }
 
     /* ===== Contact ===== */
     .contact-preview .section-title{text-align:center;}
@@ -255,6 +267,8 @@
       .section-title{font-size:3rem;}
       .domain-title{font-size:1.5rem;}
       .art-domain{width:200px;}
+      .domain-prev { left: 10px; }
+      .domain-next { right: 10px; }
     }
   </style>
 </head>
@@ -309,7 +323,7 @@
       </div>
       <div class="research-card">
         <h3>digital biomarkers research</h3>
-        <p>research on digital biomarkers for neuropsychiatric conditions and ai-driven healthcare solutions.</p>
+        <p>research on digital biomarkers for neuropsychiatric conditions and AI-driven healthcare solutions.</p>
         <div class="meta">Vitafluence.ai • 2023 - 2024</div>
       </div>
     </div>
@@ -321,15 +335,16 @@
     <div class="art-domains">
       <!-- Collage -->
       <div class="art-domain" data-domain="collage" data-files='[
-        {"src":"collage/CHOCOLATE_page-0001 copy.jpg","type":"image"},
-        {"src":"collage/NEBITNO_page-0001 2.jpg","type":"image"},
-        {"src":"collage/SPOILSPOR_page-0001(1).jpg","type":"image"},
-        {"src":"collage/Scanned Documents1_page-0001 copy.jpg","type":"image"},
-        {"src":"collage/TORTURE_page-0001 2.jpg","type":"image"}
+        {"src":"media/collage/CHOCOLATE_page-0001 copy.jpg","type":"image"},
+        {"src":"media/collage/NEBITNO_page-0001 2.jpg","type":"image"},
+        {"src":"media/collage/SPOILSPOR_page-0001(1).jpg","type":"image"},
+        {"src":"media/collage/Scanned Documents1_page-0001 copy.jpg","type":"image"},
+        {"src":"media/collage/TORTURE_page-0001 2.jpg","type":"image"}
       ]'>
-        <img src="collage/CHOCOLATE_page-0001 copy.jpg" alt="Collage Preview" class="domain-preview">
+        <img src="media/collage/CHOCOLATE_page-0001 copy.jpg" alt="Collage Preview" class="domain-preview">
         <div class="domain-title">collage</div>
       </div>
+
       <!-- Photography -->
       <div class="art-domain" data-domain="photography" data-files='[
         {"src":"media/photo1.jpg","type":"image"},
@@ -339,6 +354,7 @@
         <img src="media/photo1.jpg" alt="Photography Preview" class="domain-preview">
         <div class="domain-title">photography</div>
       </div>
+
       <!-- Video -->
       <div class="art-domain" data-domain="video" data-files='[
         {"src":"media/video-preview.jpg","type":"image"},
@@ -347,6 +363,7 @@
         <img src="media/video-preview.jpg" alt="Video Preview" class="domain-preview">
         <div class="domain-title">video</div>
       </div>
+
       <!-- Writing -->
       <div class="art-domain" data-domain="writing" data-files='[
         {"src":"media/poem1.txt","type":"text"},
@@ -392,7 +409,7 @@
       }, { threshold: .1 });
       document.querySelectorAll('.research-card, .about-card').forEach(c => obs.observe(c));
 
-      // Art Overlay
+      // Art Overlay (modal)
       const artDomains = document.querySelectorAll('.art-domain');
       const overlay = document.createElement('div');
       overlay.className = 'domain-overlay';
@@ -407,63 +424,60 @@
       let currentFiles = [];
       let currentIndex = 0;
 
-      function showItem(index) {
+      function showItem(index){
         const contentBox = overlay.querySelector('.domain-overlay-content');
         contentBox.innerHTML = '';
         const file = currentFiles[index];
-        if (!file) return;
+        if(!file) return;
 
-        if (file.type === 'image') {
-          const img = document.createElement('img');
-          img.src = file.src;
+        if(file.type==='image'){
+          const img=document.createElement('img');
+          img.src=file.src;
           contentBox.appendChild(img);
-        } else if (file.type === 'video') {
-          const vid = document.createElement('video');
-          vid.src = file.src;
-          vid.controls = true;
-          vid.autoplay = true;
+        } else if(file.type==='video'){
+          const vid=document.createElement('video');
+          vid.src=file.src;
+          vid.controls=true;
+          vid.autoplay=true;
           contentBox.appendChild(vid);
-        } else if (file.type === 'text') {
-          fetch(file.src)
-            .then(res => res.text())
-            .then(txt => {
-              const pre = document.createElement('pre');
-              pre.textContent = txt;
-              contentBox.appendChild(pre);
-            })
-            .catch(() => contentBox.innerHTML = '<p>Could not load text.</p>');
+        } else if(file.type==='text'){
+          fetch(file.src).then(res=>res.text()).then(txt=>{
+            const pre=document.createElement('pre');
+            pre.textContent=txt;
+            contentBox.appendChild(pre);
+          }).catch(()=>contentBox.innerHTML='<p>Could not load text.</p>');
         }
       }
 
-      function openDomain(files) {
-        currentFiles = files;
-        currentIndex = 0;
+      function openDomain(files){
+        currentFiles=files;
+        currentIndex=0;
         showItem(currentIndex);
         overlay.classList.add('active');
       }
 
-      function closeOverlay() {
+      function closeOverlay(){
         overlay.classList.remove('active');
-        overlay.querySelector('.domain-overlay-content').innerHTML = '';
+        overlay.querySelector('.domain-overlay-content').innerHTML='';
       }
 
-      artDomains.forEach(domain => {
-        domain.addEventListener('click', () => {
-          const files = JSON.parse(domain.dataset.files);
+      artDomains.forEach(domain=>{
+        domain.addEventListener('click',()=>{
+          const files=JSON.parse(domain.dataset.files);
           openDomain(files);
         });
       });
 
       overlay.querySelector('.domain-close').addEventListener('click', closeOverlay);
-      overlay.addEventListener('click', e => {
-        if (e.target.classList.contains('domain-overlay')) closeOverlay();
+      overlay.addEventListener('click', e=>{
+        if(e.target.classList.contains('domain-overlay')) closeOverlay();
       });
-      overlay.querySelector('.domain-next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % currentFiles.length;
+      overlay.querySelector('.domain-next').addEventListener('click', ()=>{
+        currentIndex=(currentIndex+1)%currentFiles.length;
         showItem(currentIndex);
       });
-      overlay.querySelector('.domain-prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
+      overlay.querySelector('.domain-prev').addEventListener('click', ()=>{
+        currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length;
         showItem(currentIndex);
       });
     });
