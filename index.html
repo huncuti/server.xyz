@@ -143,14 +143,14 @@
 
     /* ===== Art Section ===== */
     .art-domains{
-      display:flex;
-      gap:2rem;
-      overflow-x:auto;
-      scroll-behavior: smooth;
-      padding-bottom:2rem;
-      cursor: grab;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap; /* wrap domains on smaller screens */
+      justify-content: center;
+      padding-bottom: 2rem;
+      cursor: default; /* no grab cursor */
+      overflow: visible; /* remove scrolling */
     }
-    .art-domains:active{cursor: grabbing;}
     .art-domain{
       flex: 0 0 auto;
       width: 300px;
@@ -168,7 +168,7 @@
     }
     .domain-title{
       margin-top:1rem;
-      font-family:'Velvelyne',sans-serif; /* Use preview font */
+      font-family:'Velvelyne',sans-serif;
       font-size:2rem;
       color:#fff;
     }
@@ -220,8 +220,6 @@
       cursor:pointer;
       color:#fff;
     }
-
-    /* Navigation arrows */
     .domain-nav {
       position: absolute;
       top: 50%;
@@ -262,11 +260,10 @@
 </head>
 
 <body>
-  <!-- =================  HERO  ================= -->
+  <!-- ================= HERO ================= -->
   <div class="typewriter-container">
     <h1 class="main-title">huncut</h1>
     <div class="typewriter-text" id="typewriter-intro"></div>
-
     <nav class="navigation">
       <a href="#find-out" class="nav-item">find out</a>
       <a href="#research" class="nav-item">research</a>
@@ -275,7 +272,7 @@
     </nav>
   </div>
 
-  <!-- =================  FIND OUT  ================= -->
+  <!-- ================= FIND OUT ================= -->
   <section id="find-out" class="about-section">
     <div class="about-content">
       <h2 class="section-title">find out</h2>
@@ -296,7 +293,7 @@
     </div>
   </section>
 
-  <!-- =================  RESEARCH  ================= -->
+  <!-- ================= RESEARCH ================= -->
   <section id="research" class="research-highlights">
     <h2 class="section-title">current, previous, formal</h2>
     <div class="research-grid">
@@ -318,62 +315,49 @@
     </div>
   </section>
 
-  <!-- =================  ART  ================= -->
+  <!-- ================= ART ================= -->
   <section id="art" class="art-section">
     <h2 class="section-title">art</h2>
     <div class="art-domains">
-
       <!-- Collage -->
-      <div class="art-domain"
-           data-domain="collage"
-           data-files='[
-             {"src":"media/collage1.jpg","type":"image"},
-             {"src":"media/collage2.jpg","type":"image"},
-             {"src":"media/collage3.jpg","type":"image"},
-             {"src":"media/collage-video.mp4","type":"video"}
-           ]'>
+      <div class="art-domain" data-domain="collage" data-files='[
+        {"src":"media/collage1.jpg","type":"image"},
+        {"src":"media/collage2.jpg","type":"image"},
+        {"src":"media/collage3.jpg","type":"image"},
+        {"src":"media/collage-video.mp4","type":"video"}
+      ]'>
         <img src="media/collage1.jpg" alt="Collage Preview" class="domain-preview">
         <div class="domain-title">collage</div>
       </div>
-
       <!-- Photography -->
-      <div class="art-domain"
-           data-domain="photography"
-           data-files='[
-             {"src":"media/photo1.jpg","type":"image"},
-             {"src":"media/photo2.jpg","type":"image"},
-             {"src":"media/photo3.jpg","type":"image"}
-           ]'>
+      <div class="art-domain" data-domain="photography" data-files='[
+        {"src":"media/photo1.jpg","type":"image"},
+        {"src":"media/photo2.jpg","type":"image"},
+        {"src":"media/photo3.jpg","type":"image"}
+      ]'>
         <img src="media/photo1.jpg" alt="Photography Preview" class="domain-preview">
         <div class="domain-title">photography</div>
       </div>
-
       <!-- Video -->
-      <div class="art-domain"
-           data-domain="video"
-           data-files='[
-             {"src":"media/video-preview.jpg","type":"image"},
-             {"src":"media/video1.mp4","type":"video"}
-           ]'>
+      <div class="art-domain" data-domain="video" data-files='[
+        {"src":"media/video-preview.jpg","type":"image"},
+        {"src":"media/video1.mp4","type":"video"}
+      ]'>
         <img src="media/video-preview.jpg" alt="Video Preview" class="domain-preview">
         <div class="domain-title">video</div>
       </div>
-
       <!-- Writing -->
-      <div class="art-domain"
-           data-domain="writing"
-           data-files='[
-             {"src":"media/poem1.txt","type":"text"},
-             {"src":"media/poem2.txt","type":"text"}
-           ]'>
+      <div class="art-domain" data-domain="writing" data-files='[
+        {"src":"media/poem1.txt","type":"text"},
+        {"src":"media/poem2.txt","type":"text"}
+      ]'>
         <img src="media/writing-preview.jpg" alt="Writing Preview" class="domain-preview">
         <div class="domain-title">writing</div>
       </div>
-
     </div>
   </section>
 
-  <!-- =================  CONTACT  ================= -->
+  <!-- ================= CONTACT ================= -->
   <section id="contact" class="contact-preview">
     <h2 class="section-title">get in touch</h2>
     <div class="contact-info">
@@ -382,12 +366,12 @@
     </div>
   </section>
 
-  <!-- =================  FOOTER ================= -->
+  <!-- ================= FOOTER ================= -->
   <footer class="footer">
     <p>&copy; 2024 huncut. all rights reserved.</p>
   </footer>
 
-  <!-- =================  JS ================= -->
+  <!-- ================= JS ================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Typewriter
@@ -481,37 +465,7 @@
         currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
         showItem(currentIndex);
       });
-
-      // --- Carousel drag/swipe with snap ---
-      const carousel = document.querySelector('.art-domains');
-      let isDown = false, startX, scrollLeft;
-      function snapToCard() {
-        const cards = carousel.querySelectorAll('.art-domain');
-        const carouselRect = carousel.getBoundingClientRect();
-        let closestCard = null, closestOffset = Infinity;
-        cards.forEach(card => {
-          const cardRect = card.getBoundingClientRect();
-          const cardCenter = cardRect.left + cardRect.width/2;
-          const carouselCenter = carouselRect.left + carouselRect.width/2;
-          const offset = Math.abs(carouselCenter - cardCenter);
-          if(offset < closestOffset){closestOffset=offset;closestCard=card;}
-        });
-        if(closestCard){
-          const cardRect = closestCard.getBoundingClientRect();
-          const carouselCenter = carouselRect.left + carouselRect.width/2;
-          const scrollDelta = (cardRect.left + cardRect.width/2) - carouselCenter;
-          carousel.scrollBy({left: scrollDelta, behavior:'smooth'});
-        }
-      }
-      carousel.addEventListener('mousedown', e => {isDown=true;startX=e.pageX-carousel.offsetLeft;scrollLeft=carousel.scrollLeft;});
-      carousel.addEventListener('mouseleave', () => {if(isDown) snapToCard(); isDown=false;});
-      carousel.addEventListener('mouseup', () => {if(isDown) snapToCard(); isDown=false;});
-      carousel.addEventListener('mousemove', e => {if(!isDown) return; e.preventDefault(); const x=e.pageX-carousel.offsetLeft; const walk=(x-startX)*2; carousel.scrollLeft=scrollLeft-walk; startX=e.pageX-carousel.offsetLeft;});
-      carousel.addEventListener('touchend', snapToCard);
-      carousel.addEventListener('touchmove', e => {const touch=e.touches[0]; carousel.scrollLeft += (startX - touch.pageX)*2; startX=touch.pageX;});
-      carousel.addEventListener('touchstart', e => startX=e.touches[0].pageX);
     });
   </script>
 </body>
 </html>
-
