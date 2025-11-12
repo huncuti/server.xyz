@@ -1,336 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>server.xyz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>server.xyz</title>
 
-    <!-- external libs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <!-- external libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
 
-    <!-- preload fonts -->
-    <link rel="preload" href="fonts/Velvelyne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- preload fonts -->
+  <link rel="preload" href="fonts/Velvelyne-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
-    <style>
-        /* ===== Fonts ===== */
-        @font-face {
-            font-family: 'Typefesse';
-            src: url('fonts/Typefesse_Claire-Obscure.woff2') format('woff2'),
-                 url('fonts/Typefesse_Claire-Obscure.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Velvelyne';
-            src: url('fonts/Velvelyne-Regular.woff2') format('woff2'),
-                 url('fonts/Velvelyne-Regular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+  <style>
+    /* ===== Fonts ===== */
+    @font-face {
+      font-family: 'Typefesse';
+      src: url('fonts/Typefesse_Claire-Obscure.woff2') format('woff2'),
+           url('fonts/Typefesse_Claire-Obscure.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Velvelyne';
+      src: url('fonts/Velvelyne-Regular.woff2') format('woff2'),
+           url('fonts/Velvelyne-Regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-        /* ===== Global ===== */
-        *{margin:0;padding:0;box-sizing:border-box;}
-        html{scroll-behavior:smooth;}
-        body{
-            font-family:'Velvelyne',sans-serif;
-            background:#000;
-            color:#fff;
-            line-height:1.6;
-        }
-        a{color:inherit;text-decoration:none;}
+    /* ===== Global ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Velvelyne',sans-serif;
+      background:#000;
+      color:#fff;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none;}
 
-        /* ===== Hero ===== */
-        .typewriter-container{
-            min-height:100vh;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            padding:2rem;
-            background:#000;
-            text-align:center;
-            position:relative;
-        }
-        .main-title{
-            font-family:'Typefesse',serif;
-            font-size:8rem;
-            line-height:1;
-            color:transparent;
-            -webkit-text-stroke:1px #fff;
-            letter-spacing:.2rem;
-            margin-top:10rem;
-        }
-        .typewriter-text{
-            font-size:1.5rem;
-            margin-top:3rem;
-            height:1.6em;
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
-        }
-        .navigation{
-            display:flex;
-            gap:1.5rem;
-            margin-top:3rem;
-            flex-wrap:wrap;
-            justify-content:center;
-        }
-        .nav-item{
-            padding:.5rem 1rem;
-            border-radius:5px;
-            transition:all .3s ease;
-        }
-        .nav-item:hover{background:#fff;color:#000;}
+    /* ===== Hero ===== */
+    .typewriter-container{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+      background:#000;
+      text-align:center;
+      position:relative;
+    }
+    .main-title{
+      font-family:'Typefesse',serif;
+      font-size:8rem;
+      line-height:1;
+      color:transparent;
+      -webkit-text-stroke:1px #fff;
+      letter-spacing:.2rem;
+      margin-top:10rem;
+    }
+    .typewriter-text{
+      font-size:1.5rem;
+      margin-top:3rem;
+      height:1.6em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .navigation{
+      display:flex;
+      gap:1.5rem;
+      margin-top:3rem;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav-item{
+      padding:.5rem 1rem;
+      border-radius:5px;
+      transition:all .3s ease;
+    }
+    .nav-item:hover{background:#fff;color:#000;}
 
-        /* ===== Sections ===== */
-        .about-section,
-        .research-highlights,
-        .art-section,
-        .contact-preview{
-            padding:5rem 2rem;
-            max-width:1200px;
-            margin:0 auto;
-            text-align:left;
-        }
-        /* ===== uniform 42-rem section titles ===== */
-            .section-title,
-            #find-out .section-title,
-            #research .section-title,
-            #art .section-title,
-            #contact .section-title {
-                font-family: 'Velvelyne', serif;
-                font-size: 18rem !important;   /* 42 rem */
-                margin-bottom: 2rem;
-                color: transparent;
-                -webkit-text-stroke: 0.5px #fff;
-                text-align: center;
-            }
-            #contact .section-title { text-align: center; }   /* keep contact centred */
-        }
-        .about-card,
-        .research-card{
-            background:transparent;
-            padding:.25rem 0;
-            border:none;
-            text-align:left;
-            opacity:0;
-            transform:translateY(30px);
-            transition:all .6s ease;
-            position:relative;
-            margin:.75rem 0;
-        }
-        .about-card h3,
-        .research-card h3{
-            font-family:'Velvelyne',serif;
-            font-size:1.5rem;
-            margin-bottom:.5rem;
-        }
-        .about-card p,
-        .about-card ul,
-        .research-card p{
-            color:#ccc;
-        }
-        .about-card ul{
-            list-style:none;
-            padding-left:0;
-            margin-top:.5rem;
-        }
-        .about-card li{margin-bottom:.4rem;}
-        .research-card .meta{
-            font-size:.9rem;
-            color:#888;
-            font-style:italic;
-        }
+    /* ===== Sections ===== */
+    .about-section,
+    .research-highlights,
+    .art-section,
+    .contact-preview{
+      padding:5rem 2rem;
+      max-width:1200px;
+      margin:0 auto;
+      text-align:left;
+    }
 
-        /* ===== Art Gallery (Motion-Layer) ===== */
-        .motion-layer-gallery{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:1.5rem;
-            margin-top:2rem;
-        }
-        .motion-layer{
-            position:relative;
-            overflow:hidden;
-            border-radius:8px;
-            cursor:pointer;
-            aspect-ratio:4/3;
-        }
-        .motion-layer img{
-            width:100%;height:100%;object-fit:cover;
-            transition:transform .6s cubic-bezier(.16,1,.3,1);
-        }
-        .motion-layer:hover img{transform:scale(1.08);}
-        /* lightbox overlay */
-        .motion-layer-overlay{
-            position:fixed;inset:0;
-            background:rgba(0,0,0,.85);
-            display:flex;align-items:center;justify-content:center;
-            opacity:0;pointer-events:none;
-            transition:opacity .4s ease;
-            z-index:9999;
-        }
-        .motion-layer-overlay.active{opacity:1;pointer-events:auto;}
-        .motion-layer-overlay img{
-            max-width:90vw;max-height:90vh;
-            border-radius:6px;
-        }
-        .motion-layer-close{
-            position:absolute;top:2rem;right:2rem;
-            font-size:2rem;color:#fff;cursor:pointer;
-        }
+    .section-title{
+      font-family:'Velvelyne',serif;
+      font-size:18rem;
+      margin-bottom:2rem;
+      color:transparent;
+      -webkit-text-stroke:.5px #fff;
+      text-align:center;
+    }
 
-        /* ===== Contact ===== */
-        .contact-preview .section-title{text-align:center;}
-        .contact-info p{margin:.75rem 0;text-align:center;}
-        .contact-info a:hover{color:#aaa;}
+    .about-card,
+    .research-card{
+      background:transparent;
+      padding:.25rem 0;
+      border:none;
+      text-align:left;
+      opacity:0;
+      transform:translateY(30px);
+      transition:all .6s ease;
+      position:relative;
+      margin:.75rem 0;
+    }
+    .about-card h3,
+    .research-card h3{
+      font-family:'Velvelyne',serif;
+      font-size:1.5rem;
+      margin-bottom:.5rem;
+    }
+    .about-card p,
+    .about-card ul,
+    .research-card p{color:#ccc;}
+    .about-card ul{
+      list-style:none;
+      padding-left:0;
+      margin-top:.5rem;
+    }
+    .about-card li{margin-bottom:.4rem;}
+    .research-card .meta{
+      font-size:.9rem;
+      color:#888;
+      font-style:italic;
+    }
 
-        /* ===== Footer ===== */
-        .footer{
-            padding:2rem;text-align:center;
-            border-top:1px solid #222;
-            color:#555;margin-top:5rem;
-        }
+    /* ===== Art Section ===== */
+    .art-domains{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:2rem;
+      text-align:center;
+      margin-top:3rem;
+    }
+    .art-domain{
+      cursor:pointer;
+      transition:transform .4s ease;
+    }
+    .art-domain:hover{transform:scale(1.03);}
+    .domain-preview{
+      width:100%;
+      border-radius:10px;
+      aspect-ratio:4/3;
+      object-fit:cover;
+    }
+    .domain-title{
+      margin-top:1rem;
+      font-family:'Typefesse',serif;
+      font-size:6rem;
+      color:transparent;
+      -webkit-text-stroke:1px #fff;
+    }
 
-        /* ===== Responsive ===== */
-        @media(max-width:768px){
-            .main-title{font-size:5rem;}
-            .typewriter-text{font-size:1.2rem;}
-            .navigation{flex-direction:column;gap:1rem;margin-top:3rem;}
-            .section-title{font-size:3rem;}
-        }
-    </style>
+    /* Overlay for domain content */
+    .domain-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .4s ease;
+      z-index:9999;
+    }
+    .domain-overlay.active{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .domain-overlay-content{
+      max-width:90vw;
+      max-height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .domain-overlay-content img,
+    .domain-overlay-content video{
+      max-width:100%;
+      max-height:100%;
+      border-radius:10px;
+    }
+    .domain-overlay-content pre{
+      white-space:pre-wrap;
+      color:#fff;
+      font-size:1.2rem;
+      line-height:1.8;
+      text-align:left;
+      max-width:80vw;
+      overflow:auto;
+    }
+    .domain-close{
+      position:absolute;
+      top:2rem;
+      right:2rem;
+      font-size:2.5rem;
+      cursor:pointer;
+      color:#fff;
+    }
+
+    /* Navigation arrows */
+    .domain-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      cursor: pointer;
+      color: #fff;
+      user-select: none;
+      padding: 1rem;
+      transition: opacity 0.3s;
+    }
+    .domain-nav:hover { opacity: 0.6; }
+    .domain-prev { left: 1.5rem; }
+    .domain-next { right: 1.5rem; }
+
+    /* ===== Contact ===== */
+    .contact-preview .section-title{text-align:center;}
+    .contact-info p{margin:.75rem 0;text-align:center;}
+    .contact-info a:hover{color:#aaa;}
+
+    /* ===== Footer ===== */
+    .footer{
+      padding:2rem;text-align:center;
+      border-top:1px solid #222;
+      color:#555;margin-top:5rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media(max-width:768px){
+      .main-title{font-size:5rem;}
+      .typewriter-text{font-size:1.2rem;}
+      .navigation{flex-direction:column;gap:1rem;margin-top:3rem;}
+      .section-title{font-size:3rem;}
+      .domain-title{font-size:3rem;}
+    }
+  </style>
 </head>
 
 <body>
-    <!-- =================  HERO  ================= -->
-    <div class="typewriter-container">
-        <h1 class="main-title">huncut</h1>
-        <div class="typewriter-text" id="typewriter-intro"></div>
+  <!-- =================  HERO  ================= -->
+  <div class="typewriter-container">
+    <h1 class="main-title">huncut</h1>
+    <div class="typewriter-text" id="typewriter-intro"></div>
 
-        <nav class="navigation">
-            <a href="#find-out" class="nav-item">find out</a>
-            <a href="#research" class="nav-item">research</a>
-            <a href="#art"      class="nav-item">art</a>
-            <a href="#contact"  class="nav-item">contact</a>
-        </nav>
+    <nav class="navigation">
+      <a href="#find-out" class="nav-item">find out</a>
+      <a href="#research" class="nav-item">research</a>
+      <a href="#art" class="nav-item">art</a>
+      <a href="#contact" class="nav-item">contact</a>
+    </nav>
+  </div>
+
+  <!-- =================  FIND OUT  ================= -->
+  <section id="find-out" class="about-section">
+    <div class="about-content">
+      <h2 class="section-title">find out</h2>
+      <div class="about-card">
+        <h3>focus areas</h3>
+        <ul>
+          <li>cyberpsychology</li>
+          <li>emotion regulation, mindfulness-based interventions</li>
+          <li>creativity, intelligence, personality</li>
+          <li>digital biomarkers, AI-driven healthcare</li>
+        </ul>
+      </div>
+      <div class="about-card">
+        <h3>education</h3>
+        <p>master of psychology — university of zagreb (2020–2024)</p>
+        <p>bachelor of psychology — university of zagreb (2017–2020)</p>
+      </div>
     </div>
+  </section>
 
-    <!-- =================  FIND OUT  ================= -->
-    <section id="find-out" class="about-section">
-        <div class="about-content">
-             <h2 class="section-title">find out</h2>
-            <div class="about-card">
-                <h3>focus areas</h3>
-                <ul>
-                    <li>cyberpsychology</li>
-                    <li>emotion regulation, mindfulness-based interventions</li>
-                    <li>creativity, intelligence, personality</li>
-                    <li>digital biomarkers, AI-driven healthcare</li>
-                </ul>
-            </div>
-            <div class="about-card">
-                <h3>education</h3>
-                <p>master of psychology — university of zagreb (2020–2024)</p>
-                <p>bachelor of psychology — university of zagreb (2017–2020)</p>
-            </div>
-        </div>
-    </section>
+  <!-- =================  RESEARCH  ================= -->
+  <section id="research" class="research-highlights">
+    <h2 class="section-title">current, previous, formal</h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <h3>emotion regulation meta-analysis</h3>
+        <p>comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
+        <div class="meta">university of amsterdam • 2024 - present</div>
+      </div>
+      <div class="research-card">
+        <h3>intelligence & creativity research</h3>
+        <p>supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
+        <div class="meta">university of zagreb • 2023 - present</div>
+      </div>
+      <div class="research-card">
+        <h3>digital biomarkers research</h3>
+        <p>research on digital biomarkers for neuropsychiatric conditions and ai-driven healthcare solutions.</p>
+        <div class="meta">Vitafluence.ai • 2023 - 2024</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- =================  RESEARCH  ================= -->
-    <section id="research" class="research-highlights">
-        <h2 class="section-title">current, previous, formal</h2>
-        <div class="research-grid">
-            <div class="research-card">
-                <h3>emotion regulation meta-analysis</h3>
-                <p>comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
-                <div class="meta">university of amsterdam • 2024 - present</div>
-            </div>
-            <div class="research-card">
-                <h3>intelligence & creativity research</h3>
-                <p>supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
-                <div class="meta">university of zagreb • 2023 - present</div>
-            </div>
-            <div class="research-card">
-                <h3>digital biomarkers research</h3>
-                <p>research on digital biomarkers for neuropsychiatric conditions and ai-driven healthcare solutions.</p>
-                <div class="meta">Vitafluence.ai • 2023 - 2024</div>
-            </div>
-        </div>
-    </section>
+  <!-- =================  ART  ================= -->
+  <section id="art" class="art-section">
+    <h2 class="section-title">art</h2>
+    <div class="art-domains">
 
-    <!-- =================  ART  ================= -->
-    <section id="art" class="art-section">
-        <h2 class="section-title">art</h2>
-        <div class="motion-layer-gallery">
-            <div class="motion-layer" data-image="https://picsum.photos/800/600?random=1"></div>
-            <div class="motion-layer" data-image="https://picsum.photos/800/600?random=2"></div>
-            <div class="motion-layer" data-image="https://picsum.photos/800/600?random=3"></div>
-            <div class="motion-layer" data-image="https://picsum.photos/800/600?random=4"></div>
-            <div class="motion-layer" data-image="https://picsum.photos/800/600?random=5"></div>
-            <div class="motion-layer" data-image="https://picsum.photos/800/600?random=6"></div>
-        </div>
-    </section>
+      <!-- Collage -->
+      <div class="art-domain"
+           data-domain="collage"
+           data-files='[
+             {"src":"media/collage1.jpg","type":"image"},
+             {"src":"media/collage2.jpg","type":"image"},
+             {"src":"media/collage3.jpg","type":"image"},
+             {"src":"media/collage-video.mp4","type":"video"}
+           ]'>
+        <img src="media/collage1.jpg" alt="Collage Preview" class="domain-preview">
+        <h3 class="domain-title">collage</h3>
+      </div>
 
-    <!-- =================  CONTACT  ================= -->
-    <section id="contact" class="contact-preview">
-        <h2 class="section-title">get in touch</h2>
-        <div class="contact-info">
-            <p>e-mail: <a href="mailto:lara.petrovic.xyz@gmail.com">lara.petrovic.xyz@gmail.com</a></p>
-            <p>based in: croatia</p>
-        </div>
-    </section>
+      <!-- Photography -->
+      <div class="art-domain"
+           data-domain="photography"
+           data-files='[
+             {"src":"media/photo1.jpg","type":"image"},
+             {"src":"media/photo2.jpg","type":"image"},
+             {"src":"media/photo3.jpg","type":"image"}
+           ]'>
+        <img src="media/photo1.jpg" alt="Photography Preview" class="domain-preview">
+        <h3 class="domain-title">photography</h3>
+      </div>
 
-    <!-- =================  FOOTER  ================= -->
-    <footer class="footer">
-        <p>&copy; 2024 huncut. all rights reserved.</p>
-    </footer>
+      <!-- Video -->
+      <div class="art-domain"
+           data-domain="video"
+           data-files='[
+             {"src":"media/video-preview.jpg","type":"image"},
+             {"src":"media/video1.mp4","type":"video"}
+           ]'>
+        <img src="media/video-preview.jpg" alt="Video Preview" class="domain-preview">
+        <h3 class="domain-title">video</h3>
+      </div>
 
-    <!-- =================  JS  ================= -->
-    <script>
-        /* ---- typewriter ---- */
-        document.addEventListener('DOMContentLoaded',()=>{
-            new Typed('#typewriter-intro',{
-                strings:['expert and researcher in cybercommunication'],
-                typeSpeed:50,backSpeed:30,backDelay:2000,startDelay:1000,loop:true,showCursor:false
-            });
+      <!-- Writing -->
+      <div class="art-domain"
+           data-domain="writing"
+           data-files='[
+             {"src":"media/poem1.txt","type":"text"},
+             {"src":"media/poem2.txt","type":"text"}
+           ]'>
+        <img src="media/writing-preview.jpg" alt="Writing Preview" class="domain-preview">
+        <h3 class="domain-title">writing</h3>
+      </div>
 
-            /* ---- scroll reveal ---- */
-            const obs=new IntersectionObserver((entries)=>{
-                entries.forEach(e=>{
-                    if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
-                });
-            },{threshold:.1});
-            document.querySelectorAll('.research-card, .about-card').forEach(c=>obs.observe(c));
+    </div>
+  </section>
 
-            /* ---- motion-layer gallery ---- */
-            const gallery=document.querySelector('.motion-layer-gallery');
-            const overlay=document.createElement('div');
-            overlay.className='motion-layer-overlay';
-            overlay.innerHTML=`<span class="motion-layer-close">&times;</span><img src="" alt="">`;
-            document.body.appendChild(overlay);
+  <!-- =================  CONTACT  ================= -->
+  <section id="contact" class="contact-preview">
+    <h2 class="section-title">get in touch</h2>
+    <div class="contact-info">
+      <p>e-mail: <a href="mailto:lara.petrovic.xyz@gmail.com">lara.petrovic.xyz@gmail.com</a></p>
+      <p>based in: croatia</p>
+    </div>
+  </section>
 
-            gallery.querySelectorAll('.motion-layer').forEach(layer=>{
-                const img=new Image();
-                img.src=layer.dataset.image;
-                img.alt='';
-                layer.appendChild(img);
-                layer.addEventListener('click',()=>{
-                    overlay.querySelector('img').src=layer.dataset.image;
-                    overlay.classList.add('active');
-                });
-            });
-            overlay.addEventListener('click',()=>overlay.classList.remove('active'));
-            overlay.querySelector('.motion-layer-close').addEventListener('click',(e)=>{
-                e.stopPropagation(); overlay.classList.remove('active');
-            });
+  <!-- =================  FOOTER  ================= -->
+  <footer class="footer">
+    <p>&copy; 2024 huncut. all rights reserved.</p>
+  </footer>
+
+  <!-- =================  JS  ================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new Typed('#typewriter-intro', {
+        strings: ['expert and researcher in cybercommunication'],
+        typeSpeed: 50, backSpeed: 30, backDelay: 2000, startDelay: 1000, loop: true, showCursor: false
+      });
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }
         });
-    </script>
+      }, { threshold: .1 });
+      document.querySelectorAll('.research-card, .about-card').forEach(c => obs.observe(c));
+
+      /* ---- Art Domain Overlay with navigation ---- */
+      const artDomains = document.querySelectorAll('.art-domain');
+      const overlay = document.createElement('div');
+      overlay.className = 'domain-overlay';
+      overlay.innerHTML = `
+        <span class="domain-close">&times;</span>
+        <span class="domain-nav domain-prev">&#10094;</span>
+        <div class="domain-overlay-content"></div>
+        <span class="domain-nav domain-next">&#10095;</span>
+      `;
+      document.body.appendChild(overlay);
+
+      let currentFiles = [];
+      let currentIndex = 0;
+
+      function showItem(index) {
+        const contentBox = overlay.querySelector('.domain-overlay-content');
+        contentBox.innerHTML = '';
+        const file = currentFiles[index];
+        if (!file) return;
+
+        if (file.type === 'image') {
+          const img = document.createElement('img');
+          img.src = file.src;
+          contentBox.appendChild(img);
+        } else if (file.type === 'video') {
+          const vid = document.createElement('video');
+          vid.src = file.src;
+          vid.controls = true;
+          vid.autoplay = true;
+          contentBox.appendChild(vid);
+        } else if (file.type === 'text') {
+          fetch(file.src)
+            .then(res => res.text())
+            .then(txt => {
+              const pre = document.createElement('pre');
+              pre.textContent = txt;
+              contentBox.appendChild(pre);
+            })
+            .catch(() => {
+              contentBox.innerHTML = '<p>Could not load text.</p>';
+            });
+        }
+      }
+
+      function openDomain(files) {
+        currentFiles = files;
+        currentIndex = 0;
+        showItem(currentIndex);
+        overlay.classList.add('active');
+      }
+
+      function closeOverlay() {
+        overlay.classList.remove('active');
+        overlay.querySelector('.domain-overlay-content').innerHTML = '';
+      }
+
+      artDomains.forEach(domain => {
+        domain.addEventListener('click', () => {
+          const files = JSON.parse(domain.dataset.files);
+          openDomain(files);
+        });
+      });
+
+      overlay.querySelector('.domain-close').addEventListener('click', closeOverlay);
+      overlay.addEventListener('click', e => {
+        if (e.target.classList.contains('domain-overlay')) closeOverlay();
+      });
+
+      overlay.querySelector('.domain-next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % currentFiles.length;
+        showItem(currentIndex);
+      });
+
+      overlay.querySelector('.domain-prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
+        showItem(currentIndex);
+      });
+    });
+  </script>
 </body>
 </html>
+
