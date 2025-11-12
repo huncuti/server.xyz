@@ -141,62 +141,25 @@
       font-style:italic;
     }
 
-<!-- =================  ART  ================= -->
-<section id="art" class="art-section">
-  <h2 class="section-title">art</h2>
-  <div class="art-domains">
+    /* ===== Art Section ===== */
+    .art-domains {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+    .art-domain {
+      flex: 0 0 auto;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .art-domain:hover { transform: scale(1.03); }
+    .domain-preview { width: 280px; height: auto; border-radius: 10px; object-fit: cover; }
+    .domain-title { font-family: 'Velvelyne', sans-serif; font-size: 2rem; margin-top: .5rem; color: #fff; }
+    .art-domain h2.section-title { display: none; }
 
-    <!-- Collage -->
-    <div class="art-domain"
-         data-domain="collage"
-         data-files='[
-           {"src":"media/collage1.jpg","type":"image"},
-           {"src":"media/collage2.jpg","type":"image"},
-           {"src":"media/collage3.jpg","type":"image"},
-           {"src":"media/collage-video.mp4","type":"video"}
-         ]'>
-      <img src="media/collage1.jpg" alt="Collage Preview" class="domain-preview">
-      <h2 class="section-title">collage</h2>
-    </div>
-
-    <!-- Photography -->
-    <div class="art-domain"
-         data-domain="photography"
-         data-files='[
-           {"src":"media/photo1.jpg","type":"image"},
-           {"src":"media/photo2.jpg","type":"image"},
-           {"src":"media/photo3.jpg","type":"image"}
-         ]'>
-      <img src="media/photo1.jpg" alt="Photography Preview" class="domain-preview">
-      <h2 class="section-title">photography</h2>
-    </div>
-
-    <!-- Video -->
-    <div class="art-domain"
-         data-domain="video"
-         data-files='[
-           {"src":"media/video-preview.jpg","type":"image"},
-           {"src":"media/video1.mp4","type":"video"}
-         ]'>
-      <img src="media/video-preview.jpg" alt="Video Preview" class="domain-preview">
-      <h2 class="section-title">video</h2>
-    </div>
-
-    <!-- Writing -->
-    <div class="art-domain"
-         data-domain="writing"
-         data-files='[
-           {"src":"media/poem1.txt","type":"text"},
-           {"src":"media/poem2.txt","type":"text"}
-         ]'>
-      <img src="media/writing-preview.jpg" alt="Writing Preview" class="domain-preview">
-      <h2 class="section-title">writing</h2>
-    </div>
-
-  </div>
-</section>
-
-    
     /* Overlay for domain content */
     .domain-overlay{
       position:fixed;
@@ -279,7 +242,7 @@
       .typewriter-text{font-size:1.2rem;}
       .navigation{flex-direction:column;gap:1rem;margin-top:3rem;}
       .section-title{font-size:3rem;}
-      .domain-title{font-size:3rem;}
+      .domain-title{font-size:1.5rem;}
     }
   </style>
 </head>
@@ -413,11 +376,13 @@
   <!-- =================  JS  ================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Typewriter
       new Typed('#typewriter-intro', {
         strings: ['expert and researcher in cybercommunication'],
         typeSpeed: 50, backSpeed: 30, backDelay: 2000, startDelay: 1000, loop: true, showCursor: false
       });
 
+      // Fade-in cards
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) {
@@ -428,7 +393,7 @@
       }, { threshold: .1 });
       document.querySelectorAll('.research-card, .about-card').forEach(c => obs.observe(c));
 
-      /* ---- Art Domain Overlay with navigation ---- */
+      // ---- Art overlay ----
       const artDomains = document.querySelectorAll('.art-domain');
       const overlay = document.createElement('div');
       overlay.className = 'domain-overlay';
@@ -467,9 +432,7 @@
               pre.textContent = txt;
               contentBox.appendChild(pre);
             })
-            .catch(() => {
-              contentBox.innerHTML = '<p>Could not load text.</p>';
-            });
+            .catch(() => contentBox.innerHTML = '<p>Could not load text.</p>');
         }
       }
 
@@ -501,7 +464,6 @@
         currentIndex = (currentIndex + 1) % currentFiles.length;
         showItem(currentIndex);
       });
-
       overlay.querySelector('.domain-prev').addEventListener('click', () => {
         currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
         showItem(currentIndex);
@@ -510,4 +472,3 @@
   </script>
 </body>
 </html>
-
