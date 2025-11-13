@@ -61,7 +61,7 @@ a{color:inherit;text-decoration:none;}
   font-family:'Typefesse',serif;
   font-size:8rem;
   line-height:1;
-  color:#fff;
+  color:transparent;
   -webkit-text-stroke:1px #fff;
   letter-spacing:.2rem;
   margin-top:10rem;
@@ -99,18 +99,20 @@ a{color:inherit;text-decoration:none;}
   text-align:left;
 }
 
-/* ===== Section Titles ===== */
+/* ===== Section Titles (bigger & transparent) ===== */
 .section-title{
   font-family: 'Velvelyne', serif;
-  font-size:5rem;
+  font-size:18rem;
   margin-bottom:2rem;
-  color:#fff;
+  color:transparent;
+  -webkit-text-stroke:.5px #fff;
   text-align:center;
   opacity:0;
-  transform:translateY(30px);
-  transition: all .6s ease;
+  transform:translateY(50px);
+  transition: all .8s ease;
 }
 
+/* ===== Cards ===== */
 .about-card,
 .research-card{
   background:transparent;
@@ -152,7 +154,9 @@ a{color:inherit;text-decoration:none;}
   text-align:center;
   user-select:none;
   cursor:pointer;
-  transition:transform .4s ease;
+  transition:transform .4s ease, opacity .6s ease;
+  opacity:0;
+  transform:translateY(50px);
 }
 .art-domain:hover{transform:scale(1.03);}
 .domain-preview{
@@ -332,38 +336,22 @@ a{color:inherit;text-decoration:none;}
 <section id="art" class="art-section">
   <h2 class="section-title">art</h2>
   <div class="art-domains">
+    <!-- Collage -->
     <div class="art-domain" data-domain="collage" data-files='[
-      {"src":"collage/TORTURE_page-0001%202.jpg","type":"image"},
-      {"src":"collage/CHOCOLATE_page-0001%20copy.jpg","type":"image"},
-      {"src":"collage/NEBITNO_page-0001%202.jpg","type":"image"},
-      {"src":"collage/SPOILSPOR_page-0001(1).jpg","type":"image"},
-      {"src":"collage/Scanned%20Documents1_page-0001%20copy.jpg","type":"image"},
-      {"src":"collage/final2_copressed.mp4","type":"video"}
+      {"src":"collage/TORTURE_page-0001 2.jpg","type":"image"},
+      {"src":"collage/CHOCOLATE_page-0001 copy.jpg","type":"image"},
+      {"src":"collage/NEBITNO_page-0001 2.jpg","type":"image"}
     ]'>
-      <img src="collage/TORTURE_page-0001%202.jpg" alt="Collage Preview" class="domain-preview">
+      <img src="collage/TORTURE_page-0001 2.jpg" alt="Collage Preview" class="domain-preview">
       <div class="domain-title">collage</div>
     </div>
+    <!-- Photography -->
     <div class="art-domain" data-domain="photography" data-files='[
       {"src":"media/photo1.jpg","type":"image"},
-      {"src":"media/photo2.jpg","type":"image"},
-      {"src":"media/photo3.jpg","type":"image"}
+      {"src":"media/photo2.jpg","type":"image"}
     ]'>
       <img src="media/photo1.jpg" alt="Photography Preview" class="domain-preview">
       <div class="domain-title">photography</div>
-    </div>
-    <div class="art-domain" data-domain="video" data-files='[
-      {"src":"media/video-preview.jpg","type":"image"},
-      {"src":"media/video1.mp4","type":"video"}
-    ]'>
-      <img src="media/video-preview.jpg" alt="Video Preview" class="domain-preview">
-      <div class="domain-title">video</div>
-    </div>
-    <div class="art-domain" data-domain="writing" data-files='[
-      {"src":"media/poem1.txt","type":"text"},
-      {"src":"media/poem2.txt","type":"text"}
-    ]'>
-      <img src="media/writing-preview.jpg" alt="Writing Preview" class="domain-preview">
-      <div class="domain-title">writing</div>
     </div>
   </div>
 </section>
@@ -389,17 +377,18 @@ document.addEventListener('DOMContentLoaded',()=>{
     loop:true, showCursor:false
   });
 
-  // Scroll reveal
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-        observer.unobserve(e.target);
+  // Scroll reveal for titles and cards
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.opacity='1';
+        entry.target.style.transform='translateY(0)';
+        observer.unobserve(entry.target);
       }
     });
-  },{threshold:.1});
-  document.querySelectorAll('.section-title,.about-card,.research-card').forEach(el=>observer.observe(el));
+  }, {threshold:0.1});
+
+  document.querySelectorAll('.section-title, .about-card, .research-card, .art-domain').forEach(el=>observer.observe(el));
 
   // ART overlay
   const artDomains=document.querySelectorAll('.art-domain');
@@ -407,9 +396,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   overlay.className='domain-overlay';
   overlay.innerHTML=`
     <span class="domain-close">&times;</span>
-    <div class="domain-overlay-content">
-      <div class="domain-media"></div>
-    </div>
+    <div class="domain-overlay-content"><div class="domain-media"></div></div>
     <span class="domain-nav domain-prev">&#10094;</span>
     <span class="domain-nav domain-next">&#10095;</span>
   `;
@@ -427,47 +414,26 @@ document.addEventListener('DOMContentLoaded',()=>{
     const f=currentFiles[i];
     if(!f) return;
     if(f.type==='image'){
-      const img=document.createElement('img');
-      img.src=f.src;
-      contentBox.appendChild(img);
+      const img=document.createElement('img'); img.src=f.src; contentBox.appendChild(img);
     } else if(f.type==='video'){
-      const v=document.createElement('video');
-      v.src=f.src;
-      v.controls=true; v.autoplay=true; v.muted=true;
-      contentBox.appendChild(v);
+      const v=document.createElement('video'); v.src=f.src; v.controls=true; v.autoplay=true; v.muted=true; contentBox.appendChild(v);
     } else if(f.type==='text'){
-      fetch(f.src).then(r=>r.text()).then(t=>{
-        const pre=document.createElement('pre');
-        pre.textContent=t;
-        contentBox.appendChild(pre);
-      });
+      fetch(f.src).then(r=>r.text()).then(t=>{const pre=document.createElement('pre'); pre.textContent=t; contentBox.appendChild(pre);});
     }
   }
 
-  function openDomain(files){
-    currentFiles = files;
-    currentIndex = 0;
-    showItem(currentIndex);
-    overlay.classList.add('active');
-  }
-
-  function closeOverlay(){
-    overlay.classList.remove('active');
-    contentBox.innerHTML='';
-  }
+  function openDomain(files){currentFiles=files; currentIndex=0; showItem(currentIndex); overlay.classList.add('active');}
+  function closeOverlay(){overlay.classList.remove('active'); contentBox.innerHTML='';}
 
   artDomains.forEach(d=>{
     d.addEventListener('click',()=>{
-      try{
-        const filesJSON = d.dataset.files.replace(/(\r\n|\n|\r)/gm,"");
-        openDomain(JSON.parse(filesJSON));
-      }catch(e){console.error('JSON parse error', e);}
+      try{openDomain(JSON.parse(d.dataset.files));}catch(e){console.error(e);}
     });
   });
 
   closeBtn.onclick = closeOverlay;
-  nextBtn.onclick = ()=>{ currentIndex=(currentIndex+1)%currentFiles.length; showItem(currentIndex);}
-  prevBtn.onclick = ()=>{ currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length; showItem(currentIndex);}
+  nextBtn.onclick = ()=>{currentIndex=(currentIndex+1)%currentFiles.length; showItem(currentIndex);}
+  prevBtn.onclick = ()=>{currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length; showItem(currentIndex);}
   overlay.onclick = e=>{if(e.target===overlay) closeOverlay();}
   document.addEventListener('keydown', e=>{
     if(!overlay.classList.contains('active')) return;
