@@ -37,15 +37,10 @@
     }
 
     /* ===== Global ===== */
-    *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{
-      font-family:'Velvelyne',sans-serif;
-      background:#000;
-      color:#fff;
-      line-height:1.6;
-    }
-    a{color:inherit;text-decoration:none;}
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Velvelyne',sans-serif; background:#000; color:#fff; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
 
     /* ===== Hero ===== */
     .typewriter-container{
@@ -101,7 +96,7 @@
       text-align:left;
     }
 
-    /* ===== Section Titles: huge outline like original code ===== */
+    /* ===== Section Titles: big outlined ===== */
     .section-title{
       font-family: 'Velvelyne', serif;
       font-size: 18rem;
@@ -109,6 +104,9 @@
       color: transparent;
       -webkit-text-stroke: 0.5px #fff;
       text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .6s ease;
     }
 
     .about-card,
@@ -132,17 +130,9 @@
     .about-card p,
     .about-card ul,
     .research-card p{color:#ccc;}
-    .about-card ul{
-      list-style:none;
-      padding-left:0;
-      margin-top:.5rem;
-    }
+    .about-card ul{list-style:none;padding-left:0;margin-top:.5rem;}
     .about-card li{margin-bottom:.4rem;}
-    .research-card .meta{
-      font-size:.9rem;
-      color:#888;
-      font-style:italic;
-    }
+    .research-card .meta{font-size:.9rem;color:#888;font-style:italic;}
 
     /* ===== Art Section ===== */
     .art-domains{
@@ -203,7 +193,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: visible;
       flex-direction: column;
       position: relative;
       box-shadow: 0 0 30px rgba(255,255,255,0.1);
@@ -224,35 +214,47 @@
       max-width: 80vw;
       overflow: auto;
     }
+
+    /* ===== Close button outside ===== */
     .domain-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 2rem;
+      position: fixed;
+      top: 25px;
+      right: 30px;
+      font-size: 2.2rem;
       cursor: pointer;
       color: #fff;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.6);
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 10001;
+      transition: background 0.3s ease;
     }
-    .domain-nav {
-      font-size: 2rem;
-      color: #fff;
-      user-select: none;
-      padding: 0.5rem;
+    .domain-close:hover{background: rgba(255,255,255,0.2);}
+
+    /* ===== Navigation Arrows ===== */
+    .domain-nav{
+      font-size:2.5rem;
+      color:#fff;
+      user-select:none;
+      padding:.5rem .75rem;
       background: rgba(0,0,0,0.5);
-      border-radius: 50%;
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      border-radius:50%;
+      cursor:pointer;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:10000;
+      transition: opacity .4s ease, background .3s ease;
+      opacity:0;
     }
-    .domain-prev { left: 10px; }
-    .domain-next { right: 10px; }
+    .domain-prev{left:-70px;}
+    .domain-next{right:-70px;}
+    .domain-overlay-content:hover .domain-nav{opacity:1;}
+    .domain-nav:hover{background: rgba(255,255,255,0.2);}
 
     /* ===== Contact ===== */
     .contact-preview .section-title{text-align:center;}
@@ -260,11 +262,7 @@
     .contact-info a:hover{color:#aaa;}
 
     /* ===== Footer ===== */
-    .footer{
-      padding:2rem;text-align:center;
-      border-top:1px solid #222;
-      color:#555;margin-top:5rem;
-    }
+    .footer{padding:2rem;text-align:center;border-top:1px solid #222;color:#555;margin-top:5rem;}
 
     /* ===== Responsive ===== */
     @media(max-width:768px){
@@ -274,6 +272,9 @@
       .section-title{font-size:3rem;}
       .domain-title{font-size:1.5rem;}
       .art-domain{width:200px;}
+      .domain-prev{left:-40px;}
+      .domain-next{right:-40px;}
+      .domain-close{top:15px;right:20px;}
     }
   </style>
 </head>
@@ -293,44 +294,40 @@
 
   <!-- ================= FIND OUT ================= -->
   <section id="find-out" class="about-section">
-    <div class="about-content">
-      <h2 class="section-title">find out</h2>
-      <div class="about-card">
-        <h3>focus areas</h3>
-        <ul>
-          <li>cyberpsychology</li>
-          <li>emotion regulation, mindfulness-based interventions</li>
-          <li>creativity, intelligence, personality</li>
-          <li>digital biomarkers, AI-driven healthcare</li>
-        </ul>
-      </div>
-      <div class="about-card">
-        <h3>education</h3>
-        <p>master of psychology — university of zagreb (2020–2024)</p>
-        <p>bachelor of psychology — university of zagreb (2017–2020)</p>
-      </div>
+    <h2 class="section-title">find out</h2>
+    <div class="about-card">
+      <h3>focus areas</h3>
+      <ul>
+        <li>cyberpsychology</li>
+        <li>emotion regulation, mindfulness-based interventions</li>
+        <li>creativity, intelligence, personality</li>
+        <li>digital biomarkers, AI-driven healthcare</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <h3>education</h3>
+      <p>master of psychology — university of zagreb (2020–2024)</p>
+      <p>bachelor of psychology — university of zagreb (2017–2020)</p>
     </div>
   </section>
 
   <!-- ================= RESEARCH ================= -->
   <section id="research" class="research-highlights">
     <h2 class="section-title">current, previous, formal</h2>
-    <div class="research-grid">
-      <div class="research-card">
-        <h3>emotion regulation meta-analysis</h3>
-        <p>comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
-        <div class="meta">university of amsterdam • 2024 - present</div>
-      </div>
-      <div class="research-card">
-        <h3>intelligence & creativity research</h3>
-        <p>supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
-        <div class="meta">university of zagreb • 2023 - present</div>
-      </div>
-      <div class="research-card">
-        <h3>digital biomarkers research</h3>
-        <p>research on digital biomarkers for neuropsychiatric conditions and AI-driven healthcare solutions.</p>
-        <div class="meta">Vitafluence.ai • 2023 - 2024</div>
-      </div>
+    <div class="research-card">
+      <h3>emotion regulation meta-analysis</h3>
+      <p>comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
+      <div class="meta">university of amsterdam • 2024 - present</div>
+    </div>
+    <div class="research-card">
+      <h3>intelligence & creativity research</h3>
+      <p>supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
+      <div class="meta">university of zagreb • 2023 - present</div>
+    </div>
+    <div class="research-card">
+      <h3>digital biomarkers research</h3>
+      <p>research on digital biomarkers for neuropsychiatric conditions and AI-driven healthcare solutions.</p>
+      <div class="meta">Vitafluence.ai • 2023 - 2024</div>
     </div>
   </section>
 
@@ -344,7 +341,8 @@
         {"src":"collage/CHOCOLATE_page-0001 copy.jpg","type":"image"},
         {"src":"collage/NEBITNO_page-0001 2.jpg","type":"image"},
         {"src":"collage/SPOILSPOR_page-0001(1).jpg","type":"image"},
-        {"src":"collage/Scanned Documents1_page-0001 copy.jpg","type":"image"}
+        {"src":"collage/Scanned Documents1_page-0001 copy.jpg","type":"image"},
+        {"src":"collage/final2_copressed.mp4","type":"video"}
       ]'>
         <img src="collage/TORTURE_page-0001 2.jpg" alt="Collage Preview" class="domain-preview">
         <div class="domain-title">collage</div>
@@ -404,7 +402,7 @@
       });
 
       // Scroll reveal
-      const obs = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) {
             e.target.style.opacity = '1';
@@ -412,15 +410,15 @@
           }
         });
       }, { threshold: .1 });
-      document.querySelectorAll('.research-card, .about-card').forEach(c => obs.observe(c));
+      document.querySelectorAll('.section-title, .about-card, .research-card').forEach(el => observer.observe(el));
 
-      // ART OVERLAY (modal)
+      // ART OVERLAY
       const artDomains = document.querySelectorAll('.art-domain');
       const overlay = document.createElement('div');
       overlay.className = 'domain-overlay';
       overlay.innerHTML = `
+        <span class="domain-close">&times;</span>
         <div class="domain-overlay-content">
-          <span class="domain-close">&times;</span>
           <div class="domain-media"></div>
           <span class="domain-nav domain-prev">&#10094;</span>
           <span class="domain-nav domain-next">&#10095;</span>
@@ -429,80 +427,139 @@
       document.body.appendChild(overlay);
 
       const contentBox = overlay.querySelector('.domain-media');
-      let currentFiles = [];
-      let currentIndex = 0;
+      let currentFiles = [], currentIndex = 0;
 
-      function showItem(index) {
+      function showItem(i) {
         contentBox.innerHTML = '';
-        const file = currentFiles[index];
-        if (!file) return;
-
-        if (file.type === 'image') {
-          const img = document.createElement('img');
-          img.src = file.src;
-          contentBox.appendChild(img);
-        } else if (file.type === 'video') {
-          const vid = document.createElement('video');
-          vid.src = file.src;
-          vid.controls = true;
-          vid.autoplay = true;
-          contentBox.appendChild(vid);
-        } else if (file.type === 'text') {
-          fetch(file.src)
-            .then(res => res.text())
-            .then(txt => {
-              const pre = document.createElement('pre');
-              pre.textContent = txt;
-              contentBox.appendChild(pre);
-            })
-            .catch(() => contentBox.innerHTML = '<p>Could not load text.</p>');
+        const f = currentFiles[i];
+        if (!f) return;
+        if (f.type === 'image') {
+          const img = document.createElement('img'); img.src = f.src; contentBox.appendChild(img);
+        } else if (f.type === 'video') {
+          const v = document.createElement('video'); v.src = f.src; v.controls = true; v.autoplay = true; contentBox.appendChild(v);
+        } else if (f.type === 'text') {
+          fetch(f.src).then(r => r.text()).then(t => {
+            const pre = document.createElement('pre'); pre.textContent = t; contentBox.appendChild(pre);
+          });
         }
       }
 
-      function openDomain(files) {
-        currentFiles = files;
-        currentIndex = 0;
-        showItem(currentIndex);
-        overlay.classList.add('active');
+      function openDomain(files){ currentFiles = files; currentIndex=0; showItem(currentIndex); overlay.classList.add('active'); }
+      function closeOverlay(){ overlay.classList.remove('active'); contentBox.innerHTML=''; }
+
+      artDomains.forEach(d => d.addEventListener('click', () => { try{ openDomain(JSON.parse(d.dataset.files)); } catch(e){ console.error(e); } }));
+
+      overlay.querySelector('.domain-close').onclick = closeOverlay;
+      overlay.querySelector('.domain-next').onclick = () => { currentIndex = (currentIndex+1) % currentFiles.length; showItem(currentIndex); };
+      overlay.querySelector('.domain-prev').onclick = () => { currentIndex = (currentIndex-1+currentFiles.length) % currentFiles.length; showItem(currentIndex); };
+      overlay.onclick = e => { if(e.target===
+<!-- The HTML <body> and sections are already included above -->
+<!-- Continue with JS and overlay functionality (already mostly merged) -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ===== Typewriter =====
+  new Typed('#typewriter-intro', {
+    strings: ['expert and researcher in cybercommunication'],
+    typeSpeed: 50,
+    backSpeed: 30,
+    backDelay: 2000,
+    startDelay: 1000,
+    loop: true,
+    showCursor: false
+  });
+
+  // ===== Scroll Reveal =====
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
       }
-
-      function closeOverlay() {
-        overlay.classList.remove('active');
-        contentBox.innerHTML = '';
-      }
-
-      artDomains.forEach(domain => {
-        domain.addEventListener('click', () => {
-          try {
-            const files = JSON.parse(domain.dataset.files);
-            openDomain(files);
-          } catch (err) {
-            console.error('Error parsing files:', err);
-          }
-        });
-      });
-
-      overlay.querySelector('.domain-close').addEventListener('click', closeOverlay);
-
-      overlay.querySelector('.domain-next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % currentFiles.length;
-        showItem(currentIndex);
-      });
-
-      overlay.querySelector('.domain-prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
-        showItem(currentIndex);
-      });
-
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeOverlay();
-      });
-
-      // ESC key closes overlay
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeOverlay();
-      });
     });
-  </script>
-</body>
-</html>
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section-title, .about-card, .research-card').forEach(el => observer.observe(el));
+
+  // ===== Art Overlay =====
+  const artDomains = document.querySelectorAll('.art-domain');
+  const overlay = document.createElement('div');
+  overlay.className = 'domain-overlay';
+  overlay.innerHTML = `
+    <span class="domain-close">&times;</span>
+    <div class="domain-overlay-content">
+      <div class="domain-media"></div>
+      <span class="domain-nav domain-prev">&#10094;</span>
+      <span class="domain-nav domain-next">&#10095;</span>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const contentBox = overlay.querySelector('.domain-media');
+  let currentFiles = [], currentIndex = 0;
+
+  function showItem(i) {
+    contentBox.innerHTML = '';
+    const f = currentFiles[i];
+    if (!f) return;
+
+    if (f.type === 'image') {
+      const img = document.createElement('img');
+      img.src = f.src;
+      contentBox.appendChild(img);
+    } else if (f.type === 'video') {
+      const vid = document.createElement('video');
+      vid.src = f.src;
+      vid.controls = true;
+      vid.autoplay = true;
+      vid.style.maxHeight = '70vh';
+      contentBox.appendChild(vid);
+    } else if (f.type === 'text') {
+      fetch(f.src)
+        .then(res => res.text())
+        .then(txt => {
+          const pre = document.createElement('pre');
+          pre.textContent = txt;
+          contentBox.appendChild(pre);
+        })
+        .catch(() => contentBox.innerHTML = '<p>Could not load text.</p>');
+    }
+  }
+
+  function openDomain(files) {
+    currentFiles = files;
+    currentIndex = 0;
+    showItem(currentIndex);
+    overlay.classList.add('active');
+  }
+
+  function closeOverlay() {
+    overlay.classList.remove('active');
+    contentBox.innerHTML = '';
+  }
+
+  artDomains.forEach(d => d.addEventListener('click', () => {
+    try { openDomain(JSON.parse(d.dataset.files)); } catch (e) { console.error(e); }
+  }));
+
+  overlay.querySelector('.domain-close').onclick = closeOverlay;
+  overlay.querySelector('.domain-next').onclick = () => {
+    currentIndex = (currentIndex + 1) % currentFiles.length;
+    showItem(currentIndex);
+  };
+  overlay.querySelector('.domain-prev').onclick = () => {
+    currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
+    showItem(currentIndex);
+  };
+
+  overlay.onclick = e => { if (e.target === overlay) closeOverlay(); };
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') closeOverlay();
+    else if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentFiles.length; showItem(currentIndex); }
+    else if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length; showItem(currentIndex); }
+  });
+});
+</script>
