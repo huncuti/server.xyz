@@ -61,17 +61,10 @@ a{color:inherit;text-decoration:none;}
   font-family:'Typefesse',serif;
   font-size:8rem;
   line-height:1;
-  color:transparent;
+  color:#fff;
   -webkit-text-stroke:1px #fff;
   letter-spacing:.2rem;
   margin-top:10rem;
-  opacity:0;
-  transform: translateY(30px);
-  transition: all 1s ease;
-}
-.main-title.visible{
-  opacity:1;
-  transform: translateY(0);
 }
 .typewriter-text{
   font-size:1.5rem;
@@ -80,11 +73,7 @@ a{color:inherit;text-decoration:none;}
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  opacity:0;
-  transform: translateY(30px);
-  transition: all 1s ease;
 }
-.typewriter-text.visible{opacity:1; transform: translateY(0);}
 .navigation{
   display:flex;
   gap:1.5rem;
@@ -113,10 +102,9 @@ a{color:inherit;text-decoration:none;}
 /* ===== Section Titles ===== */
 .section-title{
   font-family: 'Velvelyne', serif;
-  font-size: 18rem;
+  font-size: 5rem;
   margin-bottom: 2rem;
-  color: transparent;
-  -webkit-text-stroke: 0.5px #fff;
+  color: #fff;
   text-align: center;
   opacity:0;
   transform:translateY(30px);
@@ -184,7 +172,7 @@ a{color:inherit;text-decoration:none;}
 .domain-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.9);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
@@ -249,7 +237,7 @@ a{color:inherit;text-decoration:none;}
 }
 .domain-close:hover{background: rgba(255,255,255,0.2);}
 
-/* ===== Navigation Arrows ===== */
+/* ===== Navigation Arrows always visible outside content ===== */
 .domain-nav{
   font-size:3rem;
   color:#fff;
@@ -258,19 +246,16 @@ a{color:inherit;text-decoration:none;}
   background: rgba(0,0,0,0.5);
   border-radius:50%;
   cursor:pointer;
-  position:absolute;
+  position: fixed; /* changed to fixed outside */
   top:50%;
   transform:translateY(-50%);
   z-index:10000;
-  opacity:0.5;
-  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  opacity:1; /* always visible */
+  transition: transform 0.3s ease, background 0.3s ease;
 }
-.domain-nav:hover{
-  background: rgba(255,255,255,0.2);
-  transform:translateY(-50%) scale(1.2);
-}
-.domain-prev{left:-70px;}
-.domain-next{right:-70px;}
+.domain-prev{left:20px;}
+.domain-next{right:20px;}
+.domain-nav:hover{background: rgba(255,255,255,0.2); transform:translateY(-50%) scale(1.2);}
 
 /* ===== Contact ===== */
 .contact-preview .section-title{text-align:center;}
@@ -288,15 +273,14 @@ a{color:inherit;text-decoration:none;}
   .section-title{font-size:3rem;}
   .domain-title{font-size:1.5rem;}
   .art-domain{width:200px;}
-  .domain-prev{left:-40px;}
-  .domain-next{right:-40px;}
+  .domain-prev{left:10px;}
+  .domain-next{right:10px;}
   .domain-close{top:15px;right:20px;}
 }
 </style>
 </head>
 
 <body>
-<!-- ================= HERO ================= -->
 <div class="typewriter-container">
   <h1 class="main-title">huncuti</h1>
   <div class="typewriter-text" id="typewriter-intro"></div>
@@ -308,7 +292,6 @@ a{color:inherit;text-decoration:none;}
   </nav>
 </div>
 
-<!-- ================= FIND OUT ================= -->
 <section id="find-out" class="about-section">
   <h2 class="section-title">find out</h2>
   <div class="about-card">
@@ -327,7 +310,6 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
-<!-- ================= RESEARCH ================= -->
 <section id="research" class="research-highlights">
   <h2 class="section-title">current, previous, formal</h2>
   <div class="research-card">
@@ -347,22 +329,20 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
-<!-- ================= ART ================= -->
 <section id="art" class="art-section">
   <h2 class="section-title">art</h2>
   <div class="art-domains">
     <div class="art-domain" data-domain="collage" data-files='[
-      {"src":"collage/TORTURE_page-0001 2.jpg","type":"image"},
-      {"src":"collage/CHOCOLATE_page-0001 copy.jpg","type":"image"},
-      {"src":"collage/NEBITNO_page-0001 2.jpg","type":"image"},
+      {"src":"collage/TORTURE_page-0001%202.jpg","type":"image"},
+      {"src":"collage/CHOCOLATE_page-0001%20copy.jpg","type":"image"},
+      {"src":"collage/NEBITNO_page-0001%202.jpg","type":"image"},
       {"src":"collage/SPOILSPOR_page-0001(1).jpg","type":"image"},
-      {"src":"collage/Scanned Documents1_page-0001 copy.jpg","type":"image"},
+      {"src":"collage/Scanned%20Documents1_page-0001%20copy.jpg","type":"image"},
       {"src":"collage/final2_copressed.mp4","type":"video"}
     ]'>
-      <img src="collage/TORTURE_page-0001 2.jpg" alt="Collage Preview" class="domain-preview">
+      <img src="collage/TORTURE_page-0001%202.jpg" alt="Collage Preview" class="domain-preview">
       <div class="domain-title">collage</div>
     </div>
-
     <div class="art-domain" data-domain="photography" data-files='[
       {"src":"media/photo1.jpg","type":"image"},
       {"src":"media/photo2.jpg","type":"image"},
@@ -371,7 +351,6 @@ a{color:inherit;text-decoration:none;}
       <img src="media/photo1.jpg" alt="Photography Preview" class="domain-preview">
       <div class="domain-title">photography</div>
     </div>
-
     <div class="art-domain" data-domain="video" data-files='[
       {"src":"media/video-preview.jpg","type":"image"},
       {"src":"media/video1.mp4","type":"video"}
@@ -379,7 +358,6 @@ a{color:inherit;text-decoration:none;}
       <img src="media/video-preview.jpg" alt="Video Preview" class="domain-preview">
       <div class="domain-title">video</div>
     </div>
-
     <div class="art-domain" data-domain="writing" data-files='[
       {"src":"media/poem1.txt","type":"text"},
       {"src":"media/poem2.txt","type":"text"}
@@ -390,7 +368,6 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
 <section id="contact" class="contact-preview">
   <h2 class="section-title">get in touch</h2>
   <div class="contact-info">
@@ -399,19 +376,12 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <p>&copy; 2024 huncuti. all rights reserved.</p>
 </footer>
 
-<!-- ================= JS ================= -->
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
-  // Hero fade-in
-  const mainTitle = document.querySelector('.main-title');
-  const typewriterText = document.querySelector('#typewriter-intro');
-  setTimeout(()=>{mainTitle.classList.add('visible'); typewriterText.classList.add('visible');},500);
-
   // Typewriter
   new Typed('#typewriter-intro',{
     strings:['expert and researcher in cybercommunication'],
@@ -434,34 +404,75 @@ document.addEventListener('DOMContentLoaded',()=>{
   const artDomains=document.querySelectorAll('.art-domain');
   const overlay=document.createElement('div');
   overlay.className='domain-overlay';
-  overlay.innerHTML='<span class="domain-close">&times;</span><div class="domain-overlay-content"><div class="domain-media"></div><span class="domain-nav domain-prev">&#10094;</span><span class="domain-nav domain-next">&#10095;</span></div>';
+  overlay.innerHTML=`
+    <span class="domain-close">&times;</span>
+    <div class="domain-overlay-content">
+      <div class="domain-media"></div>
+    </div>
+    <span class="domain-nav domain-prev">&#10094;</span>
+    <span class="domain-nav domain-next">&#10095;</span>
+  `;
   document.body.appendChild(overlay);
 
-  const contentBox=overlay.querySelector('.domain-media');
-  let currentFiles=[],currentIndex=0;
+  const contentBox = overlay.querySelector('.domain-media');
+  const closeBtn = overlay.querySelector('.domain-close');
+  const nextBtn = overlay.querySelector('.domain-next');
+  const prevBtn = overlay.querySelector('.domain-prev');
+
+  let currentFiles=[], currentIndex=0;
 
   function showItem(i){
     contentBox.innerHTML='';
     const f=currentFiles[i];
     if(!f) return;
-    if(f.type==='image'){const img=document.createElement('img');img.src=f.src;contentBox.appendChild(img);}
-    else if(f.type==='video'){const v=document.createElement('video');v.src=f.src;v.controls=true;v.autoplay=true;v.muted=true;contentBox.appendChild(v);}
-    else if(f.type==='text'){fetch(f.src).then(r=>r.text()).then(t=>{const pre=document.createElement('pre');pre.textContent=t;contentBox.appendChild(pre);});}
+    if(f.type==='image'){
+      const img=document.createElement('img');
+      img.src=f.src;
+      contentBox.appendChild(img);
+    } else if(f.type==='video'){
+      const v=document.createElement('video');
+      v.src=f.src;
+      v.controls=true; v.autoplay=true; v.muted=true;
+      contentBox.appendChild(v);
+    } else if(f.type==='text'){
+      fetch(f.src).then(r=>r.text()).then(t=>{
+        const pre=document.createElement('pre');
+        pre.textContent=t;
+        contentBox.appendChild(pre);
+      });
+    }
   }
 
-  function openDomain(files){currentFiles=files;currentIndex=0;showItem(currentIndex);overlay.classList.add('active');}
-  function closeOverlay(){overlay.classList.remove('active');contentBox.innerHTML='';}
+  function openDomain(files){
+    currentFiles = files;
+    currentIndex = 0;
+    showItem(currentIndex);
+    overlay.classList.add('active');
+  }
 
-  artDomains.forEach(d=>d.addEventListener('click',()=>{try{openDomain(JSON.parse(d.dataset.files));}catch(e){console.error(e);}}));
-  overlay.querySelector('.domain-close').onclick=closeOverlay;
-  overlay.querySelector('.domain-next').onclick=()=>{currentIndex=(currentIndex+1)%currentFiles.length;showItem(currentIndex);}
-  overlay.querySelector('.domain-prev').onclick=()=>{currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length;showItem(currentIndex);}
-  overlay.onclick=e=>{if(e.target===overlay)closeOverlay();}
-  document.addEventListener('keydown',e=>{
-    if(!overlay.classList.contains('active'))return;
-    if(e.key==='Escape')closeOverlay();
-    else if(e.key==='ArrowRight'){currentIndex=(currentIndex+1)%currentFiles.length;showItem(currentIndex);}
-    else if(e.key==='ArrowLeft'){currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length;showItem(currentIndex);}
+  function closeOverlay(){
+    overlay.classList.remove('active');
+    contentBox.innerHTML='';
+  }
+
+  artDomains.forEach(d=>{
+    d.addEventListener('click',()=>{
+      try{
+        const filesJSON = d.dataset.files.replace(/(\r\n|\n|\r)/gm,"");
+        openDomain(JSON.parse(filesJSON));
+      }catch(e){console.error('JSON parse error', e);}
+    });
+  });
+
+  closeBtn.onclick = closeOverlay;
+  nextBtn.onclick = ()=>{ currentIndex=(currentIndex+1)%currentFiles.length; showItem(currentIndex);}
+  prevBtn.onclick = ()=>{ currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length; showItem(currentIndex);}
+  overlay.onclick = e=>{if(e.target===overlay) closeOverlay();}
+  document.addEventListener('keydown', e=>{
+    if(!overlay.classList.contains('active')) return;
+    if(e.key==='Escape') closeOverlay();
+    else if(e.key==='ArrowRight'){ currentIndex=(currentIndex+1)%currentFiles.length; showItem(currentIndex);}
+    else if(e.key==='ArrowLeft'){ currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length; showItem(currentIndex);}
   });
 });
 </script>
