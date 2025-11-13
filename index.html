@@ -202,7 +202,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: visible; /* allow navs to appear outside */
       flex-direction: column;
       position: relative;
       box-shadow: 0 0 30px rgba(255,255,255,0.1);
@@ -238,20 +238,32 @@
       align-items: center;
       justify-content: center;
     }
+
+    /* ===== Navigation Arrows ===== */
     .domain-nav {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #fff;
       user-select: none;
-      padding: 0.5rem;
+      padding: 0.5rem 0.75rem;
       background: rgba(0,0,0,0.5);
       border-radius: 50%;
       cursor: pointer;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      z-index: 10000;
+      transition: opacity 0.4s ease, background 0.3s ease;
+      opacity: 0;
     }
-    .domain-prev { left: 10px; }
-    .domain-next { right: 10px; }
+    .domain-prev { left: -70px; }
+    .domain-next { right: -70px; }
+
+    .domain-overlay-content:hover .domain-nav {
+      opacity: 1; /* fade in when hovered */
+    }
+    .domain-nav:hover {
+      background: rgba(255,255,255,0.2);
+    }
 
     /* ===== Contact ===== */
     .contact-preview .section-title{text-align:center;}
@@ -273,6 +285,8 @@
       .section-title{font-size:3rem;}
       .domain-title{font-size:1.5rem;}
       .art-domain{width:200px;}
+      .domain-prev { left: -40px; }
+      .domain-next { right: -40px; }
     }
   </style>
 </head>
@@ -420,8 +434,8 @@
       overlay.innerHTML = `
         <div class="domain-overlay-content">
           <span class="domain-close">&times;</span>
-          <div class="domain-media"></div>
           <span class="domain-nav domain-prev">&#10094;</span>
+          <div class="domain-media"></div>
           <span class="domain-nav domain-next">&#10095;</span>
         </div>
       `;
@@ -497,9 +511,18 @@
         if (e.target === overlay) closeOverlay();
       });
 
-      // ESC key closes overlay
+      // Keyboard navigation: ESC + arrows
       document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('active')) return;
+
         if (e.key === 'Escape') closeOverlay();
+        else if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % currentFiles.length;
+          showItem(currentIndex);
+        } else if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + currentFiles.length) % currentFiles.length;
+          showItem(currentIndex);
+        }
       });
     });
   </script>
