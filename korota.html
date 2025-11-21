@@ -162,6 +162,29 @@ a{color:inherit;text-decoration:none;}
 @media(max-width:768px){
   .post-title{font-size:3rem;}
 }
+  /* ===== Poem 20 left/right layout ===== */
+.poem-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.poem-column {
+  flex: 1 1 45%;
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.poem-column.left { text-align: left; }
+.poem-column.right { text-align: right; }
+
+@media(max-width:768px){
+  .poem-column {
+    flex: 1 1 100%;
+    text-align: left; /* easier reading on mobile */
+  }
+}
+
 </style>
 </head>
 <body>
@@ -398,122 +421,102 @@ na naše krive noge</div></div>
     <h3>PREGOVARANJE</h3>
 
     <!-- remaining poems centered -->
- <div class="poem"><div class="poem-number">20</div><div class="poem-text justify">odsad svugdje nosim Uno kartu reverze
-
-boliš me bolim te je volim te
-
-je li te majka dojila?
-
-makar mijesila u zipci?
-
-nosim se u opojnim valovima
-
-isparavaju i ostaje samo sol
-
-ako ju nanesem na kožu preveć, hoću li biti neukusnija
-
-ako negiram krivice, hoće li nestati
-
-ako se bacim naglavce, nećeš me osuditi
-
-
-
-ovaj objekt je Vladimir Nazor
-
-soli su potmuli pokušaji planinara
-
-da negiraju vrh Himalaje: 
-
-za skočiti trebaš biti na vrhu
-
-kriti je piti niti
-
-a zbirne imenice ne priliče Vladimiru
-
-vaše netočne jednadžbe
-
-vage prave važnima riječi 
-
-težima bȋti nejakima 
-
-
-
-kada bih bila dovoljno tanka
-
-bi li se moja koža uvukla
-
-i moje kosti nestale pod
-
-teretom gustoće soli
-
-pa onda rasule dajuć soj
-
-mladom sebstvu pravog glasa
-
-koji ne utišava se za akord tuđ
-
-
-horalna notacija 
-
-ne podastire se pod vama
-
-nemate škole za ispravke ritma
-
-kroz ušice igle proći ćete
-
-ne raspadnuti ili bolji
-
-iskreni, možda
-
-sami, zasigurno
-
-
-
-hoću li znati pak stepati
-
-pa na ritam zemljine kore
-
-umijesiti svoj potplat
-
-da ziba riče i urliče
-
-kao da zadnjeg neba nema
-
-
-
-vještina bubnja uči se slijepe
-
-ne bušite si duplje
-
-jer ste lijeni sinkronizirati
-
-neba nisu vaša za brojati
-
-kad ni udove ne znate si
-
-
-
-nisam li ovdje da budem trn
-
-pa da rahlim put šiljkom
-
-sa zahtjevom voljnih bojni?
-
-
-
-voljeti Volju
-
-svoju i moju
-
-tu leži trn što dodijeljen je svakom
-
-
-
-pogrešku, kako ne napraviti?
-
-
-
-radio, nipošto ne gasiti</div></div>
+<div class="poem" id="poem-20">
+  <div class="poem-number">20</div>
+  <div class="poem-columns">
+
+    <!-- first 9 lines on the left -->
+    <div class="poem-column left">
+      odsad svugdje nosim Uno kartu reverze<br>
+      boliš me bolim te je volim te<br>
+      je li te majka dojila?<br>
+      makar mijesila u zipci?<br>
+      nosim se u opojnim valovima<br>
+      isparavaju i ostaje samo sol<br>
+      ako ju nanesem na kožu preveć, hoću li biti neukusnija<br>
+      ako negiram krivice, hoće li nestati<br>
+      ako se bacim naglavce, nećeš me osuditi
+    </div>
+
+    <!-- next 9 lines on the right -->
+    <div class="poem-column right">
+      ovaj objekt je Vladimir Nazor<br>
+      soli su potmuli pokušaji planinara<br>
+      da negiraju vrh Himalaje:<br>
+      za skočiti trebaš biti na vrhu<br>
+      kriti je piti niti<br>
+      a zbirne imenice ne priliče Vladimiru<br>
+      vaše netočne jednadžbe<br>
+      vage prave važnima riječi<br>
+      težima bȋti nejakima
+    </div>
+
+    <!-- next 7 lines on the left -->
+    <div class="poem-column left">
+      kada bih bila dovoljno tanka<br>
+      bi li se moja koža uvukla<br>
+      i moje kosti nestale pod<br>
+      teretom gustoće soli<br>
+      pa onda rasule dajuć soj<br>
+      mladom sebstvu pravog glasa<br>
+      koji ne utišava se za akord tuđ
+    </div>
+
+    <!-- next 7 lines on the right -->
+    <div class="poem-column right">
+      horalna notacija<br>
+      ne podastire se pod vama<br>
+      nemate škole za ispravke ritma<br>
+      kroz ušice igle proći ćete<br>
+      ne raspadnuti ili bolji<br>
+      iskreni, možda<br>
+      sami, zasigurno
+    </div>
+
+    <!-- next 5 lines on the left -->
+    <div class="poem-column left">
+      hoću li znati pak stepati<br>
+      pa na ritam zemljine kore<br>
+      umijesiti svoj potplat<br>
+      da ziba riče i urliče<br>
+      kao da zadnjeg neba nema
+    </div>
+
+    <!-- next 5 lines on the right -->
+    <div class="poem-column right">
+      vještina bubnja uči se slijepe<br>
+      ne bušite si duplje<br>
+      jer ste lijeni sinkronizirati<br>
+      neba nisu vaša za brojati<br>
+      kad ni udove ne znate si
+    </div>
+
+    <!-- next 3 lines on the left -->
+    <div class="poem-column left">
+      nisam li ovdje da budem trn<br>
+      pa da rahlim put šiljkom<br>
+      sa zahtjevom voljnih bojni?
+    </div>
+
+    <!-- next 3 lines on the right -->
+    <div class="poem-column right">
+      voljeti Volju<br>
+      svoju i moju<br>
+      tu leži trn što dodijeljen je svakom
+    </div>
+
+    <!-- next 1 line on the left -->
+    <div class="poem-column left">
+      pogrešku, kako ne napraviti?
+    </div>
+
+    <!-- next 1 line on the right -->
+    <div class="poem-column right">
+      radio, nipošto ne gasiti
+    </div>
+
+  </div>
+</div>
 
     <h3>DEPRESIJA</h3>
 
