@@ -40,7 +40,7 @@ body{
 }
 a{color:inherit;text-decoration:none;}
 
-/* ===== Header ===== */
+/* ===== Header / Back Arrow ===== */
 .header {
   padding: 2rem;
   text-align: left;
@@ -49,17 +49,18 @@ a{color:inherit;text-decoration:none;}
 .back-link{
   font-family: 'Velvelyne', sans-serif;
   font-size:1.5rem;
-  font-weight: bold;
-  display:inline-block;
-  padding:.5rem 1rem;
-  border-radius:5px;
-  background:transparent;
+  font-weight:bold;
   color:#fff;
+  background:transparent; /* no circle/background */
+  padding:.5rem 1rem;
+  border-radius:0;
+  text-decoration:none;
+  -webkit-text-stroke:1px #fff; /* optional outline */
   transition: all 0.3s ease;
 }
 .back-link:hover{
-  background:#fff;
   color:#000;
+  background:#fff; /* hover effect like video page */
 }
 
 /* ===== Main ===== */
@@ -89,20 +90,24 @@ a{color:inherit;text-decoration:none;}
   margin-bottom:4rem;
 }
 .gallery-item{
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio */
   cursor:pointer;
-  transition: transform 0.3s ease;
-  border-radius:10px;
   overflow:hidden;
-}
-.gallery-item:hover{
-  transform:scale(1.02);
+  border-radius:10px;
+  transition: transform 0.3s ease;
 }
 .gallery-item img{
+  position: absolute;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
-  aspect-ratio:4/3;
-  display:block;
+}
+.gallery-item:hover{
+  transform:scale(1.02);
 }
 
 /* ===== Overlay ===== */
@@ -178,70 +183,23 @@ a{color:inherit;text-decoration:none;}
 .overlay-next{right:20px;}
 .overlay-nav:hover{background: rgba(255,255,255,0.2); transform:translateY(-50%) scale(1.2);}
 
-/* ===== Home Arrow Button ===== */
-#home-button{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:60px;
-  height:60px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#000;
-  border:2px solid #fff;
-  color:#fff;
-  font-size:2.5rem;
-  font-family:'Velvelyne', serif;
-  -webkit-text-stroke:.5px #fff;
-  border-radius:50%;
-  cursor:pointer;
-  z-index:9999;
-  opacity:0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-#home-button:hover{
-  transform: scale(1.2);
-}
-
 /* ===== Footer ===== */
 .footer{padding:2rem;text-align:center;border-top:1px solid #222;color:#555;}
 
 /* ===== Responsive ===== */
 @media(max-width:768px){
   .section-title{font-size:3rem;}
-  .gallery{grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:1rem;}
+  .gallery{grid-template-columns:1fr;}
   .overlay-prev{left:10px;}
   .overlay-next{right:10px;}
   .overlay-close{top:15px;right:20px;}
-  #home-button{width:40px; height:40px; font-size:1.5rem;}
-}
-
-/* ===== Navigation / Back Button Style ===== */
-.nav-item {
-  font-family: 'Velvelyne', sans-serif;
-  padding: .5rem 1rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  display: inline-block;
-  font-weight: bold;
-  color: #fff;
-  background: transparent;
-  text-decoration: none;
-}
-.nav-item:hover {
-  background: #fff;
-  color: #000;
-}
-.nav-item {
-  font-size: 1.5rem;
 }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <a href="visual.html" class="back-link nav-item">← back to visual</a>
+  <a href="visual.html" class="back-link">← back to visual</a>
 </header>
 
 <main class="main-container">
@@ -255,9 +213,6 @@ a{color:inherit;text-decoration:none;}
   <span class="overlay-nav overlay-prev">&#10094;</span>
   <span class="overlay-nav overlay-next">&#10095;</span>
 </div>
-
-<!-- Home Button -->
-<div id="home-button">↑</div>
 
 <footer class="footer">
   <p>&copy; 2025 huncuti. all rights reserved.</p>
@@ -348,14 +303,6 @@ document.addEventListener('keydown', e => {
   else if(e.key === 'ArrowRight'){ currentIndex = (currentIndex + 1) % files.length; showItem(currentIndex); }
   else if(e.key === 'ArrowLeft'){ currentIndex = (currentIndex - 1 + files.length) % files.length; showItem(currentIndex); }
 });
-
-// ===== Home Button JS =====
-const homeBtn = document.getElementById('home-button');
-function showHomeButton(){
-  homeBtn.style.opacity = window.scrollY > 300 ? '1' : '0';
-}
-window.addEventListener('scroll', showHomeButton);
-homeBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 </script>
 
 </body>
