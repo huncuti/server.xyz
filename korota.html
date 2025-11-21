@@ -93,11 +93,13 @@ a{color:inherit;text-decoration:none;}
   margin-bottom:1.5rem;
 }
 
-/* ===== Poetry Handling ===== */
-.poem{
-  white-space:pre-line;
+/* Paragraph margins */
+.post-content p{
+  margin-bottom:1.5rem;
+  white-space: pre-line; /* preserve line breaks for poetry */
 }
 
+/* Special Alignments */
 .justify{
   text-align:justify;
   text-justify:inter-word;
@@ -105,6 +107,23 @@ a{color:inherit;text-decoration:none;}
 
 .center{
   text-align:center;
+}
+
+/* ===== Numbered poetry layout ===== */
+.poem {
+  display: flex;
+  gap: 1rem;
+}
+
+.poem-number {
+  flex: 0 0 2rem; /* fixed width for numbers */
+  color: #888;
+  text-align: left;
+  font-weight: bold;
+}
+
+.poem-text {
+  flex: 1;
 }
 
 /* ===== Headings ===== */
@@ -156,34 +175,33 @@ a{color:inherit;text-decoration:none;}
     <h2>PORICANJE</h2>
 
     <!-- paragraphs 1–10 justified -->
-    <p class="justify poem">1<br><br> plastične stolice tope se u magiji fratarskih pošalica s krila baka dolazi s travnatom kosom vrt je nesuđena plaža pome žmirkaju susjedi puno pričaju tanka nas žica razdvaja kamenjar ziba pčele one su što jesu i ja smijem sve pa i ukrasti lješnjake zeleni su ali fini jer ih mi nemamo i jer je slast bespravne prirode
+ <div class="poem justify"><div class="poem-number">1</div><div class="poem-text">plastične stolice tope se u magiji fratarskih pošalica s krila baka dolazi s travnatom kosom vrt je nesuđena plaža pome žmirkaju susjedi puno pričaju tanka nas žica razdvaja kamenjar ziba pčele one su što jesu i ja smijem sve pa i ukrasti lješnjake zeleni su ali fini jer ih mi nemamo i jer je slast bespravne prirode
 </p>
 
-    <p class="justify poem">2<br><br>
-kat je malo tužan jer su ga ostavili ali uređen je po mjeri pravog obožavatelja Elvisa on je na kazeti i u autu šikara otkriva moći zagore mi smo s brda Vrgorac nije Vrbovac ali i tamo su fratri ili Visovac plavo je i zeleno pratim sve utvrde koje ću osvojiti auti nisu strašni nego dida kad smo glasni tiho je jer spavaju popodne i navečer i zauvijek</p>
+  <div class="poem justify"><div class="poem-number">2</div><div class="poem-text">kat je malo tužan jer su ga ostavili ali uređen je po mjeri pravog obožavatelja Elvisa on je na kazeti i u autu šikara otkriva moći zagore mi smo s brda Vrgorac nije Vrbovac ali i tamo su fratri ili Visovac plavo je i zeleno pratim sve utvrde koje ću osvojiti auti nisu strašni nego dida kad smo glasni tiho je jer spavaju popodne i navečer i zauvijek</p>
 
-   <p class="justify poem">3<br><br>
+ <div class="poem justify"><div class="poem-number">3</div><div class="poem-text">
 s neba padaju kometi mi smo ispred i ne vidimo ništa ali smo pravno budni nikad ne spavamo pa je teško doći do-ručka klupe su kuće mi smo stanodavci igra je uređenje a sestre ćemo otrovati biljnim pripravcima i zakopati boce otrova dok se ne otruju Medo neće reći nikome on ne kuži jer je u kavezu i jer psi ne misle</p>
 
-    <p class="justify poem">4<br><br>
+ <div class="poem justify"><div class="poem-number">4</div><div class="poem-text">
 Tom i Jerry se uvijek svađaju tako i mi imam vazu koja je slomljena i stvarno ne lažem ovaj put ali slamam se isto valjda će biti bolje vrtlaru ostavljam polovinu imetka tko te pita</p>
 
-   <p class="justify poem">5<br><br>
+ <div class="poem justify"><div class="poem-number">5</div><div class="poem-text">
 volim kako je hladno u tunelu zato se molim toliko puta lijepo se obući za misu škrta sam i želim okruglo za sebe kako da narod preživi ali dajem pod okom mama ne zna pjevati to je obiteljski ne i kod mene ipak neću pjesma su dvije molitve</p>
 
-   <p class="justify poem">6<br><br>
+ <div class="poem justify"><div class="poem-number">6</div><div class="poem-text">
 alkar usridu ali Čaja je ništa se još ne zna brci su im do poda i vuku se po prašini zrnce mi je ispod zuba ili vuna ili vata volim sove i žižu velika okupljanja dane pure komina i bronzina nagovorili su me ali glazba nije javna i ne znam svirati</p>
 
-   <p class="justify poem">7<br><br>
+  <div class="poem justify"><div class="poem-number">7</div><div class="poem-text">
 ispod kante je sakriven škorpion njega se bojim ali magarca jašem nasmijani su i ja sam on skuplja previše stvari ali zato sve miriše posebno meni ne smeta kao nekima jednom je iz principa sve je bilo čisto ali dva računa smo sigurno bacile krivnja – krivnja loptica na stolu i veliki i mali u turnirima ping pong je najveća vrlina na svijetu ako baciš od rub stola</p>
 
-   <p class="justify poem">8<br><br>
+ <div class="poem justify"><div class="poem-number">8</div><div class="poem-text">
 penjemo se po utvrdi osvojena je prozorčić je lijep bojim se visine ipak vrijeme je za pripremu ove godine nosim ljubičaste šlape i nisam se zaljubila nego baca kartice tako da sam i ja naučila da ako sam bolja od njega onda će me voljeti</p>
 
-  <p class="justify poem">9<br><br>
+ <div class="poem justify"><div class="poem-number">9</div><div class="poem-text">
 na hipodromu je ranč nema buha tamo je i igralište ja volim trčati u rozim šlapama ili bosa kada trčim staza je vruća i zabija mi se u tabane kao da upadam pa se odvojim jer sam brza jer ću ih stići jer ću ih prerasti</p>
 
-   <p class="justify poem">10<br><br>
+ <div class="poem justify"><div class="poem-number">10</div><div class="poem-text">
 bacamo kupe moja simpatija je kralj špade zato su mi najdraže mi smijemo igrati dok oni igraju belu koja je dosadna koja je moja sestra a prije toga moj pas iza čega koji se penjao po krovovima na kojima bi onda zapeo pa su ga morali spuštati ili jednom u kanalu jedino sam Stipu voljela grizao je cvijeće dok nije pobjegao jer psi ne misle nego ljudi koji ih stave u auto
 
 </p>
@@ -191,8 +209,7 @@ bacamo kupe moja simpatija je kralj špade zato su mi najdraže mi smijemo igrat
     <h3>BIJES</h3>
 
     <!-- paragraphs 11–18 centered -->
-   <p class="center poem">11<br><br>
-da im flora bude čitava
+ <div class="poem center"><div class="poem-number">11</div><div class="poem-text">da im flora bude čitava
 
 da im kose ne skaču
 
@@ -218,7 +235,7 @@ posvojile ruke koje su nas
 
 stvorile da imamo svoje</p>
 
-   <p class="center poem">12<br><br>
+  <div class="poem center"><div class="poem-number">12</div><div class="poem-text">
 piće je radnja
 
 ne, vi ste slabi
@@ -251,7 +268,7 @@ društvo je gotovo siroče –
 
 krivi oci i mrtve majke</p>
 
-<p class="center poem">13<br><br>
+ <div class="poem center"><div class="poem-number">13</div><div class="poem-text">
 dobar dan, imate poziv
 
 pornografski skok u svijesti
@@ -286,7 +303,7 @@ ali njemu se oprašta
 
 faličan je i ne prostači</p>
 
-<p class="center poem">14<br><br>
+ <div class="poem center"><div class="poem-number">14</div><div class="poem-text">
 Heretik je´n reče:
 
 čednost je vrlina čiji okus gnuša
@@ -297,7 +314,7 @@ a Đurđa će mu na to:
 
 jezik prigriz´o!</p>
 
-<p class="center poem">15<br><br>
+ <div class="poem center"><div class="poem-number">15</div><div class="poem-text">
 čije vlasništvo je moj rad?
 
 želim EU sufinanciran projekt!
@@ -318,7 +335,7 @@ pa se zbrojite i postanite šeste!
 
 prožvačite tržište rada!</p>
 
-<p class="center poem">16<br><br>
+ <div class="poem center"><div class="poem-number">16</div><div class="poem-text">
 ulicama hodaju utvare čije čelo viče:
 
 da!
@@ -339,7 +356,7 @@ rogovima rahleći narativ
 
 ostat će na slobodi</p>
 
- <p class="center poem">17<br><br>
+ <div class="poem center"><div class="poem-number">17</div><div class="poem-text">
 bezglavo hodamo u 
 
 sintetičkoj tvorbi mutiranih stanica
@@ -356,7 +373,7 @@ pritom zaboravljajući da je kao lektiru
 
 propisala – Šoljana!</p>
 
- <p class="center poem">18<br><br>
+ <div class="poem center"><div class="poem-number">18</div><div class="poem-text">
 prljavim čipovima umijesili su
 
 robotske prste da bi
@@ -390,7 +407,7 @@ na naše krive noge
 </p>
 
     <!-- paragraph 19 justified again -->
-<p class="justify poem">19<br><br>
+<div class="poem justify"><div class="poem-number">19</div><div class="poem-text">
 vidite gospođo vi ste ovdje da čekate a mi da vam izbrišemo pamćenje nemojte se sjećati jer nema vremena uskoro će Božić a vi ste tako lijepi u crvenom jeste li sigurni da ste na pravoj adresi evo i sustav je pao možete li ponovno kako to mislite pa zvučite baš normalno unutra više niste znate ne znate da strahovi dolaze na javu ako ih puno promatrate kao mi vas ovo je slobodan prostor za kaveze ste sami potpisali pušite previše a i pišete do kasno ovdje je raspored takav da ste bolje čim utoplite krevet gospođo Marta vi s druge strane ne slušate i glasni ste Martine ne čupajte žice Martine to nije gitara Martine popravit ćemo vȃs Martine ušutite želite li nazad Martine sjetite se samo Martin je tamo
 
 </p>
@@ -398,7 +415,7 @@ vidite gospođo vi ste ovdje da čekate a mi da vam izbrišemo pamćenje nemojte
     <h3>PREGOVARANJE</h3>
 
     <!-- remaining poems centered -->
-    <p class="center poem"20<br><br>odsad svugdje nosim Uno kartu reverze
+<div class="poem center"><div class="poem-number">20</div><div class="poem-text">odsad svugdje nosim Uno kartu reverze
 
 boliš me bolim te je volim te
 
@@ -517,7 +534,7 @@ radio, nipošto ne gasiti</p>
 
     <h3>DEPRESIJA</h3>
 
-   <p class="center poem">21<br><br>u vrevi dimnih stolica 
+<div class="poem center"><div class="poem-number">21</div><div class="poem-text">u vrevi dimnih stolica 
 
 dolazim na pijanističku sesiju
 
@@ -548,7 +565,7 @@ i nestaje u mrmoru 
 moje reprodukcije
 
 </p>
- <p class="center poem">22<br><br>otvaram grlo da bih pustila jad
+<div class="poem center"><div class="poem-number">22</div><div class="poem-text">otvaram grlo da bih pustila jad
 
 usne mi pucaju dok iz mene teče tišina
 
@@ -559,7 +576,7 @@ zvuk se odbija od
 javu koja je mora
 
 koja je moja koja sam ja</p>
-<p class="center poem">23<br><br>sjećaš li se samoglasnika?
+<div class="poem center"><div class="poem-number">23</div><div class="poem-text">sjećaš li se samoglasnika?
 
 prštali su s nama a ja sam 
 
@@ -582,7 +599,7 @@ u meni je bol koji čeka da procvjeta
 danas, danas je proljeće
 
 </p>
-  <p class="center poem">24<br><br>mravinjak impulsa širi se disanjem
+<div class="poem center"><div class="poem-number">24</div><div class="poem-text">mravinjak impulsa širi se disanjem
 
 prostirem more pred tobom
 
@@ -593,7 +610,7 @@ ti plutaš
 nasmiješena prema suncu
 
 ljeto je</p>
-   <p class="center poem">25<br><br>izlaziš na krivim stanicama
+<div class="poem center"><div class="poem-number">25</div><div class="poem-text">izlaziš na krivim stanicama
 
 ne vjerujem što čujem, ali čekam
 
@@ -626,7 +643,7 @@ svoje komadiće lijepim
 nepažljivo i krivim rukama
 
 dobro sam</p>
- <p class="center poem">26<br><br>nasred oktogona smo
+<div class="poem center"><div class="poem-number">26</div><div class="poem-text">nasred oktogona smo
 
 prsti ti mirišu moju kosu
 
@@ -651,7 +668,7 @@ pogledima kradu napoj želju mene
 koliko god gledala gore
 
 oktogona nema</p>
- <p class="center poem">27<br><br>zakrabuljene sjene predaka vrište mu u očima
+<div class="poem center"><div class="poem-number">27</div><div class="poem-text">zakrabuljene sjene predaka vrište mu u očima
 
 vapaje smo čuli i ostali gluhi
 
@@ -672,7 +689,7 @@ sad kad ih ima, ispravlja tuđa
 kao da je zaboravio
 
 kao da je izbrisao</p>
- <p class="center poem">28<br><br>u snovima si mi prijatelj
+<div class="poem center"><div class="poem-number">28</div><div class="poem-text">u snovima si mi prijatelj
 
 pronalazimo toteme za usporedbu
 
@@ -691,7 +708,7 @@ glupa sam što sam ušla
 igra je ubijanje
 
 moja istina: probudim se</p>
-<p class="center poem">29<br><br>zakopanih temelja
+<div class="poem center"><div class="poem-number">29</div><div class="poem-text">zakopanih temelja
 
 rahliš kroz privid svijeta
 
@@ -761,7 +778,7 @@ jesi li zaboravio?
 
     <h3>POMIRENJE</h3>
 
-  <p class="center poem">30<br><br>slobodnolebdeće nožice kao šestar
+<div class="poem center"><div class="poem-number">30</div><div class="poem-text">slobodnolebdeće nožice kao šestar
 
 okružuju naše Jerihone koji
 
@@ -782,7 +799,7 @@ prevelik jer smeta jer je
 čovjek mjera svemu pa tako
 
 i drugima i ne sebi</p>
-   <p class="center poem">31<br><br>mislili smo da male smrti znače nešto francusko, prosto
+ <div class="poem center"><div class="poem-number">31</div><div class="poem-text">mislili smo da male smrti znače nešto francusko, prosto
 
 i da su plahte bijele nakon pranja
 
@@ -809,7 +826,7 @@ postavlja samo jedno pitanje:
 misliš li i dalje da te netko gleda
 
 ili zoveš to moralom?</p>
- <p class="center poem">32<br><br>kad sam ju optužila 
+<div class="poem center"><div class="poem-number">32</div><div class="poem-text">kad sam ju optužila 
 
 za ubijanje sinapsi
 
@@ -828,7 +845,7 @@ ispravcima nemoguće prirode?
 odsjeci mi dakle glavu
 
 da i ja jedem kolače</p>
-<p class="center poem">33<br><br>kao počasni Vennovi članovi
+<div class="poem center"><div class="poem-number">33</div><div class="poem-text">kao počasni Vennovi članovi
 
 slijedimo putanju svojih kruga
 
@@ -843,14 +860,14 @@ revizija dijaloga je zabranjena
 pa ljudi su uvijek 
 
 Isti</p>
- <p class="center poem">34<br><br>smisao je dobro naći ni u čemu
+<div class="poem center"><div class="poem-number">34</div><div class="poem-text">smisao je dobro naći ni u čemu
 
 male smrti za male prinčeve:
 
 1. boe ne jedu čitave slonove
 
 2. postoje samo šeširi</p>
-  <p class="center poem">35<br><br>obodi su obadi koji ne mogu protiv sebe
+ <div class="poem center"><div class="poem-number">35</div><div class="poem-text">obodi su obadi koji ne mogu protiv sebe
 
 kojeg su naučili jer su im rekli
 
@@ -867,7 +884,7 @@ ostavljanje odrješite odluke
 odlutati u oduzimanje 
 
 ili ostati za obod</p>
-  <p class="center poem">36<br><br>nađi malu dvokolicu pa proklinji dokolicu
+<div class="poem center"><div class="poem-number">36</div><div class="poem-text">nađi malu dvokolicu pa proklinji dokolicu
 
 okreni se oko osi i slušaj njihov pljesak
 
@@ -884,7 +901,7 @@ nastavio s kotrljanjem
 gospodine, vi ste buha!
 
 buha u ovom cirkusu!</p>
-<p class="center poem">37<br><br>stupam po ravnoj zemlji
+<div class="poem center"><div class="poem-number">37</div><div class="poem-text">stupam po ravnoj zemlji
 
 i dođem do kraja ploče
 
@@ -915,7 +932,7 @@ ili
 osvojio sam dno!
 
 svejedno</p>
- <p class="center poem">38<br><br>što ako su vizije
+<div class="poem center"><div class="poem-number">38</div><div class="poem-text">što ako su vizije
 
 upravo one bobice istine
 
@@ -938,8 +955,7 @@ neočekivana sila koja 
 se iznenada pojavljuje
 
 i rešava stvar?</p>
- <p class="center poem">39<br><br>
-u minijaturi umjetnost znači
+<div class="poem center"><div class="poem-number">39</div><div class="poem-text">u minijaturi umjetnost znači
 
 osjećati sve osjet dišem
 
@@ -960,8 +976,7 @@ koje slapim svaki dan znajući da će
 doći turisti kojima ću moći reći:
 
 nisam više bolestan!</p>
- <p class="center poem">40<br><br>
-dragi doktore,
+<div class="poem center"><div class="poem-number">40</div><div class="poem-text">dragi doktore,
 
 ja se budim mokar i bez daha
 
