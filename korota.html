@@ -185,6 +185,57 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
+  /* ===== Poem 29 centered blocks ===== */
+#poem-29 {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+#poem-29 .poem-number {
+  flex: 0 0 2rem;
+  color: #888;
+  font-weight: bold;
+  text-align: left;
+}
+
+.poem-29-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  align-items: center; /* center the blocks horizontally */
+}
+
+.poem-29-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 600px; /* optional: control width */
+  text-align: center;
+}
+
+.poem-29-block p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+@media(max-width:768px){
+  #poem-29 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .poem-29-columns {
+    align-items: flex-start;
+  }
+  .poem-29-block {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -690,73 +741,61 @@ glupa sam što sam ušla
 igra je ubijanje
 
 moja istina: probudim se</div></div>
-    <div class="poem"><div class="poem-number">29</div><div class="poem-text justify">zakopanih temelja
+<div class="poem" id="poem-29">
+  <div class="poem-number">29</div>
+  <div class="poem-29-columns">
 
-rahliš kroz privid svijeta
+    <div class="poem-29-block">
+      <p>zakopanih temelja</p>
+      <p>rahliš kroz privid svijeta</p>
+      <p>znajući da sve što tražiš</p>
+      <p>iza Zastora zove</p>
+    </div>
 
-znajući da sve što tražiš
+    <div class="poem-29-block">
+      <p>ruke postaju etida</p>
+      <p>kaos se premješta u princip</p>
+      <p>sve što želiš reći</p>
+      <p>zaključava se u liniji usana</p>
+    </div>
 
-iza Zastora zove
+    <div class="poem-29-block">
+      <p>nijem si.</p>
+      <p>zašto uopće objasniti?</p>
+      <p>vidio si rasplete svih duljina</p>
+      <p>oni uvijek čuju samo šumove</p>
+    </div>
 
+    <div class="poem-29-block">
+      <p>nećeš im se otkriti</p>
+      <p>korito Razuma u kojem borave</p>
+      <p>njihovo je pravo i dar</p>
+      <p>bi li se volio vratiti?</p>
+    </div>
 
+    <div class="poem-29-block">
+      <p>prsti se prisjećaju</p>
+      <p>zadaha more onog Drugog</p>
+      <p>možda se zato više</p>
+      <p>ne usudiš letjeti</p>
+    </div>
 
-ruke postaju etida
+    <div class="poem-29-block">
+      <p>sakrit ćeš si članke</p>
+      <p>fragmenti maske mršte se</p>
+      <p>kao rug na stvarno</p>
+      <p>na mravojede koji očekuju</p>
+    </div>
 
-kaos se premješta u princip
+    <div class="poem-29-block">
+      <p>u rezu svjetova ćutiš podsmjeh</p>
+      <p>možda su baš ovaj put u pravu</p>
+      <p>jesi li zaboravio?</p>
+      <p>čestica si samo</p>
+    </div>
 
-sve što želiš reći
-
-zaključava se u liniji usana
-
-
-
-nijem si. 
-
-zašto uopće objasniti?
-
-vidio si rasplete svih duljina
-
-oni uvijek čuju samo šumove
-
-
-
-nećeš im se otkriti
-
-korito Razuma u kojem borave
-
-njihovo je pravo i dar
-
-bi li se volio vratiti?
-
-
-
-prsti se prisjećaju
-
-zadaha more onog Drugog
-
-možda se zato više
-
-ne usudiš letjeti
-
-
-
-sakrit ćeš si članke
-
-fragmenti maske mršte se
-
-kao rug na stvarno
-
-na mravojede koji očekuju
-
-
-
-u rezu svjetova ćutiš podsmjeh
-
-možda su baš ovaj put u pravu
-
-jesi li zaboravio?
-
-čestica si samo</div></div>
+  </div>
+</div>
 
     <h3>POMIRENJE</h3>
 
