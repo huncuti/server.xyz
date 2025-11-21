@@ -40,53 +40,28 @@ body{
 }
 a{color:inherit;text-decoration:none;}
 
-/* ===== Home Button (Desktop default) ===== */
-#home-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: transparent;          /* no box */
-  border: none;
-  cursor: pointer;
-  display: none;
-  z-index: 999;
-
-  font-family: 'Velvelyne', serif; /* same as section headings */
-  font-size: 2rem;                  /* desktop arrow size */
-  color: #000;                      /* fill black for stroke to show */
-  -webkit-text-stroke: 1px #fff;    /* white outline */
-  text-align: center;
-  line-height: 1;
-  user-select: none;
-  transition: transform 0.3s ease;
+/* ===== Header / Back Arrow ===== */
+.header {
+  padding: 2rem;
+  text-align: left;
+  border-bottom: 1px solid #222;
 }
-
-#home-button:hover {
-  transform: scale(1.2);            /* subtle zoom on hover */
+.back-link{
+  font-family: 'Velvelyne', sans-serif;
+  font-size:1.5rem;
+  font-weight:bold;
+  color:#fff;
+  background:transparent; /* no circle/background */
+  padding:.5rem 1rem;
+  border-radius:0;
+  text-decoration:none;
+  -webkit-text-stroke:1px #fff; /* optional outline */
+  transition: all 0.3s ease;
 }
-
-/* ===== Tablet (smaller than 768px) ===== */
-@media (max-width: 768px) {
-  #home-button {
-    font-size: 1.5rem;              /* smaller arrow */
-  }
+.back-link:hover{
+  color:#000;
+  background:#fff; /* hover effect like video page */
 }
-
-/* ===== Mobile (smaller than 480px) ===== */
-@media (max-width: 480px) {
-  #home-button {
-    font-size: 1.2rem;              /* tiny arrow for phones */
-  }
-}
-/* ===== Main ===== */
-.main-container{
-  flex:1;
-  padding:5rem 2rem;
-  max-width:1400px;
-  margin:0 auto;
-  width:100%;
-}
-
 /* ===== Section Title ===== */
 .section-title{
   font-family: 'Velvelyne', serif;
@@ -208,6 +183,53 @@ a{color:inherit;text-decoration:none;}
   .overlay-prev{left:10px;}
   .overlay-next{right:10px;}
   .overlay-close{top:15px;right:20px;}
+}
+  
+/* ===== Home Button (Desktop default) ===== */
+#home-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: transparent;          /* no box */
+  border: none;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+
+  font-family: 'Velvelyne', serif; /* same as section headings */
+  font-size: 2rem;                  /* desktop arrow size */
+  color: #000;                      /* fill black for stroke to show */
+  -webkit-text-stroke: 1px #fff;    /* white outline */
+  text-align: center;
+  line-height: 1;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+#home-button:hover {
+  transform: scale(1.2);            /* subtle zoom on hover */
+}
+
+/* ===== Tablet (smaller than 768px) ===== */
+@media (max-width: 768px) {
+  #home-button {
+    font-size: 1.5rem;              /* smaller arrow */
+  }
+}
+
+/* ===== Mobile (smaller than 480px) ===== */
+@media (max-width: 480px) {
+  #home-button {
+    font-size: 1.2rem;              /* tiny arrow for phones */
+  }
+}
+/* ===== Main ===== */
+.main-container{
+  flex:1;
+  padding:5rem 2rem;
+  max-width:1400px;
+  margin:0 auto;
+  width:100%;
 }
 </style>
 </head>
