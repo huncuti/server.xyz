@@ -146,7 +146,6 @@ a{color:inherit;text-decoration:none;}
   justify-content:center;
   padding-bottom:2rem;
   cursor:default;
-  overflow:visible;
 }
 .art-domain{
   flex:0 0 auto;
@@ -165,103 +164,11 @@ a{color:inherit;text-decoration:none;}
 .art-domain:hover{
   transform:scale(1.05);
 }
-.domain-preview{
-  width:100%;
-  border-radius:10px;
-  aspect-ratio:4/3;
-  object-fit:cover;
-}
 .domain-title{
-  margin-top:1rem;
   font-family:'Velvelyne',sans-serif;
   font-size:2rem;
   color:#fff;
 }
-
-/* ===== Overlay ===== */
-.domain-overlay{
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,0.9);
-  backdrop-filter:blur(5px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .4s ease;
-  z-index:9999;
-}
-.domain-overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-.domain-overlay-content{
-  background:#111;
-  padding:1rem;
-  border-radius:12px;
-  max-width:80vw;
-  max-height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  flex-direction:column;
-  position:relative;
-  box-shadow:0 0 30px rgba(255,255,255,0.1);
-}
-.domain-overlay-content img,
-.domain-overlay-content video{
-  max-width:100%;
-  max-height:70vh;
-  border-radius:8px;
-  object-fit:contain;
-}
-.domain-overlay-content pre{
-  white-space: pre-wrap;
-  color:#fff;
-  font-size:1.2rem;
-  line-height:1.8;
-  text-align:left;
-  max-width:80vw;
-  overflow:auto;
-}
-.domain-close{
-  position:fixed;
-  top:25px;
-  right:30px;
-  font-size:2.2rem;
-  cursor:pointer;
-  color:#fff;
-  background: rgba(0,0,0,0.6);
-  border-radius:50%;
-  width:45px;
-  height:45px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:10001;
-  transition: background 0.3s ease;
-}
-.domain-close:hover{background: rgba(255,255,255,0.2);}
-.domain-nav{
-  font-size:3rem;
-  color:#fff;
-  user-select:none;
-  padding:0.5rem 0.75rem;
-  background: rgba(0,0,0,0.5);
-  border-radius:50%;
-  cursor:pointer;
-  position: fixed;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:10000;
-  opacity:1;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.domain-prev{left:20px;}
-.domain-next{right:20px;}
-.domain-nav:hover{background: rgba(255,255,255,0.2); transform:translateY(-50%) scale(1.2);}
 
 /* ===== Contact ===== */
 .contact-preview .section-title{text-align:center;}
@@ -279,9 +186,6 @@ a{color:inherit;text-decoration:none;}
   .section-title{font-size:3rem;}
   .domain-title{font-size:1.5rem;}
   .art-domain{width:200px;}
-  .domain-prev{left:10px;}
-  .domain-next{right:10px;}
-  .domain-close{top:15px;right:20px;}
 }
 </style>
 </head>
@@ -342,69 +246,16 @@ a{color:inherit;text-decoration:none;}
 <section id="art" class="art-section">
   <h2 class="section-title">art</h2>
   <div class="art-domains">
-    <!-- Collage -->
-    <div class="art-domain" data-domain="collage" data-files='[
-      {"src":"collage/TORTURE_page-0001 2.jpg","type":"image"},
-      {"src":"collage/CHOCOLATE_page-0001 copy.jpg","type":"image"},
-      {"src":"collage/NEBITNO_page-0001 2.jpg","type":"image"},
-      {"src":"collage/SPOILSPOR_page-0001(1).jpg","type":"image"},
-      {"src":"collage/Scanned Documents1_page-0001 copy.jpg","type":"image"},
-      {"src":"collage/final2_copressed.mp4","type":"video"}
-    ]'>
-      <img src="collage/TORTURE_page-0001 2.jpg" alt="Collage Preview" class="domain-preview">
-      <div class="domain-title">collage</div>
-    </div>
-
-    <!-- Photography -->
-    <div class="art-domain" data-domain="photography" data-files='[
-      {"src":"astaro/IMG_2345.jpg","type":"image"},
-      {"src":"astaro/IMG_2337.jpg","type":"image"},
-      {"src":"astaro/IMG_2338.jpg","type":"image"},
-      {"src":"astaro/IMG_2339.jpg","type":"image"},
-      {"src":"astaro/IMG_2340.jpg","type":"image"},
-      {"src":"astaro/IMG_2341.jpg","type":"image"},
-      {"src":"astaro/IMG_2342.jpg","type":"image"},
-      {"src":"astaro/IMG_2343.jpg","type":"image"},
-      {"src":"astaro/IMG_2344.jpg","type":"image"},
-      {"src":"prije rijeke/04600020.JPG","type":"image"},
-      {"src":"prije rijeke/04600021.JPG","type":"image"},
-      {"src":"prije rijeke/04600022.JPG","type":"image"},
-      {"src":"prije rijeke/3 Ene.jpg","type":"image"},
-      {"src":"rijeka/29200022.JPG","type":"image"},
-      {"src":"rijeka/29220002.JPG","type":"image"},
-      {"src":"rijeka/29220022.JPG","type":"image"},
-      {"src":"rijeka/29220023.JPG","type":"image"},
-      {"src":"rijeka/29220027.JPG","type":"image"},
-      {"src":"sbrijuni/47810012.JPG","type":"image"},
-      {"src":"sbrijuni/47820012.JPG","type":"image"},
-      {"src":"sbrijuni/47820018.JPG","type":"image"},
-      {"src":"sbrijuni/47820031.JPG","type":"image"},
-      {"src":"sbrijuni/47820032.JPG","type":"image"},
-      {"src":"sbrijuni/47870002.JPG","type":"image"},
-      {"src":"sbrijuni/47870006.JPG","type":"image"},
-      {"src":"sbrijuni/47870016.JPG","type":"image"},
-      {"src":"sbrijuni/47870030.JPG","type":"image"},
-      {"src":"sbrijuni/47870034.JPG","type":"image"},
-      {"src":"sbrijuni/47870036.JPG","type":"image"},
-      {"src":"wis/51130010.JPG","type":"image"},
-      {"src":"wis/51130012.JPG","type":"image"},
-      {"src":"wis/51130020.JPG","type":"image"},
-      {"src":"wis/51130021.JPG","type":"image"}
-    ]'>
-      <img src="astaro/IMG_2345.jpg" alt="Photography Preview" class="domain-preview">
-      <div class="domain-title">photography</div>
-    </div>
-
-    <!-- Video -->
-    <div class="art-domain" data-domain="video" data-files='[
-      {"src":"video/Eating The Elephant 2.MP4","type":"video"},
-      {"src":"video/IMG_1727.mov","type":"video"},
-      {"src":"video/video.mov","type":"video"},
-      {"src":"video/1F1406DB-0D05-4369-96CF-0A620CE411C8(_compressed.mp4","type":"video"}
-    ]'>
-      <img src="video/IMG_2346.jpg" alt="Video Preview" class="domain-preview">
-      <div class="domain-title">video</div>
-    </div>
+    <a href="visual.html" class="art-domain">
+      <div class="domain-title">visual</div>
+    </a>
+    <a href="writing.html" class="art-domain">
+      <div class="domain-title">writing</div>
+    </a>
+    <a href="music.html" class="art-domain">
+      <div class="domain-title">music</div>
+    </a>
+  </div>
 </section>
 
 <!-- ===== CONTACT ===== -->
@@ -456,78 +307,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }, {threshold:0.1});
   artDomains.forEach(ad=>artObserver.observe(ad));
-
-  // ART overlay
-  const overlay=document.createElement('div');
-  overlay.className='domain-overlay';
-  overlay.innerHTML=`
-    <span class="domain-close">&times;</span>
-    <div class="domain-overlay-content">
-      <div class="domain-media"></div>
-    </div>
-    <span class="domain-nav domain-prev">&#10094;</span>
-    <span class="domain-nav domain-next">&#10095;</span>
-  `;
-  document.body.appendChild(overlay);
-
-  const contentBox = overlay.querySelector('.domain-media');
-  const closeBtn = overlay.querySelector('.domain-close');
-  const nextBtn = overlay.querySelector('.domain-next');
-  const prevBtn = overlay.querySelector('.domain-prev');
-  let currentFiles=[], currentIndex=0;
-
-  function showItem(i){
-    contentBox.innerHTML='';
-    const f=currentFiles[i];
-    if(!f) return;
-    if(f.type==='image'){
-      const img=document.createElement('img');
-      img.src=f.src;
-      contentBox.appendChild(img);
-    } else if(f.type==='video'){
-      const v=document.createElement('video');
-      v.src=f.src;
-      v.controls=true; v.autoplay=true; v.muted=true;
-      contentBox.appendChild(v);
-    } else if(f.type==='text'){
-      fetch(f.src).then(r=>r.text()).then(t=>{
-        const pre=document.createElement('pre');
-        pre.textContent=t;
-        contentBox.appendChild(pre);
-      });
-    }
-  }
-
-  function openDomain(files){
-    currentFiles = files;
-    currentIndex = 0;
-    showItem(currentIndex);
-    overlay.classList.add('active');
-  }
-  function closeOverlay(){
-    overlay.classList.remove('active');
-    contentBox.innerHTML='';
-  }
-
-  artDomains.forEach(d=>{
-    d.addEventListener('click',()=>{
-      try{
-        const filesJSON=d.dataset.files.replace(/(\r\n|\n|\r)/gm,"");
-        openDomain(JSON.parse(filesJSON));
-      }catch(e){console.error('JSON parse error', e);}
-    });
-  });
-
-  closeBtn.onclick=closeOverlay;
-  nextBtn.onclick=()=>{ currentIndex=(currentIndex+1)%currentFiles.length; showItem(currentIndex);}
-  prevBtn.onclick=()=>{ currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length; showItem(currentIndex);}
-  overlay.onclick=e=>{if(e.target===overlay) closeOverlay();}
-  document.addEventListener('keydown', e=>{
-    if(!overlay.classList.contains('active')) return;
-    if(e.key==='Escape') closeOverlay();
-    else if(e.key==='ArrowRight'){ currentIndex=(currentIndex+1)%currentFiles.length; showItem(currentIndex);}
-    else if(e.key==='ArrowLeft'){ currentIndex=(currentIndex-1+currentFiles.length)%currentFiles.length; showItem(currentIndex);}
-  });
 
 });
 </script>
