@@ -236,6 +236,57 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
+/* ===== Poem 24 3-line blocks ===== */
+#poem-24 {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+#poem-24 .poem-number {
+  flex: 0 0 2rem;
+  color: #888;
+  font-weight: bold;
+  text-align: left;
+}
+
+.poem-24-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  align-items: center; /* center blocks horizontally */
+}
+
+.poem-24-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 600px; /* optional width */
+  text-align: center;
+}
+
+.poem-24-block p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+@media(max-width:768px){
+  #poem-24 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .poem-24-columns {
+    align-items: flex-start;
+  }
+  .poem-24-block {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -632,17 +683,24 @@ na desno rame stavljam težinu svijeta
 u meni je bol koji čeka da procvjeta
 
 danas, danas je proljeće</div></div>
-    <div class="poem"><div class="poem-number">24</div><div class="poem-text justify">mravinjak impulsa širi se disanjem
+<div class="poem" id="poem-24">
+  <div class="poem-number">24</div>
+  <div class="poem-24-columns">
 
-prostirem more pred tobom
+    <div class="poem-24-block">
+      <p>mravinjak impulsa širi se disanjem</p>
+      <p>prostirem more pred tobom</p>
+      <p>ono je ocean i izlijeva se</p>
+    </div>
 
-ono je ocean i izlijeva se
+    <div class="poem-24-block">
+      <p>ti plutaš</p>
+      <p>nasmiješena prema suncu</p>
+      <p>ljeto je</p>
+    </div>
 
-ti plutaš
-
-nasmiješena prema suncu
-
-ljeto je</div></div>
+  </div>
+</div>
     <div class="poem"><div class="poem-number">25</div><div class="poem-text justify">izlaziš na krivim stanicama
 
 ne vjerujem što čujem, ali čekam
