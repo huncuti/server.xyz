@@ -47,7 +47,7 @@ a{color:inherit;text-decoration:none;}
 
 /* ===== Hero ===== */
 .typewriter-container{
-  min-height:90vh; /* smaller hero */
+  min-height:90vh;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -93,7 +93,7 @@ a{color:inherit;text-decoration:none;}
 .research-highlights,
 .art-section,
 .contact-preview{
-  padding:8rem 2rem; /* increased spacing */
+  padding:8rem 2rem;
   max-width:1200px;
   margin:0 auto;
   text-align:left;
@@ -200,8 +200,8 @@ a{color:inherit;text-decoration:none;}
 /* ===== Responsive ===== */
 @media(max-width:768px){
   body{overflow-x:hidden;} /* fix horizontal shift */
-  .main-title{font-size:5rem; margin-top:3rem; -webkit-text-stroke:.8px #fff;}
-  .typewriter-text{font-size:1.2rem; margin-top:1.5rem;}
+  .main-title{font-size:4rem; margin-top:2rem; -webkit-text-stroke:.6px #fff;}
+  .typewriter-text{font-size:1.1rem; margin-top:1rem;}
 
   /* Navigation 2-column grid */
   .navigation {
@@ -209,16 +209,22 @@ a{color:inherit;text-decoration:none;}
     grid-template-columns: repeat(2, auto);
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
   .nav-item {
-    padding: .75rem 1.5rem;
+    padding: .5rem 1rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: .95rem;
   }
 
   /* Section titles smaller */
   .section-title{font-size:3rem; margin-bottom:1.5rem;}
+
+  /* Reduce top padding of sections so they start higher */
+  .about-section, .research-highlights, .art-section, .contact-preview{
+    padding-top:5rem;
+    padding-bottom:5rem;
+  }
 
   /* Art domains grid: visual + writing first row, music second row centered */
   .art-domains {
@@ -226,7 +232,7 @@ a{color:inherit;text-decoration:none;}
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     justify-items: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
   .art-domain {
     width: 100%;
