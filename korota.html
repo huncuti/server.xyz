@@ -337,17 +337,17 @@ a{color:inherit;text-decoration:none;}
     text-align: left;
   }
 }
-  /* ===== Poem 12 centered blocks ===== */
+/* ===== Poem 12 centered blocks ===== */
 #poem-12 {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1rem;           /* space between the number and text blocks */
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* space after the poem */
 }
 
 #poem-12 .poem-number {
-  flex: 0 0 2rem;
+  flex: 0 0 2rem;      /* fixed width for poem number */
   color: #888;
   font-weight: bold;
   text-align: left;
@@ -356,35 +356,36 @@ a{color:inherit;text-decoration:none;}
 .poem-12-columns {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.5rem;         /* space between multiple blocks if any */
   flex: 1;
-  align-items: center; /* center the blocks horizontally */
+  align-items: center;  /* horizontally center blocks */
 }
 
 .poem-12-block {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  max-width: 600px; /* optional: control width */
+  gap: 0.25rem;        /* space between individual lines inside the block */
+  max-width: 600px;    /* optional, control max width */
   text-align: center;
 }
 
 .poem-12-block p {
-  margin: 0;
-  line-height: 1.8;
+  margin: 0;           /* remove default paragraph margin */
+  line-height: 1.8;    /* spacing between lines inside a paragraph */
 }
 
+/* ===== Responsive ===== */
 @media(max-width:768px){
   #poem-12 {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; /* stack number and text vertically */
   }
   .poem-12-columns {
-    align-items: flex-start;
+    align-items: flex-start; /* align blocks to left on small screens */
   }
   .poem-12-block {
-    max-width: 100%;
-    text-align: left;
+    max-width: 100%;        /* fill available width */
+    text-align: left;       /* align text to left on mobile */
   }
 }
 
