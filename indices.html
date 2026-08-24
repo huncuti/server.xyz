@@ -3,24 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>portfolio</title>
+<title>Lara Petrović — Architectural Portfolio</title>
 
+<!-- External libs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 
 <style>
-/* ===== Bauhaus Root & Reset ===== */
+/* ===== Bauhaus x Brutalism Design Tokens ===== */
 :root {
   --bg-color: #f4f1ea;
-  --text-color: #111111;
+  --text-color: #000000;
   --yellow: #f2c94c;
   --red: #d9381e;
   --blue: #1a4384;
-  --line-color: #111111;
+  --line-color: #000000;
   --spine-width: 4px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 html, body { 
   scroll-behavior: smooth; 
   width: 100%; 
@@ -32,7 +33,7 @@ html, body {
 
 a { color: inherit; text-decoration: none; }
 
-/* ===== SVG Spinal Cord Overlay ===== */
+/* ===== Dynamic 2D Bauhaus Spine Background ===== */
 #spine-canvas {
   position: absolute;
   top: 0;
@@ -61,16 +62,16 @@ a { color: inherit; text-decoration: none; }
 .spine-node.active-red { fill: var(--red); }
 .spine-node.active-blue { fill: var(--blue); }
 
-/* ===== Main Structural Container ===== */
+/* ===== Structural Layout Wrapper ===== */
 .page-wrapper {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-/* ===== Hero Section ===== */
-.hero-section {
+/* ===== Level Header / Hero (The Head Node) ===== */
+.hero-level {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -81,10 +82,10 @@ a { color: inherit; text-decoration: none; }
   position: relative;
 }
 
-/* Bauhaus Head Container: Large Yellow Circle */
+/* Plain Yellow Bauhaus Head Circle */
 .head-container {
-  width: 320px;
-  height: 320px;
+  width: 300px;
+  height: 300px;
   background-color: var(--yellow);
   border: 4px solid var(--line-color);
   border-radius: 50%;
@@ -93,7 +94,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   box-shadow: 8px 8px 0px var(--line-color);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s ease;
 }
 
 .head-container:hover {
@@ -111,13 +112,25 @@ a { color: inherit; text-decoration: none; }
 
 .typewriter-text {
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 700;
   margin-top: 1.5rem;
   height: 1.6em;
   text-transform: lowercase;
 }
 
-/* Nav Pill Buttons */
+.level-tag {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--line-color);
+  color: var(--bg-color);
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Nav Block Buttons */
 .navigation {
   display: flex;
   gap: 1rem;
@@ -128,9 +141,9 @@ a { color: inherit; text-decoration: none; }
 
 .nav-item {
   padding: 0.6rem 1.4rem;
-  border: 2px solid var(--line-color);
+  border: 3px solid var(--line-color);
   background: var(--bg-color);
-  font-weight: 700;
+  font-weight: 800;
   text-transform: lowercase;
   box-shadow: 4px 4px 0px var(--line-color);
   transition: all 0.2s ease;
@@ -143,8 +156,8 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 6px 6px 0px var(--red);
 }
 
-/* ===== General Section Styling ===== */
-.section-block {
+/* ===== Section Elevations (Levels) ===== */
+.level-block {
   padding: 6rem 2rem;
   position: relative;
   min-height: 60vh;
@@ -152,7 +165,6 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
 }
 
-/* Asymmetric Section Layout Alignment */
 .align-left { align-items: flex-start; text-align: left; }
 .align-right { align-items: flex-end; text-align: right; }
 
@@ -163,25 +175,25 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -1px;
   margin-bottom: 2rem;
   background: var(--bg-color);
-  padding: 0.2rem 0.8rem;
-  border: 3px solid var(--line-color);
+  padding: 0.3rem 1rem;
+  border: 4px solid var(--line-color);
   display: inline-block;
-  box-shadow: 5px 5px 0px var(--line-color);
+  box-shadow: 6px 6px 0px var(--line-color);
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease;
 }
 
-/* Section-Specific Accent Colors */
-#find-out .section-title { box-shadow: 6px 6px 0px var(--red); }
-#research .section-title { box-shadow: -6px 6px 0px var(--blue); }
-#art .section-title { box-shadow: 6px 6px 0px var(--yellow); }
-#contact .section-title { box-shadow: 0px 6px 0px var(--line-color); }
+/* Accent Shadows per Section Level */
+#find-out .section-title { box-shadow: 8px 8px 0px var(--red); }
+#research .section-title { box-shadow: -8px 8px 0px var(--blue); }
+#art .section-title { box-shadow: 8px 8px 0px var(--yellow); }
+#contact .section-title { box-shadow: 0px 8px 0px var(--line-color); }
 
-/* ===== Content Cards ===== */
+/* ===== Content Cards (Monolithic Blocks) ===== */
 .card-container {
   width: 100%;
-  max-width: 550px;
+  max-width: 580px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -199,36 +211,36 @@ a { color: inherit; text-decoration: none; }
 
 .about-card h3, .research-card h3 {
   font-size: 1.4rem;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: lowercase;
   margin-bottom: 0.5rem;
-  border-bottom: 2px solid var(--line-color);
+  border-bottom: 3px solid var(--line-color);
   padding-bottom: 0.3rem;
 }
 
 .about-card ul { list-style: none; }
-.about-card li { margin-bottom: 0.4rem; position: relative; padding-left: 1rem; }
+.about-card li { margin-bottom: 0.4rem; position: relative; padding-left: 1.2rem; }
 .about-card li::before {
   content: "■";
   position: absolute;
   left: 0;
-  font-size: 0.6rem;
-  top: 0.2rem;
+  font-size: 0.7rem;
+  top: 0.1rem;
   color: var(--red);
 }
 
 .research-card .meta {
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   margin-top: 0.8rem;
   text-transform: lowercase;
   display: inline-block;
   background: var(--yellow);
-  padding: 0.1rem 0.5rem;
-  border: 1px solid var(--line-color);
+  padding: 0.2rem 0.6rem;
+  border: 2px solid var(--line-color);
 }
 
-/* ===== Art Section ===== */
+/* ===== Art Section Domains ===== */
 .art-domains {
   display: flex;
   gap: 1.5rem;
@@ -257,7 +269,7 @@ a { color: inherit; text-decoration: none; }
 
 .domain-title {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 900;
   text-transform: lowercase;
 }
 
@@ -268,7 +280,7 @@ a { color: inherit; text-decoration: none; }
   padding: 2rem;
   box-shadow: 6px 6px 0px var(--line-color);
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .contact-info a {
@@ -280,14 +292,14 @@ a { color: inherit; text-decoration: none; }
 .footer {
   padding: 3rem 2rem;
   text-align: center;
-  border-top: 3px solid var(--line-color);
+  border-top: 4px solid var(--line-color);
   background: var(--bg-color);
-  font-weight: 700;
+  font-weight: 800;
   position: relative;
   z-index: 2;
 }
 
-/* ===== Floating Bauhaus Home Button ===== */
+/* ===== Brutalist Floating Home Button ===== */
 #home-button {
   position: fixed;
   bottom: 25px;
@@ -317,7 +329,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ===== Responsive Adaptations ===== */
 @media (max-width: 768px) {
-  .head-container { width: 260px; height: 260px; }
+  .head-container { width: 250px; height: 250px; }
   .main-title { font-size: 1.8rem; }
   .section-title { font-size: 2.5rem; }
   .align-left, .align-right { align-items: center; text-align: left; }
@@ -328,11 +340,14 @@ a { color: inherit; text-decoration: none; }
 </head>
 <body>
 
+<!-- Dynamic SVG Backdrop for 2D Spinal Axis Connection -->
 <svg id="spine-canvas"></svg>
 
 <div class="page-wrapper">
 
-  <header class="hero-section" id="hero">
+  <!-- ===== LEVEL 00: HERO (HEAD NODE) ===== -->
+  <header class="hero-level" id="hero">
+    <span class="level-tag">level 00 // main node</span>
     <div class="head-container" id="head-node">
       <h1 class="main-title">Lara<br>Petrović</h1>
     </div>
@@ -345,7 +360,9 @@ a { color: inherit; text-decoration: none; }
     </nav>
   </header>
 
-  <section id="find-out" class="section-block align-left">
+  <!-- ===== LEVEL 01: FIND OUT (BRANCH LEFT) ===== -->
+  <section id="find-out" class="level-block align-left">
+    <span class="level-tag">level 01 // overview</span>
     <h2 class="section-title">find out</h2>
     <div class="card-container">
       <div class="about-card">
@@ -365,7 +382,9 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <section id="research" class="section-block align-right">
+  <!-- ===== LEVEL 02: RESEARCH (BRANCH RIGHT) ===== -->
+  <section id="research" class="level-block align-right">
+    <span class="level-tag">level 02 // research archive</span>
     <h2 class="section-title">current, previous, (in)formal</h2>
     <div class="card-container">
       <div class="research-card">
@@ -391,7 +410,9 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <section id="art" class="section-block align-left">
+  <!-- ===== LEVEL 03: ART (BRANCH LEFT) ===== -->
+  <section id="art" class="level-block align-left">
+    <span class="level-tag">level 03 // creative output</span>
     <h2 class="section-title">art</h2>
     <div class="art-domains">
       <a href="visual.html" class="art-domain">
@@ -406,7 +427,9 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <section id="contact" class="section-block align-right">
+  <!-- ===== LEVEL 04: CONTACT (BRANCH RIGHT) ===== -->
+  <section id="contact" class="level-block align-right">
+    <span class="level-tag">level 04 // terminal node</span>
     <h2 class="section-title">get in touch</h2>
     <div class="contact-info">
       <p>e-mail: <a href="mailto:lara.petrovic.xyz@gmail.com">lara.petrovic.xyz@gmail.com</a></p>
@@ -414,18 +437,21 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <p>&copy; 2026 lara petrović. all rights reserved.</p>
   </footer>
 
 </div>
 
+<!-- ===== HOME BUTTON ===== -->
 <div id="home-button">↑</div>
 
+<!-- ===== INTERACTIVE SCRIPT ===== -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Initialize Typewriter
+  // 1. Typewriter Script
   new Typed('#typewriter-intro', {
     strings: ['researcher on cybercommunication', 'psychologist & digital analyst', 'creative explorer'],
     typeSpeed: 40,
@@ -436,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showCursor: false
   });
 
-  // 2. Scroll Reveal Animations
+  // 2. Scroll Reveal Observer
   const revealEls = document.querySelectorAll('.section-title, .about-card, .research-card, .art-domain');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -449,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15 });
   revealEls.forEach(el => observer.observe(el));
 
-  // 3. Home Button Toggle
+  // 3. Floating Home Button Logic
   const hero = document.getElementById('hero');
   const homeBtn = document.getElementById('home-button');
   window.addEventListener('scroll', () => {
@@ -460,11 +486,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // 4. Dynamic Bauhaus Spinal Cord SVG Generator
+  // 4. Dynamic 2D Bauhaus Spine Generator
   const svg = document.getElementById('spine-canvas');
   
   function drawSpine() {
-    svg.innerHTML = ''; // Clear canvas
+    svg.innerHTML = ''; // Clear SVG
     const documentHeight = Math.max(
       document.body.scrollHeight, document.documentElement.scrollHeight
     );
@@ -476,14 +502,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const headRect = headElem.getBoundingClientRect();
     const startY = headRect.bottom + window.scrollY;
 
-    const sections = [
+    const levels = [
       { id: 'find-out', dir: 'left', colorClass: 'active-red' },
       { id: 'research', dir: 'right', colorClass: 'active-blue' },
       { id: 'art', dir: 'left', colorClass: 'active-red' },
       { id: 'contact', dir: 'right', colorClass: 'active-blue' }
     ];
 
-    // Main Central Vertebra Line
+    // Draw Main Structural Spine Axis
     const mainLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     mainLine.setAttribute('x1', centerX);
     mainLine.setAttribute('y1', startY);
@@ -492,9 +518,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mainLine.setAttribute('class', 'spine-path');
     svg.appendChild(mainLine);
 
-    // Draw 90-Degree Asymmetrical Orthogonal Branches to Sections
-    sections.forEach(sec => {
-      const el = document.getElementById(sec.id);
+    // Draw 90° Orthogonal Level Connectors
+    levels.forEach(level => {
+      const el = document.getElementById(level.id);
       if (!el) return;
 
       const titleEl = el.querySelector('.section-title');
@@ -502,39 +528,39 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetY = titleRect.top + window.scrollY + (titleRect.height / 2);
 
       let targetX;
-      if (sec.dir === 'left') {
+      if (level.dir === 'left') {
         targetX = titleRect.right + window.scrollX + 15;
       } else {
         targetX = titleRect.left + window.scrollX - 15;
       }
 
-      // Orthogonal Polyline Path: Central Spine -> Horizontal 90° Turn -> Title Node
+      // Orthogonal Polyline (Branching off spine at 90°)
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
       const points = `${centerX},${targetY} ${targetX},${targetY}`;
       path.setAttribute('points', points);
       path.setAttribute('class', 'spine-path');
       svg.appendChild(path);
 
-      // Vertebral Node Circle at Center Connection
+      // Central Axis Junction Circle
       const centerNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       centerNode.setAttribute('cx', centerX);
       centerNode.setAttribute('cy', targetY);
       centerNode.setAttribute('r', '8');
-      centerNode.setAttribute('class', `spine-node ${sec.colorClass}`);
+      centerNode.setAttribute('class', `spine-node ${level.colorClass}`);
       svg.appendChild(centerNode);
 
-      // Terminal Geometric Square at Branch End
+      // Terminal Level Node Square
       const termSquare = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       termSquare.setAttribute('x', targetX - 6);
       termSquare.setAttribute('y', targetY - 6);
       termSquare.setAttribute('width', '12');
       termSquare.setAttribute('height', '12');
-      termSquare.setAttribute('class', `spine-node ${sec.colorClass}`);
+      termSquare.setAttribute('class', `spine-node ${level.colorClass}`);
       svg.appendChild(termSquare);
     });
   }
 
-  // Initial draw & recalculate on window resize
+  // Initial render & resize update
   drawSpine();
   window.addEventListener('resize', drawSpine);
 });
