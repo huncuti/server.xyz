@@ -3,369 +3,1243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>portfolio</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+
 <style>
-/* ===== BAUHAUS & BRUTALIST SYSTEM ===== */
-:root {
-  --black: #050505;
-  --white: #F4F4F0;
-  --red: #FF1300;
-  --blue: #0029FF;
-  --border: 3px solid var(--black);
+
+/* =========================================================
+   BAUHAUS / BRUTALIST SYSTEM
+   ========================================================= */
+
+:root{
+  --paper:#e9e7df;
+  --black:#080808;
+  --red:#e3261e;
+  --yellow:#f5c400;
+  --blue:#174cff;
+  --white:#f7f6f0;
+
+  --line:3px solid var(--black);
+  --max:1600px;
 }
 
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  background-color: var(--white);
-  color: var(--black);
-  font-family: "Courier New", Courier, monospace; /* Monospaced precision */
+html{
+  scroll-behavior:smooth;
 }
 
-/* ===== TYPOGRAPHY ===== */
-h1, h2, h3, .sans {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
+body{
+  background:var(--paper);
+  color:var(--black);
+  font-family:Arial, Helvetica, sans-serif;
+  line-height:1.25;
+  overflow-x:hidden;
 }
 
-/* ===== CORE LAYOUT STRUCTURE ===== */
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  width: 100%;
-  border-left: var(--border);
-  border-right: var(--border);
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-.cell {
-  border-bottom: var(--border);
-  border-right: var(--border);
-  padding: 1.5rem;
-  position: relative;
-  background: var(--white);
+
+/* =========================================================
+   ARCHITECTURAL GRID
+   ========================================================= */
+
+.site{
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  border-left:var(--line);
+  border-right:var(--line);
+  background:var(--paper);
 }
 
-.cell:nth-child(12n) {
-  border-right: none;
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(12, minmax(0,1fr));
 }
 
-/* ===== HERO SECTION ===== */
-.hero-header {
-  grid-column: span 12;
-  padding: 4rem 2rem 2rem 2rem;
-  background: var(--white);
+
+/* =========================================================
+   HEADER / HERO
+   ========================================================= */
+
+.hero{
+  min-height:100vh;
+  border-bottom:var(--line);
+  position:relative;
+  overflow:hidden;
+  background:var(--paper);
 }
 
-.main-title {
-  font-size: clamp(4rem, 15vw, 16rem);
-  word-break: break-word;
-  color: var(--black);
+.hero-top{
+  min-height:70px;
+  border-bottom:var(--line);
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  align-items:stretch;
 }
 
-.hero-sub {
-  grid-column: span 8;
-  font-size: 1.25rem;
-  font-weight: bold;
-  background: var(--black);
-  color: var(--white);
+.logo{
+  grid-column:span 3;
+  border-right:var(--line);
+  display:flex;
+  align-items:center;
+  padding:0 1.25rem;
+  font-size:1rem;
+  font-weight:900;
+  letter-spacing:-.04em;
+  text-transform:uppercase;
 }
 
-/* ===== SECTION LABELS ===== */
-.section-label {
-  grid-column: span 12;
-  background: var(--black);
-  color: var(--white);
-  padding: 0.5rem 1.5rem;
+.coordinates{
+  grid-column:span 6;
+  display:flex;
+  align-items:center;
+  padding:0 1.25rem;
+  font-family:monospace;
+  font-size:.75rem;
+  text-transform:uppercase;
 }
 
-.section-label h2 {
-  font-size: 2rem;
+.year{
+  grid-column:span 3;
+  border-left:var(--line);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:900;
 }
 
-/* ===== FIND OUT (ABOUT) ===== */
-.about-focus {
-  grid-column: span 7;
+.hero-main{
+  min-height:calc(100vh - 70px);
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-template-rows:1fr auto;
 }
 
-.about-edu {
-  grid-column: span 5;
-  background: #EBEBE6;
+.hero-title{
+  grid-column:1 / 13;
+  align-self:center;
+  padding:2rem 1rem 0;
+
+  font-size:
+    clamp(7rem, 19vw, 22rem);
+
+  line-height:.72;
+  letter-spacing:-.085em;
+  font-weight:900;
+  text-transform:lowercase;
+
+  position:relative;
+  z-index:2;
 }
 
-.cell h3 {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-  border-bottom: var(--border);
-  padding-bottom: 0.5rem;
+.hero-title span{
+  display:block;
 }
 
-ul.raw-list {
-  list-style: none;
+.hero-title span:last-child{
+  margin-left:12vw;
 }
 
-ul.raw-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--black);
-  font-weight: bold;
+
+/* Primary geometric element */
+
+.hero-circle{
+  position:absolute;
+  width:min(28vw,430px);
+  height:min(28vw,430px);
+  border-radius:50%;
+  background:var(--red);
+  right:8%;
+  top:19%;
+  z-index:0;
 }
 
-ul.raw-list li::before {
-  content: "-> ";
-  color: var(--red);
+.hero-square{
+  position:absolute;
+  width:min(15vw,230px);
+  height:min(15vw,230px);
+  background:var(--blue);
+  left:4%;
+  bottom:12%;
+  z-index:0;
 }
 
-/* ===== RESEARCH ===== */
-.research-item {
-  grid-column: span 6;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.hero-bar{
+  position:absolute;
+  width:45%;
+  height:34px;
+  background:var(--yellow);
+  right:0;
+  bottom:17%;
+  z-index:1;
 }
 
-.research-item:hover {
-  background: #FFF;
-  box-shadow: inset 0 0 0 3px var(--red);
+
+/* Hero bottom */
+
+.hero-bottom{
+  grid-column:1 / 13;
+  border-top:var(--line);
+  min-height:125px;
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
 }
 
-.meta-tag {
-  margin-top: 1.5rem;
-  display: inline-block;
-  background: var(--black);
-  color: var(--white);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.85rem;
-  font-weight: bold;
-  align-self: flex-start;
+.hero-intro{
+  grid-column:span 7;
+  border-right:var(--line);
+  padding:1.25rem;
+  display:flex;
+  align-items:center;
+  font-size:1.35rem;
+  font-weight:700;
+  max-width:800px;
 }
 
-/* ===== ART DOMAINS ===== */
-.art-item {
-  grid-column: span 4;
-  min-height: 200px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  text-decoration: none;
-  color: var(--black);
-  transition: background 0.1s ease;
+.hero-nav{
+  grid-column:span 5;
+  display:grid;
+  grid-template-columns:1fr 1fr;
 }
 
-.art-item:hover {
-  background: var(--blue);
-  color: var(--white);
+.hero-nav a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-right:var(--line);
+  border-bottom:var(--line);
+  font-weight:900;
+  text-transform:uppercase;
+  font-size:.85rem;
+  transition:.15s ease;
 }
 
-.art-item:hover .art-arrow {
-  transform: translate(5px, -5px);
+.hero-nav a:nth-child(2n){
+  border-right:0;
 }
 
-.art-title {
-  font-size: 3rem;
+.hero-nav a:nth-child(3),
+.hero-nav a:nth-child(4){
+  border-bottom:0;
 }
 
-.art-arrow {
-  font-size: 3rem;
-  font-family: Arial, sans-serif;
-  transition: transform 0.1s ease;
+.hero-nav a:hover{
+  background:var(--black);
+  color:var(--white);
 }
 
-/* ===== CONTACT & FOOTER ===== */
-.contact-cell {
-  grid-column: span 12;
-  padding: 3rem 1.5rem;
-  background: var(--red);
-  color: var(--white);
+
+/* =========================================================
+   GENERIC SECTION
+   ========================================================= */
+
+.section{
+  border-bottom:var(--line);
 }
 
-.contact-cell a {
-  color: var(--white);
-  text-decoration: underline;
-  font-weight: bold;
+.section-head{
+  display:grid;
+  grid-template-columns:3fr 9fr;
+  min-height:170px;
+  border-bottom:var(--line);
 }
 
-.footer-cell {
-  grid-column: span 12;
-  font-size: 0.85rem;
-  text-align: justify;
-  background: var(--black);
-  color: var(--white);
-  border-bottom: none;
+.section-number{
+  border-right:var(--line);
+  display:flex;
+  align-items:center;
+  padding:1.25rem;
+  font-family:monospace;
+  font-size:.8rem;
 }
 
-/* ===== STICKY BACK TO TOP BUTTON ===== */
-#home-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background: var(--white);
-  border: var(--border);
-  box-shadow: 4px 4px 0px var(--black);
-  font-family: Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+.section-title{
+  padding:1rem 1.5rem;
+  font-size:clamp(4rem,9vw,10rem);
+  line-height:.8;
+  letter-spacing:-.07em;
+  font-weight:900;
+  text-transform:lowercase;
+  align-self:end;
 }
 
-#home-button:active {
-  box-shadow: 0px 0px 0px var(--black);
-  transform: translate(4px, 4px);
+
+/* =========================================================
+   FIND OUT
+   ========================================================= */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:4fr 4fr 4fr;
 }
 
-/* ===== RESPONSIVE BREAKPOINTS ===== */
-@media (max-width: 900px) {
-  .hero-sub { grid-column: span 12; }
-  .hero-nav { grid-column: span 12; }
-  .about-focus { grid-column: span 12; }
-  .about-edu { grid-column: span 12; }
-  .research-item { grid-column: span 12; }
-  .art-item { grid-column: span 12; }
+.about-card{
+  min-height:370px;
+  padding:1.5rem;
+  border-right:var(--line);
+  position:relative;
 }
+
+.about-card:last-child{
+  border-right:0;
+}
+
+.about-card:nth-child(1){
+  background:var(--yellow);
+}
+
+.about-card:nth-child(2){
+  background:var(--blue);
+  color:var(--white);
+}
+
+.about-card:nth-child(3){
+  background:var(--paper);
+}
+
+.card-index{
+  font-family:monospace;
+  font-size:.75rem;
+  display:block;
+  margin-bottom:5rem;
+}
+
+.about-card h3{
+  font-size:2rem;
+  line-height:.9;
+  letter-spacing:-.05em;
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+
+.about-card ul{
+  list-style:none;
+}
+
+.about-card li{
+  border-top:2px solid currentColor;
+  padding:.65rem 0;
+  font-weight:700;
+  font-size:1rem;
+}
+
+.about-card p{
+  margin:.8rem 0;
+  font-weight:700;
+}
+
+
+/* =========================================================
+   RESEARCH
+   ========================================================= */
+
+.research-list{
+  display:grid;
+  grid-template-columns:1fr;
+}
+
+.research-card{
+  display:grid;
+  grid-template-columns:1fr 3fr 2fr;
+  min-height:180px;
+  border-bottom:var(--line);
+  transition:.15s ease;
+}
+
+.research-card:last-child{
+  border-bottom:0;
+}
+
+.research-card:hover{
+  background:var(--black);
+  color:var(--white);
+}
+
+.research-index{
+  padding:1.25rem;
+  border-right:var(--line);
+  font-family:monospace;
+}
+
+.research-content{
+  padding:1.25rem;
+  border-right:var(--line);
+}
+
+.research-content h3{
+  font-size:clamp(2rem,4vw,4.5rem);
+  line-height:.85;
+  letter-spacing:-.06em;
+  text-transform:lowercase;
+}
+
+.research-content p{
+  margin-top:1rem;
+  max-width:650px;
+  font-weight:600;
+}
+
+.research-meta{
+  padding:1.25rem;
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+  text-align:right;
+  font-family:monospace;
+  font-size:.8rem;
+  text-transform:uppercase;
+}
+
+
+/* =========================================================
+   ART
+   ========================================================= */
+
+.art-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+}
+
+.art-domain{
+  min-height:500px;
+  border-right:var(--line);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:1.25rem;
+  position:relative;
+  overflow:hidden;
+  transition:.15s ease;
+}
+
+.art-domain:last-child{
+  border-right:0;
+}
+
+.art-domain:nth-child(1){
+  background:var(--red);
+}
+
+.art-domain:nth-child(2){
+  background:var(--yellow);
+}
+
+.art-domain:nth-child(3){
+  background:var(--blue);
+  color:var(--white);
+}
+
+.art-number{
+  font-family:monospace;
+  font-size:.8rem;
+}
+
+.domain-title{
+  font-size:clamp(4rem,8vw,9rem);
+  line-height:.75;
+  font-weight:900;
+  letter-spacing:-.08em;
+  text-transform:lowercase;
+  transform:rotate(-90deg);
+  transform-origin:left bottom;
+  position:absolute;
+  left:1.25rem;
+  bottom:1.5rem;
+}
+
+.art-domain:hover{
+  background:var(--black);
+  color:var(--white);
+}
+
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:5fr 7fr;
+  min-height:450px;
+}
+
+.contact-statement{
+  border-right:var(--line);
+  padding:1.5rem;
+  background:var(--black);
+  color:var(--white);
+
+  display:flex;
+  align-items:flex-end;
+}
+
+.contact-statement h3{
+  font-size:clamp(4rem,8vw,9rem);
+  line-height:.72;
+  letter-spacing:-.08em;
+}
+
+.contact-info{
+  padding:1.5rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.contact-label{
+  font-family:monospace;
+  font-size:.8rem;
+}
+
+.email{
+  font-size:clamp(1.5rem,3vw,3rem);
+  font-weight:900;
+  letter-spacing:-.05em;
+  word-break:break-word;
+  border-bottom:4px solid var(--black);
+  padding-bottom:.5rem;
+}
+
+.location{
+  font-size:1.5rem;
+  font-weight:900;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+  min-height:90px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:1.25rem;
+  font-family:monospace;
+  font-size:.75rem;
+  text-transform:uppercase;
+}
+
+.footer-right{
+  text-align:right;
+}
+
+
+/* =========================================================
+   HOME BUTTON
+   ========================================================= */
+
+#home-button{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:60px;
+  height:60px;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--red);
+  border:var(--line);
+
+  color:var(--black);
+  font-size:2rem;
+  font-weight:900;
+
+  cursor:pointer;
+  z-index:999;
+}
+
+#home-button:hover{
+  background:var(--yellow);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:900px){
+
+  .site{
+    border-left:0;
+    border-right:0;
+  }
+
+  .hero-top{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .logo{
+    grid-column:span 1;
+  }
+
+  .coordinates{
+    display:none;
+  }
+
+  .year{
+    grid-column:span 1;
+  }
+
+  .hero-title{
+    font-size:clamp(5rem,18vw,10rem);
+    padding-top:4rem;
+  }
+
+  .hero-title span:last-child{
+    margin-left:8vw;
+  }
+
+  .hero-circle{
+    width:38vw;
+    height:38vw;
+  }
+
+  .hero-square{
+    width:22vw;
+    height:22vw;
+  }
+
+  .hero-bottom{
+    grid-template-columns:1fr;
+  }
+
+  .hero-intro{
+    grid-column:1;
+    border-right:0;
+    border-bottom:var(--line);
+    min-height:120px;
+  }
+
+  .hero-nav{
+    grid-column:1;
+  }
+
+  .section-head{
+    grid-template-columns:1fr;
+  }
+
+  .section-number{
+    border-right:0;
+    border-bottom:var(--line);
+    min-height:50px;
+  }
+
+  .section-title{
+    min-height:140px;
+    display:flex;
+    align-items:flex-end;
+  }
+
+  .about-grid,
+  .art-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-card,
+  .art-domain{
+    border-right:0;
+    border-bottom:var(--line);
+  }
+
+  .about-card:last-child,
+  .art-domain:last-child{
+    border-bottom:0;
+  }
+
+  .art-domain{
+    min-height:300px;
+  }
+
+  .domain-title{
+    transform:none;
+    left:1.25rem;
+    bottom:1.25rem;
+  }
+
+  .research-card{
+    grid-template-columns:60px 1fr;
+  }
+
+  .research-index{
+    grid-row:span 2;
+  }
+
+  .research-content{
+    border-right:0;
+  }
+
+  .research-meta{
+    border-top:2px solid currentColor;
+    justify-content:flex-start;
+    text-align:left;
+    padding-top:.8rem;
+  }
+
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .contact-statement{
+    min-height:300px;
+    border-right:0;
+    border-bottom:var(--line);
+  }
+
+  .footer{
+    grid-template-columns:1fr;
+    gap:.5rem;
+  }
+
+  .footer-right{
+    text-align:left;
+  }
+}
+
+
+@media(max-width:500px){
+
+  .hero{
+    min-height:100svh;
+  }
+
+  .hero-title{
+    font-size:clamp(4.5rem,21vw,7rem);
+  }
+
+  .hero-intro{
+    font-size:1rem;
+  }
+
+  .hero-nav a{
+    min-height:65px;
+  }
+
+  .section-title{
+    font-size:4rem;
+  }
+
+  .about-card{
+    min-height:330px;
+  }
+
+  .research-card{
+    grid-template-columns:45px 1fr;
+  }
+
+  .research-content h3{
+    font-size:2.2rem;
+  }
+
+  .research-meta{
+    font-size:.7rem;
+  }
+
+  #home-button{
+    width:50px;
+    height:50px;
+    right:12px;
+    bottom:12px;
+  }
+}
+
 </style>
 </head>
+
 <body>
 
-<main class="grid-container">
+<div class="site">
 
-  <section class="cell hero-header">
-    <h1 class="main-title">HUNCUTI</h1>
-  </section>
+<!-- ======================================================
+     HERO
+     ====================================================== -->
 
-  <div class="cell hero-sub">
-    RESEARCHER ON CYBERCOMMUNICATION & DIGITAL BEHAVIORAL PATTERNS.
-  </div>
+<header class="hero" id="home">
 
-  <nav class="hero-nav">
-    <a href="#find-out" class="nav-item">01 // FIND OUT</a>
-    <a href="#research" class="nav-item">02 // RESEARCH</a>
-    <a href="#art" class="nav-item">03 // ART</a>
-    <a href="#contact" class="nav-item">04 // CONTACT</a>
-  </nav>
+  <div class="hero-top">
 
-  <div id="find-out" class="section-label">
-    <h2>01 // FIND OUT</h2>
-  </div>
-
-  <article class="cell about-focus">
-    <h3>FOCUS AREAS</h3>
-    <ul class="raw-list">
-      <li>Cyberpsychology</li>
-      <li>Emotion regulation, mindfulness-based interventions</li>
-      <li>Creativity, intelligence, personality</li>
-      <li>Digital biomarkers, AI-driven healthcare</li>
-    </ul>
-  </article>
-
-  <article class="cell about-edu">
-    <h3>EDUCATION</h3>
-    <ul class="raw-list">
-      <li>Master of Psychology — University of Zagreb (2020–2024)</li>
-      <li>Bachelor of Psychology — University of Zagreb (2017–2020)</li>
-    </ul>
-  </article>
-
-  <div id="research" class="section-label">
-    <h2>02 // RESEARCH HIGHLIGHTS</h2>
-  </div>
-
-  <article class="cell research-item">
-    <div>
-      <h3>Morality of Redditors</h3>
-      <p>Qualitative research on a Reddit AITA database.</p>
+    <div class="logo">
+      LARA PETROVIć
     </div>
-    <span class="meta-tag">CYBURGER • 2026 - PRESENT</span>
-  </article>
 
-  <article class="cell research-item">
-    <div>
-      <h3>Emotion Regulation Meta-Analysis</h3>
-      <p>Comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
+    <div class="coordinates">
+      researcher / artist / cybercommunication
     </div>
-    <span class="meta-tag">UNIVERSITY OF AMSTERDAM • 2024 - 2026</span>
-  </article>
 
-  <article class="cell research-item">
-    <div>
-      <h3>Intelligence & Creativity</h3>
-      <p>Supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
+    <div class="year">
+      2026
     </div>
-    <span class="meta-tag">UNIVERSITY OF ZAGREB • 2023 - PRESENT</span>
-  </article>
 
-  <article class="cell research-item">
-    <div>
-      <h3>Digital Biomarkers Research</h3>
-      <p>Research on digital biomarkers for neuropsychiatric conditions and AI-driven healthcare solutions.</p>
-    </div>
-    <span class="meta-tag">VITAFLUENCE.AI • 2023 - 2024</span>
-  </article>
-
-  <div id="art" class="section-label">
-    <h2>03 // ART DOMAINS</h2>
   </div>
 
-  <a href="visual.html" class="cell art-item">
-    <span class="art-title">VISUAL</span>
-    <span class="art-arrow">↗</span>
-  </a>
+  <div class="hero-main">
 
-  <a href="writing.html" class="cell art-item">
-    <span class="art-title">WRITING</span>
-    <span class="art-arrow">↗</span>
-  </a>
+    <div class="hero-circle"></div>
+    <div class="hero-square"></div>
+    <div class="hero-bar"></div>
 
-  <a href="music.html" class="cell art-item">
-    <span class="art-title">MUSIC</span>
-    <span class="art-arrow">↗</span>
-  </a>
+    <h1 class="hero-title">
+      <span>hun</span>
+      <span>cuti</span>
+    </h1>
 
-  <div id="contact" class="section-label">
-    <h2>04 // CONTACT</h2>
+    <div class="hero-bottom">
+
+      <div class="hero-intro">
+        <span id="typewriter-intro"></span>
+      </div>
+
+      <nav class="hero-nav">
+        <a href="#find-out">01 / find out</a>
+        <a href="#research">02 / research</a>
+        <a href="#art">03 / art</a>
+        <a href="#contact">04 / contact</a>
+      </nav>
+
+    </div>
+
   </div>
 
-  <section class="cell contact-cell">
-    <h3 class="sans" style="font-size: 3rem; margin-bottom: 1rem;">GET IN TOUCH</h3>
-    <p style="font-size: 1.25rem; font-weight: bold;">E-MAIL: <a href="mailto:lara.petrovic.xyz@gmail.com">LARA.PETROVIC.XYZ@GMAIL.COM</a></p>
-    <p style="font-size: 1.25rem; font-weight: bold;">LOCATION: CROATIA</p>
-  </section>
+</header>
 
-  <footer class="cell footer-cell">
-    © 2026 HUNCUTI. ALL RIGHTS RESERVED. STRUCTURE BUILT ON STRICT BAUHAUS GRID RULES.
-  </footer>
 
-</main>
+<!-- ======================================================
+     FIND OUT
+     ====================================================== -->
 
-<button id="home-button" aria-label="Scroll to top">↑</button>
+<section id="find-out" class="section">
+
+  <div class="section-head">
+
+    <div class="section-number">
+      01 — profile
+    </div>
+
+    <h2 class="section-title">
+      find out
+    </h2>
+
+  </div>
+
+
+  <div class="about-grid">
+
+    <article class="about-card">
+
+      <span class="card-index">A / 01</span>
+
+      <h3>focus<br>areas</h3>
+
+      <ul>
+        <li>cyberpsychology</li>
+        <li>emotion regulation / mindfulness</li>
+        <li>creativity / intelligence / personality</li>
+        <li>digital biomarkers / AI healthcare</li>
+      </ul>
+
+    </article>
+
+
+    <article class="about-card">
+
+      <span class="card-index">A / 02</span>
+
+      <h3>education</h3>
+
+      <p>
+        master of psychology<br>
+        university of zagreb<br>
+        2020—2024
+      </p>
+
+      <p>
+        bachelor of psychology<br>
+        university of zagreb<br>
+        2017—2020
+      </p>
+
+    </article>
+
+
+    <article class="about-card">
+
+      <span class="card-index">A / 03</span>
+
+      <h3>method</h3>
+
+      <p>
+        psychological research,
+        digital culture,
+        computational approaches,
+        qualitative inquiry,
+        creative practice.
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     RESEARCH
+     ====================================================== -->
+
+<section id="research" class="section">
+
+  <div class="section-head">
+
+    <div class="section-number">
+      02 — research
+    </div>
+
+    <h2 class="section-title">
+      current,<br>
+      previous,<br>
+      (in)formal
+    </h2>
+
+  </div>
+
+
+  <div class="research-list">
+
+
+    <article class="research-card">
+
+      <div class="research-index">
+        01
+      </div>
+
+      <div class="research-content">
+
+        <h3>
+          morality<br>
+          of Redditors
+        </h3>
+
+        <p>
+          qualitative research on a Reddit AITA database.
+        </p>
+
+      </div>
+
+      <div class="research-meta">
+        cyburger<br>
+        2026 — present
+      </div>
+
+    </article>
+
+
+    <article class="research-card">
+
+      <div class="research-index">
+        02
+      </div>
+
+      <div class="research-content">
+
+        <h3>
+          emotion<br>
+          regulation<br>
+          meta-analysis
+        </h3>
+
+        <p>
+          comprehensive meta-analysis of mindfulness-based
+          interventions on emotion regulation.
+        </p>
+
+      </div>
+
+      <div class="research-meta">
+        university of amsterdam<br>
+        2024 — 2026
+      </div>
+
+    </article>
+
+
+    <article class="research-card">
+
+      <div class="research-index">
+        03
+      </div>
+
+      <div class="research-content">
+
+        <h3>
+          intelligence<br>
+          & creativity
+        </h3>
+
+        <p>
+          supporting research on intelligence,
+          creativity, and personality constructs
+          across multiple phases.
+        </p>
+
+      </div>
+
+      <div class="research-meta">
+        university of zagreb<br>
+        2023 — present
+      </div>
+
+    </article>
+
+
+    <article class="research-card">
+
+      <div class="research-index">
+        04
+      </div>
+
+      <div class="research-content">
+
+        <h3>
+          digital<br>
+          biomarkers
+        </h3>
+
+        <p>
+          research on digital biomarkers for
+          neuropsychiatric conditions and
+          AI-driven healthcare solutions.
+        </p>
+
+      </div>
+
+      <div class="research-meta">
+        Vitafluence.ai<br>
+        2023 — 2024
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     ART
+     ====================================================== -->
+
+<section id="art" class="section">
+
+  <div class="section-head">
+
+    <div class="section-number">
+      03 — practice
+    </div>
+
+    <h2 class="section-title">
+      art
+    </h2>
+
+  </div>
+
+
+  <div class="art-grid">
+
+    <a href="visual.html" class="art-domain">
+
+      <span class="art-number">
+        01 / VISUAL
+      </span>
+
+      <div class="domain-title">
+        visual
+      </div>
+
+    </a>
+
+
+    <a href="writing.html" class="art-domain">
+
+      <span class="art-number">
+        02 / WRITING
+      </span>
+
+      <div class="domain-title">
+        writing
+      </div>
+
+    </a>
+
+
+    <a href="music.html" class="art-domain">
+
+      <span class="art-number">
+        03 / MUSIC
+      </span>
+
+      <div class="domain-title">
+        music
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     CONTACT
+     ====================================================== -->
+
+<section id="contact" class="section">
+
+  <div class="section-head">
+
+    <div class="section-number">
+      04 — communication
+    </div>
+
+    <h2 class="section-title">
+      get in touch
+    </h2>
+
+  </div>
+
+
+  <div class="contact-grid">
+
+    <div class="contact-statement">
+
+      <h3>
+        let's<br>
+        talk.
+      </h3>
+
+    </div>
+
+
+    <div class="contact-info">
+
+      <span class="contact-label">
+        DIRECT CHANNEL
+      </span>
+
+      <a
+        class="email"
+        href="mailto:lara.petrovic.xyz@gmail.com"
+      >
+        lara.petrovic.xyz@gmail.com
+      </a>
+
+      <div class="location">
+        CROATIA
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+
+<footer class="footer">
+
+  <div>
+    © 2026 huncuti
+  </div>
+
+  <div class="footer-right">
+    psychology / research / art
+  </div>
+
+</footer>
+
+</div>
+
+
+<!-- HOME BUTTON -->
+
+<button id="home-button" aria-label="Back to top">
+  ↑
+</button>
+
 
 <script>
-  // Simple functional back-to-top execution
-  const homeBtn = document.getElementById('home-button');
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      homeBtn.style.display = 'flex';
-    } else {
-      homeBtn.style.display = 'none';
-    }
+
+/* =========================================================
+   TYPEWRITER
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  new Typed("#typewriter-intro", {
+    strings: [
+      "researcher on cybercommunication",
+      "psychology × technology × culture",
+      "research / art / experimentation"
+    ],
+    typeSpeed:45,
+    backSpeed:25,
+    backDelay:1800,
+    startDelay:700,
+    loop:true,
+    showCursor:false
   });
 
-  homeBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  /* =======================================================
+     HOME BUTTON
+     ======================================================= */
+
+  const homeButton =
+    document.getElementById("home-button");
+
+  window.addEventListener("scroll", () => {
+
+    if(window.scrollY > window.innerHeight * .8){
+      homeButton.style.display = "flex";
+    }else{
+      homeButton.style.display = "none";
+    }
+
   });
+
+
+  homeButton.addEventListener("click", () => {
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  });
+
+});
+
 </script>
 
 </body>
