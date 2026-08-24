@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>portfolio</title>
+<title>huncuti — researcher / artist</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 
 <style>
@@ -35,9 +34,12 @@
 
 html{
   scroll-behavior:smooth;
+  width:100%;
 }
 
 body{
+  width:100%;
+  min-width:0;
   background:var(--paper);
   color:var(--black);
   font-family:Arial, Helvetica, sans-serif;
@@ -52,27 +54,49 @@ a{
 
 
 /* =========================================================
-   ARCHITECTURAL GRID
+   MAIN ARCHITECTURAL FRAME
    ========================================================= */
 
 .site{
   width:100%;
   max-width:var(--max);
+  min-width:0;
   margin:0 auto;
   border-left:var(--line);
   border-right:var(--line);
   background:var(--paper);
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:
-    repeat(12, minmax(0,1fr));
+
+/* =========================================================
+   GLOBAL GRID SAFETY
+   ========================================================= */
+
+.hero-top,
+.hero-main,
+.hero-bottom,
+.section-head,
+.about-grid,
+.research-card,
+.art-grid,
+.contact-grid{
+  min-width:0;
+}
+
+.hero-top > *,
+.hero-main > *,
+.hero-bottom > *,
+.section-head > *,
+.about-grid > *,
+.research-card > *,
+.art-grid > *,
+.contact-grid > *{
+  min-width:0;
 }
 
 
 /* =========================================================
-   HEADER / HERO
+   HERO
    ========================================================= */
 
 .hero{
@@ -83,72 +107,105 @@ a{
   background:var(--paper);
 }
 
+
+/* ---------- Hero top ---------- */
+
 .hero-top{
   min-height:70px;
   border-bottom:var(--line);
+
   display:grid;
-  grid-template-columns:repeat(12,1fr);
+  grid-template-columns:
+    minmax(0,3fr)
+    minmax(0,6fr)
+    minmax(0,3fr);
+
   align-items:stretch;
 }
 
 .logo{
-  grid-column:span 3;
-  border-right:var(--line);
   display:flex;
   align-items:center;
+
+  border-right:var(--line);
+
   padding:0 1.25rem;
+
   font-size:1rem;
   font-weight:900;
   letter-spacing:-.04em;
   text-transform:uppercase;
+
+  min-width:0;
 }
 
 .coordinates{
-  grid-column:span 6;
   display:flex;
   align-items:center;
+
   padding:0 1.25rem;
+
   font-family:monospace;
   font-size:.75rem;
   text-transform:uppercase;
+
+  min-width:0;
+  overflow-wrap:anywhere;
 }
 
 .year{
-  grid-column:span 3;
   border-left:var(--line);
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   font-weight:900;
 }
+
+
+/* ---------- Hero main ---------- */
 
 .hero-main{
   min-height:calc(100vh - 70px);
+
   position:relative;
+
   display:grid;
-  grid-template-columns:repeat(12,1fr);
+  grid-template-columns:repeat(12,minmax(0,1fr));
   grid-template-rows:1fr auto;
+
+  overflow:hidden;
 }
+
+
+/* ---------- Hero typography ---------- */
 
 .hero-title{
   grid-column:1 / 13;
+
   align-self:center;
+
   padding:2rem 1rem 0;
 
-  font-size:
-    clamp(7rem, 19vw, 22rem);
-
+  font-size:clamp(7rem,19vw,22rem);
   line-height:.72;
+
   letter-spacing:-.085em;
   font-weight:900;
+
   text-transform:lowercase;
 
   position:relative;
   z-index:2;
+
+  max-width:100%;
+  min-width:0;
 }
 
 .hero-title span{
   display:block;
+  max-width:100%;
 }
 
 .hero-title span:last-child{
@@ -156,76 +213,113 @@ a{
 }
 
 
-/* Primary geometric element */
+/* ---------- Geometric elements ---------- */
 
 .hero-circle{
   position:absolute;
+
   width:min(28vw,430px);
   height:min(28vw,430px);
+
   border-radius:50%;
+
   background:var(--red);
+
   right:8%;
   top:19%;
+
   z-index:0;
 }
 
 .hero-square{
   position:absolute;
+
   width:min(15vw,230px);
   height:min(15vw,230px);
+
   background:var(--blue);
+
   left:4%;
   bottom:12%;
+
   z-index:0;
 }
 
 .hero-bar{
   position:absolute;
+
   width:45%;
   height:34px;
+
   background:var(--yellow);
+
   right:0;
   bottom:17%;
+
   z-index:1;
 }
 
 
-/* Hero bottom */
+/* ---------- Hero bottom ---------- */
 
 .hero-bottom{
   grid-column:1 / 13;
+
+  min-width:0;
+
   border-top:var(--line);
+
   min-height:125px;
+
   display:grid;
-  grid-template-columns:repeat(12,1fr);
+  grid-template-columns:
+    minmax(0,7fr)
+    minmax(0,5fr);
 }
 
 .hero-intro{
-  grid-column:span 7;
+  min-width:0;
+
   border-right:var(--line);
+
   padding:1.25rem;
+
   display:flex;
   align-items:center;
+
   font-size:1.35rem;
   font-weight:700;
-  max-width:800px;
+
+  overflow-wrap:anywhere;
 }
 
 .hero-nav{
-  grid-column:span 5;
+  min-width:0;
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
 }
 
 .hero-nav a{
+  min-width:0;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
+  padding:.75rem;
+
   border-right:var(--line);
   border-bottom:var(--line);
+
   font-weight:900;
   text-transform:uppercase;
   font-size:.85rem;
+
+  text-align:center;
+
   transition:.15s ease;
 }
 
@@ -249,33 +343,55 @@ a{
    ========================================================= */
 
 .section{
+  min-width:0;
   border-bottom:var(--line);
 }
 
 .section-head{
   display:grid;
-  grid-template-columns:3fr 9fr;
+
+  grid-template-columns:
+    minmax(140px,3fr)
+    minmax(0,9fr);
+
   min-height:170px;
+
   border-bottom:var(--line);
 }
 
 .section-number{
+  min-width:0;
+
   border-right:var(--line);
+
   display:flex;
   align-items:center;
+
   padding:1.25rem;
+
   font-family:monospace;
   font-size:.8rem;
+
+  overflow-wrap:anywhere;
 }
 
 .section-title{
+  min-width:0;
+  max-width:100%;
+
   padding:1rem 1.5rem;
+
   font-size:clamp(4rem,9vw,10rem);
   line-height:.8;
+
   letter-spacing:-.07em;
   font-weight:900;
+
   text-transform:lowercase;
+
   align-self:end;
+
+  overflow-wrap:break-word;
 }
 
 
@@ -285,14 +401,26 @@ a{
 
 .about-grid{
   display:grid;
-  grid-template-columns:4fr 4fr 4fr;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr)
+    minmax(0,1fr);
 }
 
 .about-card{
+  width:100%;
+  min-width:0;
+
   min-height:370px;
+
   padding:1.5rem;
+
   border-right:var(--line);
+
   position:relative;
+
+  overflow-wrap:anywhere;
 }
 
 .about-card:last-child{
@@ -313,34 +441,57 @@ a{
 }
 
 .card-index{
+  display:block;
+
   font-family:monospace;
   font-size:.75rem;
-  display:block;
+
   margin-bottom:5rem;
 }
 
 .about-card h3{
-  font-size:2rem;
+  max-width:100%;
+
+  font-size:clamp(1.7rem,3vw,2rem);
   line-height:.9;
+
   letter-spacing:-.05em;
+
   text-transform:uppercase;
+
   margin-bottom:1.5rem;
+
+  overflow-wrap:break-word;
 }
 
 .about-card ul{
   list-style:none;
+  padding:0;
+  margin:0;
+
+  max-width:100%;
 }
 
 .about-card li{
+  max-width:100%;
+
   border-top:2px solid currentColor;
+
   padding:.65rem 0;
+
   font-weight:700;
-  font-size:1rem;
+
+  overflow-wrap:anywhere;
 }
 
 .about-card p{
+  max-width:100%;
+
   margin:.8rem 0;
+
   font-weight:700;
+
+  overflow-wrap:anywhere;
 }
 
 
@@ -350,14 +501,25 @@ a{
 
 .research-list{
   display:grid;
-  grid-template-columns:1fr;
+  grid-template-columns:minmax(0,1fr);
+  min-width:0;
 }
 
 .research-card{
+  width:100%;
+  min-width:0;
+
   display:grid;
-  grid-template-columns:1fr 3fr 2fr;
+
+  grid-template-columns:
+    minmax(60px,1fr)
+    minmax(0,3fr)
+    minmax(0,2fr);
+
   min-height:180px;
+
   border-bottom:var(--line);
+
   transition:.15s ease;
 }
 
@@ -371,38 +533,66 @@ a{
 }
 
 .research-index{
+  min-width:0;
+
   padding:1.25rem;
+
   border-right:var(--line);
+
   font-family:monospace;
 }
 
 .research-content{
+  min-width:0;
+
   padding:1.25rem;
+
   border-right:var(--line);
+
+  overflow-wrap:anywhere;
 }
 
 .research-content h3{
+  max-width:100%;
+
   font-size:clamp(2rem,4vw,4.5rem);
   line-height:.85;
+
   letter-spacing:-.06em;
+
   text-transform:lowercase;
+
+  overflow-wrap:break-word;
 }
 
 .research-content p{
+  max-width:100%;
+
   margin-top:1rem;
-  max-width:650px;
+
   font-weight:600;
+
+  overflow-wrap:anywhere;
 }
 
 .research-meta{
+  min-width:0;
+
   padding:1.25rem;
+
   display:flex;
+
   justify-content:flex-end;
   align-items:flex-end;
+
   text-align:right;
+
   font-family:monospace;
   font-size:.8rem;
+
   text-transform:uppercase;
+
+  overflow-wrap:anywhere;
 }
 
 
@@ -412,18 +602,31 @@ a{
 
 .art-grid{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr)
+    minmax(0,1fr);
 }
 
 .art-domain{
+  width:100%;
+  min-width:0;
+
   min-height:500px;
+
   border-right:var(--line);
+
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+
   padding:1.25rem;
+
   position:relative;
+
   overflow:hidden;
+
   transition:.15s ease;
 }
 
@@ -450,16 +653,26 @@ a{
 }
 
 .domain-title{
+  max-width:100%;
+
   font-size:clamp(4rem,8vw,9rem);
   line-height:.75;
+
   font-weight:900;
+
   letter-spacing:-.08em;
+
   text-transform:lowercase;
+
   transform:rotate(-90deg);
   transform-origin:left bottom;
+
   position:absolute;
+
   left:1.25rem;
   bottom:1.5rem;
+
+  white-space:nowrap;
 }
 
 .art-domain:hover{
@@ -474,13 +687,21 @@ a{
 
 .contact-grid{
   display:grid;
-  grid-template-columns:5fr 7fr;
+
+  grid-template-columns:
+    minmax(0,5fr)
+    minmax(0,7fr);
+
   min-height:450px;
 }
 
 .contact-statement{
+  min-width:0;
+
   border-right:var(--line);
+
   padding:1.5rem;
+
   background:var(--black);
   color:var(--white);
 
@@ -489,16 +710,26 @@ a{
 }
 
 .contact-statement h3{
+  max-width:100%;
+
   font-size:clamp(4rem,8vw,9rem);
   line-height:.72;
+
   letter-spacing:-.08em;
+
+  overflow-wrap:break-word;
 }
 
 .contact-info{
+  min-width:0;
+
   padding:1.5rem;
+
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+
+  overflow:hidden;
 }
 
 .contact-label{
@@ -507,11 +738,21 @@ a{
 }
 
 .email{
-  font-size:clamp(1.5rem,3vw,3rem);
+  display:block;
+
+  max-width:100%;
+
+  font-size:clamp(1.2rem,3vw,3rem);
+
   font-weight:900;
+
   letter-spacing:-.05em;
+
   word-break:break-word;
+  overflow-wrap:anywhere;
+
   border-bottom:4px solid var(--black);
+
   padding-bottom:.5rem;
 }
 
@@ -527,12 +768,20 @@ a{
 
 .footer{
   min-height:90px;
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    minmax(0,1fr);
+
   align-items:center;
+
   padding:1.25rem;
+
   font-family:monospace;
   font-size:.75rem;
+
   text-transform:uppercase;
 }
 
@@ -547,8 +796,10 @@ a{
 
 #home-button{
   position:fixed;
+
   right:20px;
   bottom:20px;
+
   width:60px;
   height:60px;
 
@@ -557,13 +808,16 @@ a{
   justify-content:center;
 
   background:var(--red);
+
   border:var(--line);
 
   color:var(--black);
+
   font-size:2rem;
   font-weight:900;
 
   cursor:pointer;
+
   z-index:999;
 }
 
@@ -573,7 +827,7 @@ a{
 
 
 /* =========================================================
-   RESPONSIVE
+   TABLET
    ========================================================= */
 
 @media(max-width:900px){
@@ -583,12 +837,17 @@ a{
     border-right:0;
   }
 
+
+  /* HERO */
+
   .hero-top{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr);
   }
 
   .logo{
-    grid-column:span 1;
+    grid-column:1;
   }
 
   .coordinates{
@@ -596,8 +855,9 @@ a{
   }
 
   .year{
-    grid-column:span 1;
+    grid-column:2;
   }
+
 
   .hero-title{
     font-size:clamp(5rem,18vw,10rem);
@@ -607,6 +867,7 @@ a{
   .hero-title span:last-child{
     margin-left:8vw;
   }
+
 
   .hero-circle{
     width:38vw;
@@ -618,14 +879,17 @@ a{
     height:22vw;
   }
 
+
   .hero-bottom{
-    grid-template-columns:1fr;
+    grid-template-columns:minmax(0,1fr);
   }
 
   .hero-intro{
     grid-column:1;
+
     border-right:0;
     border-bottom:var(--line);
+
     min-height:120px;
   }
 
@@ -633,50 +897,52 @@ a{
     grid-column:1;
   }
 
+
+  /* SECTION HEAD */
+
   .section-head{
-    grid-template-columns:1fr;
+    grid-template-columns:minmax(0,1fr);
   }
 
   .section-number{
     border-right:0;
     border-bottom:var(--line);
+
     min-height:50px;
   }
 
   .section-title{
     min-height:140px;
+
     display:flex;
     align-items:flex-end;
+
+    font-size:clamp(4rem,12vw,8rem);
   }
 
-  .about-grid,
-  .art-grid{
-    grid-template-columns:1fr;
+
+  /* ABOUT */
+
+  .about-grid{
+    grid-template-columns:minmax(0,1fr);
   }
 
-  .about-card,
-  .art-domain{
+  .about-card{
     border-right:0;
     border-bottom:var(--line);
   }
 
-  .about-card:last-child,
-  .art-domain:last-child{
+  .about-card:last-child{
     border-bottom:0;
   }
 
-  .art-domain{
-    min-height:300px;
-  }
 
-  .domain-title{
-    transform:none;
-    left:1.25rem;
-    bottom:1.25rem;
-  }
+  /* RESEARCH */
 
   .research-card{
-    grid-template-columns:60px 1fr;
+    grid-template-columns:
+      60px
+      minmax(0,1fr);
   }
 
   .research-index{
@@ -689,23 +955,58 @@ a{
 
   .research-meta{
     border-top:2px solid currentColor;
+
     justify-content:flex-start;
     text-align:left;
+
     padding-top:.8rem;
   }
 
-  .contact-grid{
-    grid-template-columns:1fr;
+
+  /* ART */
+
+  .art-grid{
+    grid-template-columns:minmax(0,1fr);
   }
 
-  .contact-statement{
+  .art-domain{
     min-height:300px;
+
     border-right:0;
     border-bottom:var(--line);
   }
 
+  .art-domain:last-child{
+    border-bottom:0;
+  }
+
+  .domain-title{
+    transform:none;
+
+    left:1.25rem;
+    bottom:1.25rem;
+  }
+
+
+  /* CONTACT */
+
+  .contact-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+
+  .contact-statement{
+    min-height:300px;
+
+    border-right:0;
+    border-bottom:var(--line);
+  }
+
+
+  /* FOOTER */
+
   .footer{
-    grid-template-columns:1fr;
+    grid-template-columns:minmax(0,1fr);
+
     gap:.5rem;
   }
 
@@ -715,47 +1016,128 @@ a{
 }
 
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media(max-width:500px){
 
   .hero{
     min-height:100svh;
   }
 
+
+  .hero-top{
+    min-height:60px;
+  }
+
+
   .hero-title{
     font-size:clamp(4.5rem,21vw,7rem);
+    letter-spacing:-.09em;
   }
+
+  .hero-title span:last-child{
+    margin-left:7vw;
+  }
+
 
   .hero-intro{
     font-size:1rem;
+    line-height:1.15;
   }
+
 
   .hero-nav a{
     min-height:65px;
+    font-size:.72rem;
+  }
+
+
+  .section-number{
+    font-size:.7rem;
   }
 
   .section-title{
-    font-size:4rem;
+    min-height:120px;
+
+    font-size:clamp(3rem,16vw,5rem);
+
+    padding:1rem;
+
+    line-height:.82;
   }
+
 
   .about-card{
     min-height:330px;
+    padding:1.25rem;
   }
 
+  .about-card h3{
+    font-size:clamp(1.7rem,8vw,2.5rem);
+  }
+
+
   .research-card{
-    grid-template-columns:45px 1fr;
+    grid-template-columns:
+      45px
+      minmax(0,1fr);
+  }
+
+  .research-index{
+    padding:.9rem;
+  }
+
+  .research-content{
+    padding:1rem;
   }
 
   .research-content h3{
-    font-size:2.2rem;
+    font-size:clamp(2rem,10vw,3rem);
+  }
+
+  .research-content p{
+    font-size:.9rem;
   }
 
   .research-meta{
-    font-size:.7rem;
+    padding:1rem;
+    font-size:.65rem;
   }
+
+
+  .art-domain{
+    min-height:260px;
+  }
+
+  .domain-title{
+    font-size:clamp(4rem,17vw,7rem);
+  }
+
+
+  .contact-statement{
+    min-height:260px;
+  }
+
+  .contact-statement h3{
+    font-size:clamp(4rem,18vw,7rem);
+  }
+
+  .contact-info{
+    min-height:300px;
+    padding:1.25rem;
+  }
+
+  .email{
+    font-size:clamp(1.1rem,6vw,1.7rem);
+  }
+
 
   #home-button{
     width:50px;
     height:50px;
+
     right:12px;
     bottom:12px;
   }
@@ -764,9 +1146,11 @@ a{
 </style>
 </head>
 
+
 <body>
 
 <div class="site">
+
 
 <!-- ======================================================
      HERO
@@ -777,7 +1161,7 @@ a{
   <div class="hero-top">
 
     <div class="logo">
-      LARA PETROVIć
+      huncuti
     </div>
 
     <div class="coordinates">
@@ -790,16 +1174,21 @@ a{
 
   </div>
 
+
   <div class="hero-main">
 
     <div class="hero-circle"></div>
+
     <div class="hero-square"></div>
+
     <div class="hero-bar"></div>
+
 
     <h1 class="hero-title">
       <span>hun</span>
       <span>cuti</span>
     </h1>
+
 
     <div class="hero-bottom">
 
@@ -807,11 +1196,25 @@ a{
         <span id="typewriter-intro"></span>
       </div>
 
+
       <nav class="hero-nav">
-        <a href="#find-out">01 / find out</a>
-        <a href="#research">02 / research</a>
-        <a href="#art">03 / art</a>
-        <a href="#contact">04 / contact</a>
+
+        <a href="#find-out">
+          01 / find out
+        </a>
+
+        <a href="#research">
+          02 / research
+        </a>
+
+        <a href="#art">
+          03 / art
+        </a>
+
+        <a href="#contact">
+          04 / contact
+        </a>
+
       </nav>
 
     </div>
@@ -819,6 +1222,7 @@ a{
   </div>
 
 </header>
+
 
 
 <!-- ======================================================
@@ -842,27 +1246,51 @@ a{
 
   <div class="about-grid">
 
+
     <article class="about-card">
 
-      <span class="card-index">A / 01</span>
+      <span class="card-index">
+        A / 01
+      </span>
 
-      <h3>focus<br>areas</h3>
+      <h3>
+        focus<br>
+        areas
+      </h3>
 
       <ul>
-        <li>cyberpsychology</li>
-        <li>emotion regulation / mindfulness</li>
-        <li>creativity / intelligence / personality</li>
-        <li>digital biomarkers / AI healthcare</li>
+
+        <li>
+          cyberpsychology
+        </li>
+
+        <li>
+          emotion regulation / mindfulness
+        </li>
+
+        <li>
+          creativity / intelligence / personality
+        </li>
+
+        <li>
+          digital biomarkers / AI healthcare
+        </li>
+
       </ul>
 
     </article>
 
 
+
     <article class="about-card">
 
-      <span class="card-index">A / 02</span>
+      <span class="card-index">
+        A / 02
+      </span>
 
-      <h3>education</h3>
+      <h3>
+        education
+      </h3>
 
       <p>
         master of psychology<br>
@@ -879,11 +1307,16 @@ a{
     </article>
 
 
+
     <article class="about-card">
 
-      <span class="card-index">A / 03</span>
+      <span class="card-index">
+        A / 03
+      </span>
 
-      <h3>method</h3>
+      <h3>
+        method
+      </h3>
 
       <p>
         psychological research,
@@ -895,9 +1328,11 @@ a{
 
     </article>
 
+
   </div>
 
 </section>
+
 
 
 <!-- ======================================================
@@ -951,6 +1386,7 @@ a{
     </article>
 
 
+
     <article class="research-card">
 
       <div class="research-index">
@@ -966,8 +1402,9 @@ a{
         </h3>
 
         <p>
-          comprehensive meta-analysis of mindfulness-based
-          interventions on emotion regulation.
+          comprehensive meta-analysis of
+          mindfulness-based interventions
+          on emotion regulation.
         </p>
 
       </div>
@@ -978,6 +1415,7 @@ a{
       </div>
 
     </article>
+
 
 
     <article class="research-card">
@@ -1007,6 +1445,7 @@ a{
       </div>
 
     </article>
+
 
 
     <article class="research-card">
@@ -1043,6 +1482,7 @@ a{
 </section>
 
 
+
 <!-- ======================================================
      ART
      ====================================================== -->
@@ -1064,6 +1504,7 @@ a{
 
   <div class="art-grid">
 
+
     <a href="visual.html" class="art-domain">
 
       <span class="art-number">
@@ -1075,6 +1516,7 @@ a{
       </div>
 
     </a>
+
 
 
     <a href="writing.html" class="art-domain">
@@ -1090,6 +1532,7 @@ a{
     </a>
 
 
+
     <a href="music.html" class="art-domain">
 
       <span class="art-number">
@@ -1102,9 +1545,11 @@ a{
 
     </a>
 
+
   </div>
 
 </section>
+
 
 
 <!-- ======================================================
@@ -1128,6 +1573,7 @@ a{
 
   <div class="contact-grid">
 
+
     <div class="contact-statement">
 
       <h3>
@@ -1136,6 +1582,7 @@ a{
       </h3>
 
     </div>
+
 
 
     <div class="contact-info">
@@ -1157,9 +1604,11 @@ a{
 
     </div>
 
+
   </div>
 
 </section>
+
 
 
 <!-- ======================================================
@@ -1181,52 +1630,84 @@ a{
 </div>
 
 
-<!-- HOME BUTTON -->
 
-<button id="home-button" aria-label="Back to top">
+<!-- ======================================================
+     HOME BUTTON
+     ====================================================== -->
+
+<button
+  id="home-button"
+  aria-label="Back to top"
+>
   ↑
 </button>
 
 
-<script>
 
-/* =========================================================
-   TYPEWRITER
-   ========================================================= */
+<!-- ======================================================
+     JAVASCRIPT
+     ====================================================== -->
+
+<script>
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
+  /* -------------------------------------------------------
+     TYPEWRITER
+     ------------------------------------------------------- */
+
   new Typed("#typewriter-intro", {
-    strings: [
+
+    strings:[
       "researcher on cybercommunication",
       "psychology × technology × culture",
       "research / art / experimentation"
     ],
+
     typeSpeed:45,
     backSpeed:25,
     backDelay:1800,
     startDelay:700,
+
     loop:true,
     showCursor:false
+
   });
 
 
-  /* =======================================================
+
+  /* -------------------------------------------------------
      HOME BUTTON
-     ======================================================= */
+     ------------------------------------------------------- */
 
   const homeButton =
     document.getElementById("home-button");
 
-  window.addEventListener("scroll", () => {
+
+  function updateHomeButton(){
 
     if(window.scrollY > window.innerHeight * .8){
+
       homeButton.style.display = "flex";
+
     }else{
+
       homeButton.style.display = "none";
+
     }
 
-  });
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    updateHomeButton,
+    { passive:true }
+  );
+
+
+  updateHomeButton();
 
 
   homeButton.addEventListener("click", () => {
@@ -1237,6 +1718,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   });
+
 
 });
 
