@@ -3,567 +3,400 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>portfolio</title>
-
-<!-- External libs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<title>HUNCUTI // ARCHIVE</title>
 
 <style>
-/* ===== Bauhaus x Brutalism Design Tokens ===== */
+/* ===== BAUHAUS & BRUTALIST SYSTEM ===== */
 :root {
-  --bg-color: #f4f1ea;
-  --text-color: #000000;
-  --yellow: #f2c94c;
-  --red: #d9381e;
-  --blue: #1a4384;
-  --line-color: #000000;
-  --spine-width: 4px;
+  --black: #050505;
+  --white: #F4F4F0;
+  --red: #FF1300;
+  --blue: #0029FF;
+  --border: 3px solid var(--black);
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body { 
-  scroll-behavior: smooth; 
-  width: 100%; 
-  background: var(--bg-color); 
-  color: var(--text-color);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a { color: inherit; text-decoration: none; }
+html {
+  scroll-behavior: smooth;
+  background-color: var(--white);
+  color: var(--black);
+  font-family: "Courier New", Courier, monospace; /* Monospaced precision */
+}
 
-/* ===== Dynamic 2D Bauhaus Spine Background ===== */
-#spine-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, .sans {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+/* ===== CORE LAYOUT STRUCTURE ===== */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
+  border-left: var(--border);
+  border-right: var(--border);
 }
 
-.spine-path {
-  fill: none;
-  stroke: var(--line-color);
-  stroke-width: var(--spine-width);
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-}
-
-.spine-node {
-  fill: var(--bg-color);
-  stroke: var(--line-color);
-  stroke-width: 3px;
-  transition: fill 0.3s ease, transform 0.3s ease;
-}
-
-.spine-node.active-red { fill: var(--red); }
-.spine-node.active-blue { fill: var(--blue); }
-
-/* ===== Structural Layout Wrapper ===== */
-.page-wrapper {
+.cell {
+  border-bottom: var(--border);
+  border-right: var(--border);
+  padding: 1.5rem;
   position: relative;
-  z-index: 2;
-  max-width: 1200px;
-  margin: 0 auto;
+  background: var(--white);
 }
 
-/* ===== Level Header / Hero (The Head Node) ===== */
-.hero-level {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  text-align: center;
-  position: relative;
+.cell:nth-child(12n) {
+  border-right: none;
 }
 
-/* Plain Yellow Bauhaus Head Circle */
-.head-container {
-  width: 300px;
-  height: 300px;
-  background-color: var(--yellow);
-  border: 4px solid var(--line-color);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 8px 8px 0px var(--line-color);
-  transition: transform 0.4s ease;
-}
-
-.head-container:hover {
-  transform: scale(1.03) rotate(-2deg);
+/* ===== HERO SECTION ===== */
+.hero-header {
+  grid-column: span 12;
+  padding: 4rem 2rem 2rem 2rem;
+  background: var(--white);
 }
 
 .main-title {
-  font-size: 2.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  line-height: 1.1;
-  color: var(--text-color);
+  font-size: clamp(4rem, 15vw, 16rem);
+  word-break: break-word;
+  color: var(--black);
 }
 
-.typewriter-text {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-top: 1.5rem;
-  height: 1.6em;
-  text-transform: lowercase;
+.hero-sub {
+  grid-column: span 8;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background: var(--black);
+  color: var(--white);
 }
 
-.level-tag {
-  font-family: monospace;
-  font-size: 0.85rem;
-  font-weight: 700;
-  background: var(--line-color);
-  color: var(--bg-color);
-  padding: 0.2rem 0.6rem;
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Nav Block Buttons */
-.navigation {
-  display: flex;
-  gap: 1rem;
-  margin-top: 3rem;
-  flex-wrap: wrap;
-  justify-content: center;
+.hero-nav {
+  grid-column: span 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
 }
 
 .nav-item {
-  padding: 0.6rem 1.4rem;
-  border: 3px solid var(--line-color);
-  background: var(--bg-color);
-  font-weight: 800;
-  text-transform: lowercase;
-  box-shadow: 4px 4px 0px var(--line-color);
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  border-right: var(--border);
+  border-bottom: var(--border);
+  background: var(--white);
+  transition: all 0.1s ease;
+}
+
+.nav-item:nth-child(2n) {
+  border-right: none;
 }
 
 .nav-item:hover {
-  background: var(--line-color);
-  color: var(--bg-color);
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--red);
+  background: var(--red);
+  color: var(--white);
 }
 
-/* ===== Section Elevations (Levels) ===== */
-.level-block {
-  padding: 6rem 2rem;
-  position: relative;
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
+/* ===== SECTION LABELS ===== */
+.section-label {
+  grid-column: span 12;
+  background: var(--black);
+  color: var(--white);
+  padding: 0.5rem 1.5rem;
 }
 
-.align-left { align-items: flex-start; text-align: left; }
-.align-right { align-items: flex-end; text-align: right; }
-
-.section-title {
-  font-size: 4rem;
-  font-weight: 900;
-  text-transform: lowercase;
-  letter-spacing: -1px;
-  margin-bottom: 2rem;
-  background: var(--bg-color);
-  padding: 0.3rem 1rem;
-  border: 4px solid var(--line-color);
-  display: inline-block;
-  box-shadow: 6px 6px 0px var(--line-color);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
+.section-label h2 {
+  font-size: 2rem;
 }
 
-/* Accent Shadows per Section Level */
-#find-out .section-title { box-shadow: 8px 8px 0px var(--red); }
-#research .section-title { box-shadow: -8px 8px 0px var(--blue); }
-#art .section-title { box-shadow: 8px 8px 0px var(--yellow); }
-#contact .section-title { box-shadow: 0px 8px 0px var(--line-color); }
-
-/* ===== Content Cards (Monolithic Blocks) ===== */
-.card-container {
-  width: 100%;
-  max-width: 580px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* ===== FIND OUT (ABOUT) ===== */
+.about-focus {
+  grid-column: span 7;
 }
 
-.about-card, .research-card {
-  background: var(--bg-color);
-  border: 3px solid var(--line-color);
-  padding: 1.5rem;
-  box-shadow: 6px 6px 0px var(--line-color);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
+.about-edu {
+  grid-column: span 5;
+  background: #EBEBE6;
 }
 
-.about-card h3, .research-card h3 {
-  font-size: 1.4rem;
-  font-weight: 900;
-  text-transform: lowercase;
-  margin-bottom: 0.5rem;
-  border-bottom: 3px solid var(--line-color);
-  padding-bottom: 0.3rem;
+.cell h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  border-bottom: var(--border);
+  padding-bottom: 0.5rem;
 }
 
-.about-card ul { list-style: none; }
-.about-card li { margin-bottom: 0.4rem; position: relative; padding-left: 1.2rem; }
-.about-card li::before {
-  content: "■";
-  position: absolute;
-  left: 0;
-  font-size: 0.7rem;
-  top: 0.1rem;
+ul.raw-list {
+  list-style: none;
+}
+
+ul.raw-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--black);
+  font-weight: bold;
+}
+
+ul.raw-list li::before {
+  content: "-> ";
   color: var(--red);
 }
 
-.research-card .meta {
+/* ===== RESEARCH ===== */
+.research-item {
+  grid-column: span 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.research-item:hover {
+  background: #FFF;
+  box-shadow: inset 0 0 0 3px var(--red);
+}
+
+.meta-tag {
+  margin-top: 1.5rem;
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 0.25rem 0.5rem;
   font-size: 0.85rem;
-  font-weight: 800;
-  margin-top: 0.8rem;
-  text-transform: lowercase;
-  display: inline-block;
-  background: var(--yellow);
-  padding: 0.2rem 0.6rem;
-  border: 2px solid var(--line-color);
+  font-weight: bold;
+  align-self: flex-start;
 }
 
-/* ===== Art Section Domains ===== */
-.art-domains {
+/* ===== ART DOMAINS ===== */
+.art-item {
+  grid-column: span 4;
+  min-height: 200px;
   display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 650px;
+  align-items: flex-end;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--black);
+  transition: background 0.1s ease;
 }
 
-.art-domain {
-  flex: 1 1 180px;
-  background: var(--bg-color);
-  border: 3px solid var(--line-color);
-  padding: 2rem 1rem;
-  text-align: center;
-  box-shadow: 6px 6px 0px var(--line-color);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.5s ease;
+.art-item:hover {
+  background: var(--blue);
+  color: var(--white);
 }
 
-.art-domain:hover {
-  background: var(--yellow);
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0px var(--line-color);
+.art-item:hover .art-arrow {
+  transform: translate(5px, -5px);
 }
 
-.domain-title {
-  font-size: 1.5rem;
-  font-weight: 900;
-  text-transform: lowercase;
+.art-title {
+  font-size: 3rem;
 }
 
-/* ===== Contact Section ===== */
-.contact-info {
-  background: var(--bg-color);
-  border: 3px solid var(--line-color);
-  padding: 2rem;
-  box-shadow: 6px 6px 0px var(--line-color);
-  font-size: 1.1rem;
-  font-weight: 800;
+.art-arrow {
+  font-size: 3rem;
+  font-family: Arial, sans-serif;
+  transition: transform 0.1s ease;
 }
 
-.contact-info a {
-  color: var(--red);
+/* ===== CONTACT & FOOTER ===== */
+.contact-cell {
+  grid-column: span 12;
+  padding: 3rem 1.5rem;
+  background: var(--red);
+  color: var(--white);
+}
+
+.contact-cell a {
+  color: var(--white);
   text-decoration: underline;
+  font-weight: bold;
 }
 
-/* ===== Footer ===== */
-.footer {
-  padding: 3rem 2rem;
-  text-align: center;
-  border-top: 4px solid var(--line-color);
-  background: var(--bg-color);
-  font-weight: 800;
-  position: relative;
-  z-index: 2;
+.footer-cell {
+  grid-column: span 12;
+  font-size: 0.85rem;
+  text-align: justify;
+  background: var(--black);
+  color: var(--white);
+  border-bottom: none;
 }
 
-/* ===== Brutalist Floating Home Button ===== */
+/* ===== STICKY BACK TO TOP BUTTON ===== */
 #home-button {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 50px;
-  height: 50px;
-  background: var(--yellow);
-  border: 3px solid var(--line-color);
-  box-shadow: 4px 4px 0px var(--line-color);
-  cursor: pointer;
-  display: none;
-  z-index: 999;
-  font-size: 1.5rem;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  border: var(--border);
+  box-shadow: 4px 4px 0px var(--black);
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
   font-weight: 900;
-  line-height: 44px;
-  text-align: center;
-  user-select: none;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-#home-button:hover {
-  background: var(--red);
-  color: var(--bg-color);
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--line-color);
+#home-button:active {
+  box-shadow: 0px 0px 0px var(--black);
+  transform: translate(4px, 4px);
 }
 
-/* ===== Responsive Adaptations ===== */
-@media (max-width: 768px) {
-  .head-container { width: 250px; height: 250px; }
-  .main-title { font-size: 1.8rem; }
-  .section-title { font-size: 2.5rem; }
-  .align-left, .align-right { align-items: center; text-align: left; }
-  .card-container, .art-domains { max-width: 100%; }
-  .art-domains { flex-direction: column; }
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+@media (max-width: 900px) {
+  .hero-sub { grid-column: span 12; }
+  .hero-nav { grid-column: span 12; }
+  .about-focus { grid-column: span 12; }
+  .about-edu { grid-column: span 12; }
+  .research-item { grid-column: span 12; }
+  .art-item { grid-column: span 12; }
 }
 </style>
 </head>
 <body>
 
-<!-- Dynamic SVG Backdrop for 2D Spinal Axis Connection -->
-<svg id="spine-canvas"></svg>
+<main class="grid-container">
 
-<div class="page-wrapper">
-
-  <!-- ===== LEVEL 00: HERO (HEAD NODE) ===== -->
-  <header class="hero-level" id="hero">
-    <span class="level-tag">level 00 // main node</span>
-    <div class="head-container" id="head-node">
-      <h1 class="main-title">Lara<br>Petrović</h1>
-    </div>
-    <div class="typewriter-text" id="typewriter-intro"></div>
-    <nav class="navigation">
-      <a href="#find-out" class="nav-item">find out</a>
-      <a href="#research" class="nav-item">research</a>
-      <a href="#art" class="nav-item">art</a>
-      <a href="#contact" class="nav-item">contact</a>
-    </nav>
-  </header>
-
-  <!-- ===== LEVEL 01: FIND OUT (BRANCH LEFT) ===== -->
-  <section id="find-out" class="level-block align-left">
-    <span class="level-tag">level 01 // overview</span>
-    <h2 class="section-title">find out</h2>
-    <div class="card-container">
-      <div class="about-card">
-        <h3>focus areas</h3>
-        <ul>
-          <li>cyberpsychology</li>
-          <li>emotion regulation, mindfulness-based interventions</li>
-          <li>creativity, intelligence, personality</li>
-          <li>digital biomarkers, AI-driven healthcare</li>
-        </ul>
-      </div>
-      <div class="about-card">
-        <h3>education</h3>
-        <p><strong>master of psychology</strong> — university of zagreb (2020–2024)</p>
-        <p><strong>bachelor of psychology</strong> — university of zagreb (2017–2020)</p>
-      </div>
-    </div>
+  <section class="cell hero-header">
+    <h1 class="main-title">HUNCUTI</h1>
   </section>
 
-  <!-- ===== LEVEL 02: RESEARCH (BRANCH RIGHT) ===== -->
-  <section id="research" class="level-block align-right">
-    <span class="level-tag">level 02 // research archive</span>
-    <h2 class="section-title">current, previous, (in)formal</h2>
-    <div class="card-container">
-      <div class="research-card">
-        <h3>morality of Redditors</h3>
-        <p>qualitative research on a Reddit AITA database.</p>
-        <div class="meta">cyburger • 2026 - present</div>
-      </div>
-      <div class="research-card">
-        <h3>emotion regulation meta-analysis</h3>
-        <p>comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
-        <div class="meta">university of amsterdam • 2024 - 2026</div>
-      </div>
-      <div class="research-card">
-        <h3>intelligence & creativity research</h3>
-        <p>supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
-        <div class="meta">university of zagreb • 2023 - present</div>
-      </div>
-      <div class="research-card">
-        <h3>digital biomarkers research</h3>
-        <p>research on digital biomarkers for neuropsychiatric conditions and AI-driven healthcare solutions.</p>
-        <div class="meta">Vitafluence.ai • 2023 - 2024</div>
-      </div>
+  <div class="cell hero-sub">
+    RESEARCHER ON CYBERCOMMUNICATION & DIGITAL BEHAVIORAL PATTERNS.
+  </div>
+
+  <nav class="hero-nav">
+    <a href="#find-out" class="nav-item">01 // FIND OUT</a>
+    <a href="#research" class="nav-item">02 // RESEARCH</a>
+    <a href="#art" class="nav-item">03 // ART</a>
+    <a href="#contact" class="nav-item">04 // CONTACT</a>
+  </nav>
+
+  <div id="find-out" class="section-label">
+    <h2>01 // FIND OUT</h2>
+  </div>
+
+  <article class="cell about-focus">
+    <h3>FOCUS AREAS</h3>
+    <ul class="raw-list">
+      <li>Cyberpsychology</li>
+      <li>Emotion regulation, mindfulness-based interventions</li>
+      <li>Creativity, intelligence, personality</li>
+      <li>Digital biomarkers, AI-driven healthcare</li>
+    </ul>
+  </article>
+
+  <article class="cell about-edu">
+    <h3>EDUCATION</h3>
+    <ul class="raw-list">
+      <li>Master of Psychology — University of Zagreb (2020–2024)</li>
+      <li>Bachelor of Psychology — University of Zagreb (2017–2020)</li>
+    </ul>
+  </article>
+
+  <div id="research" class="section-label">
+    <h2>02 // RESEARCH HIGHLIGHTS</h2>
+  </div>
+
+  <article class="cell research-item">
+    <div>
+      <h3>Morality of Redditors</h3>
+      <p>Qualitative research on a Reddit AITA database.</p>
     </div>
+    <span class="meta-tag">CYBURGER • 2026 - PRESENT</span>
+  </article>
+
+  <article class="cell research-item">
+    <div>
+      <h3>Emotion Regulation Meta-Analysis</h3>
+      <p>Comprehensive meta-analysis of mindfulness-based interventions on emotion regulation.</p>
+    </div>
+    <span class="meta-tag">UNIVERSITY OF AMSTERDAM • 2024 - 2026</span>
+  </article>
+
+  <article class="cell research-item">
+    <div>
+      <h3>Intelligence & Creativity</h3>
+      <p>Supporting research on intelligence, creativity, and personality constructs across multiple phases.</p>
+    </div>
+    <span class="meta-tag">UNIVERSITY OF ZAGREB • 2023 - PRESENT</span>
+  </article>
+
+  <article class="cell research-item">
+    <div>
+      <h3>Digital Biomarkers Research</h3>
+      <p>Research on digital biomarkers for neuropsychiatric conditions and AI-driven healthcare solutions.</p>
+    </div>
+    <span class="meta-tag">VITAFLUENCE.AI • 2023 - 2024</span>
+  </article>
+
+  <div id="art" class="section-label">
+    <h2>03 // ART DOMAINS</h2>
+  </div>
+
+  <a href="visual.html" class="cell art-item">
+    <span class="art-title">VISUAL</span>
+    <span class="art-arrow">↗</span>
+  </a>
+
+  <a href="writing.html" class="cell art-item">
+    <span class="art-title">WRITING</span>
+    <span class="art-arrow">↗</span>
+  </a>
+
+  <a href="music.html" class="cell art-item">
+    <span class="art-title">MUSIC</span>
+    <span class="art-arrow">↗</span>
+  </a>
+
+  <div id="contact" class="section-label">
+    <h2>04 // CONTACT</h2>
+  </div>
+
+  <section class="cell contact-cell">
+    <h3 class="sans" style="font-size: 3rem; margin-bottom: 1rem;">GET IN TOUCH</h3>
+    <p style="font-size: 1.25rem; font-weight: bold;">E-MAIL: <a href="mailto:lara.petrovic.xyz@gmail.com">LARA.PETROVIC.XYZ@GMAIL.COM</a></p>
+    <p style="font-size: 1.25rem; font-weight: bold;">LOCATION: CROATIA</p>
   </section>
 
-  <!-- ===== LEVEL 03: ART (BRANCH LEFT) ===== -->
-  <section id="art" class="level-block align-left">
-    <span class="level-tag">level 03 // creative output</span>
-    <h2 class="section-title">art</h2>
-    <div class="art-domains">
-      <a href="visual.html" class="art-domain">
-        <div class="domain-title">visual</div>
-      </a>
-      <a href="writing.html" class="art-domain">
-        <div class="domain-title">writing</div>
-      </a>
-      <a href="music.html" class="art-domain">
-        <div class="domain-title">music</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ===== LEVEL 04: CONTACT (BRANCH RIGHT) ===== -->
-  <section id="contact" class="level-block align-right">
-    <span class="level-tag">level 04 // terminal node</span>
-    <h2 class="section-title">get in touch</h2>
-    <div class="contact-info">
-      <p>e-mail: <a href="mailto:lara.petrovic.xyz@gmail.com">lara.petrovic.xyz@gmail.com</a></p>
-      <p style="margin-top:0.5rem;">based in: croatia</p>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <p>&copy; 2026 lara petrović. all rights reserved.</p>
+  <footer class="cell footer-cell">
+    © 2026 HUNCUTI. ALL RIGHTS RESERVED. STRUCTURE BUILT ON STRICT BAUHAUS GRID RULES.
   </footer>
 
-</div>
+</main>
 
-<!-- ===== HOME BUTTON ===== -->
-<div id="home-button">↑</div>
+<button id="home-button" aria-label="Scroll to top">↑</button>
 
-<!-- ===== INTERACTIVE SCRIPT ===== -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  // 1. Typewriter Script
-  new Typed('#typewriter-intro', {
-    strings: ['researcher on cybercommunication', 'psychologist & digital analyst', 'creative explorer'],
-    typeSpeed: 40,
-    backSpeed: 25,
-    backDelay: 2200,
-    startDelay: 600,
-    loop: true,
-    showCursor: false
-  });
-
-  // 2. Scroll Reveal Observer
-  const revealEls = document.querySelectorAll('.section-title, .about-card, .research-card, .art-domain');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => observer.observe(el));
-
-  // 3. Floating Home Button Logic
-  const hero = document.getElementById('hero');
+  // Simple functional back-to-top execution
   const homeBtn = document.getElementById('home-button');
+  
   window.addEventListener('scroll', () => {
-    const heroBottom = hero.getBoundingClientRect().bottom;
-    homeBtn.style.display = heroBottom <= 0 ? 'block' : 'none';
+    if (window.scrollY > 300) {
+      homeBtn.style.display = 'flex';
+    } else {
+      homeBtn.style.display = 'none';
+    }
   });
+
   homeBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-
-  // 4. Dynamic 2D Bauhaus Spine Generator
-  const svg = document.getElementById('spine-canvas');
-  
-  function drawSpine() {
-    svg.innerHTML = ''; // Clear SVG
-    const documentHeight = Math.max(
-      document.body.scrollHeight, document.documentElement.scrollHeight
-    );
-    svg.setAttribute('height', documentHeight);
-    svg.setAttribute('width', window.innerWidth);
-
-    const centerX = window.innerWidth / 2;
-    const headElem = document.getElementById('head-node');
-    const headRect = headElem.getBoundingClientRect();
-    const startY = headRect.bottom + window.scrollY;
-
-    const levels = [
-      { id: 'find-out', dir: 'left', colorClass: 'active-red' },
-      { id: 'research', dir: 'right', colorClass: 'active-blue' },
-      { id: 'art', dir: 'left', colorClass: 'active-red' },
-      { id: 'contact', dir: 'right', colorClass: 'active-blue' }
-    ];
-
-    // Draw Main Structural Spine Axis
-    const mainLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    mainLine.setAttribute('x1', centerX);
-    mainLine.setAttribute('y1', startY);
-    mainLine.setAttribute('x2', centerX);
-    mainLine.setAttribute('y2', documentHeight - 120);
-    mainLine.setAttribute('class', 'spine-path');
-    svg.appendChild(mainLine);
-
-    // Draw 90° Orthogonal Level Connectors
-    levels.forEach(level => {
-      const el = document.getElementById(level.id);
-      if (!el) return;
-
-      const titleEl = el.querySelector('.section-title');
-      const titleRect = titleEl.getBoundingClientRect();
-      const targetY = titleRect.top + window.scrollY + (titleRect.height / 2);
-
-      let targetX;
-      if (level.dir === 'left') {
-        targetX = titleRect.right + window.scrollX + 15;
-      } else {
-        targetX = titleRect.left + window.scrollX - 15;
-      }
-
-      // Orthogonal Polyline (Branching off spine at 90°)
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-      const points = `${centerX},${targetY} ${targetX},${targetY}`;
-      path.setAttribute('points', points);
-      path.setAttribute('class', 'spine-path');
-      svg.appendChild(path);
-
-      // Central Axis Junction Circle
-      const centerNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      centerNode.setAttribute('cx', centerX);
-      centerNode.setAttribute('cy', targetY);
-      centerNode.setAttribute('r', '8');
-      centerNode.setAttribute('class', `spine-node ${level.colorClass}`);
-      svg.appendChild(centerNode);
-
-      // Terminal Level Node Square
-      const termSquare = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      termSquare.setAttribute('x', targetX - 6);
-      termSquare.setAttribute('y', targetY - 6);
-      termSquare.setAttribute('width', '12');
-      termSquare.setAttribute('height', '12');
-      termSquare.setAttribute('class', `spine-node ${level.colorClass}`);
-      svg.appendChild(termSquare);
-    });
-  }
-
-  // Initial render & resize update
-  drawSpine();
-  window.addEventListener('resize', drawSpine);
-});
 </script>
+
 </body>
 </html>
