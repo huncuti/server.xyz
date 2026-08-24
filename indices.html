@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +13,7 @@
 <style>
 
 /* =========================================================
-   BAUHAUS / BRUTALIST SYSTEM
+   VARIABLES
    ========================================================= */
 
 :root{
@@ -23,8 +25,14 @@
   --white:#f7f6f0;
 
   --line:3px solid var(--black);
-  --max:1600px;
+
+  --max-width:1600px;
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 *{
   margin:0;
@@ -33,17 +41,21 @@
 }
 
 html{
-  scroll-behavior:smooth;
   width:100%;
+  scroll-behavior:smooth;
 }
 
 body{
   width:100%;
   min-width:0;
+
   background:var(--paper);
   color:var(--black);
+
   font-family:Arial, Helvetica, sans-serif;
+
   line-height:1.25;
+
   overflow-x:hidden;
 }
 
@@ -54,22 +66,26 @@ a{
 
 
 /* =========================================================
-   MAIN ARCHITECTURAL FRAME
+   SITE FRAME
    ========================================================= */
 
 .site{
   width:100%;
-  max-width:var(--max);
+  max-width:var(--max-width);
+
   min-width:0;
+
   margin:0 auto;
+
+  background:var(--paper);
+
   border-left:var(--line);
   border-right:var(--line);
-  background:var(--paper);
 }
 
 
 /* =========================================================
-   GLOBAL GRID SAFETY
+   GLOBAL SAFETY
    ========================================================= */
 
 .hero-top,
@@ -101,20 +117,29 @@ a{
 
 .hero{
   min-height:100vh;
+
   border-bottom:var(--line);
+
   position:relative;
+
   overflow:hidden;
+
   background:var(--paper);
 }
 
 
-/* ---------- Hero top ---------- */
+/* =========================================================
+   HERO TOP BAR
+   ========================================================= */
 
 .hero-top{
+
   min-height:70px;
+
   border-bottom:var(--line);
 
   display:grid;
+
   grid-template-columns:
     minmax(0,3fr)
     minmax(0,6fr)
@@ -123,84 +148,107 @@ a{
   align-items:stretch;
 }
 
+
 .logo{
+
   display:flex;
   align-items:center;
 
-  border-right:var(--line);
-
   padding:0 1.25rem;
+
+  border-right:var(--line);
 
   font-size:1rem;
   font-weight:900;
+
   letter-spacing:-.04em;
+
   text-transform:uppercase;
 
-  min-width:0;
+  overflow-wrap:anywhere;
 }
 
+
 .coordinates{
+
   display:flex;
   align-items:center;
 
   padding:0 1.25rem;
 
   font-family:monospace;
+
   font-size:.75rem;
+
   text-transform:uppercase;
 
-  min-width:0;
   overflow-wrap:anywhere;
 }
 
+
 .year{
-  border-left:var(--line);
 
   display:flex;
   justify-content:center;
   align-items:center;
 
+  border-left:var(--line);
+
   font-weight:900;
 }
 
 
-/* ---------- Hero main ---------- */
+/* =========================================================
+   HERO MAIN
+   ========================================================= */
 
 .hero-main{
+
   min-height:calc(100vh - 70px);
 
   position:relative;
 
   display:grid;
-  grid-template-columns:repeat(12,minmax(0,1fr));
-  grid-template-rows:1fr auto;
+
+  grid-template-columns:
+    repeat(12,minmax(0,1fr));
+
+  grid-template-rows:
+    1fr auto;
 
   overflow:hidden;
 }
 
 
-/* ---------- Hero typography ---------- */
+/* =========================================================
+   HERO TITLE
+   ========================================================= */
 
 .hero-title{
+
   grid-column:1 / 13;
 
   align-self:center;
 
   padding:2rem 1rem 0;
 
+  max-width:100%;
+
   font-size:clamp(7rem,19vw,22rem);
+
   line-height:.72;
 
   letter-spacing:-.085em;
+
   font-weight:900;
 
   text-transform:lowercase;
 
   position:relative;
+
   z-index:2;
 
-  max-width:100%;
-  min-width:0;
+  overflow-wrap:break-word;
 }
 
 .hero-title span{
@@ -213,9 +261,12 @@ a{
 }
 
 
-/* ---------- Geometric elements ---------- */
+/* =========================================================
+   HERO GEOMETRY
+   ========================================================= */
 
 .hero-circle{
+
   position:absolute;
 
   width:min(28vw,430px);
@@ -231,7 +282,9 @@ a{
   z-index:0;
 }
 
+
 .hero-square{
+
   position:absolute;
 
   width:min(15vw,230px);
@@ -245,7 +298,9 @@ a{
   z-index:0;
 }
 
+
 .hero-bar{
+
   position:absolute;
 
   width:45%;
@@ -260,24 +315,28 @@ a{
 }
 
 
-/* ---------- Hero bottom ---------- */
+/* =========================================================
+   HERO BOTTOM
+   ========================================================= */
 
 .hero-bottom{
-  grid-column:1 / 13;
 
-  min-width:0;
+  grid-column:1 / 13;
 
   border-top:var(--line);
 
   min-height:125px;
 
   display:grid;
+
   grid-template-columns:
     minmax(0,7fr)
     minmax(0,5fr);
 }
 
+
 .hero-intro{
+
   min-width:0;
 
   border-right:var(--line);
@@ -293,19 +352,23 @@ a{
   overflow-wrap:anywhere;
 }
 
+
 .hero-nav{
-  min-width:0;
 
   display:grid;
+
   grid-template-columns:
     minmax(0,1fr)
     minmax(0,1fr);
 }
 
+
 .hero-nav a{
+
   min-width:0;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
@@ -314,14 +377,18 @@ a{
   border-right:var(--line);
   border-bottom:var(--line);
 
-  font-weight:900;
-  text-transform:uppercase;
-  font-size:.85rem;
-
   text-align:center;
 
-  transition:.15s ease;
+  font-size:.85rem;
+  font-weight:900;
+
+  text-transform:uppercase;
+
+  transition:
+    background .15s ease,
+    color .15s ease;
 }
+
 
 .hero-nav a:nth-child(2n){
   border-right:0;
@@ -339,57 +406,52 @@ a{
 
 
 /* =========================================================
-   GENERIC SECTION
+   SECTIONS
    ========================================================= */
 
 .section{
+
   min-width:0;
+
   border-bottom:var(--line);
 }
 
-.section-head{
-  display:grid;
 
-  grid-template-columns:
-    minmax(140px,3fr)
-    minmax(0,9fr);
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-head{
+
+  width:100%;
+  min-width:0;
 
   min-height:170px;
 
   border-bottom:var(--line);
-}
-
-.section-number{
-  min-width:0;
-
-  border-right:var(--line);
 
   display:flex;
-  align-items:center;
 
-  padding:1.25rem;
-
-  font-family:monospace;
-  font-size:.8rem;
-
-  overflow-wrap:anywhere;
+  align-items:flex-end;
 }
 
+
 .section-title{
+
+  width:100%;
   min-width:0;
-  max-width:100%;
 
   padding:1rem 1.5rem;
 
-  font-size:clamp(4rem,9vw,10rem);
-  line-height:.8;
+  font-size:clamp(5rem,11vw,12rem);
 
-  letter-spacing:-.07em;
+  line-height:.78;
+
+  letter-spacing:-.075em;
+
   font-weight:900;
 
   text-transform:lowercase;
-
-  align-self:end;
 
   overflow-wrap:break-word;
 }
@@ -400,6 +462,7 @@ a{
    ========================================================= */
 
 .about-grid{
+
   display:grid;
 
   grid-template-columns:
@@ -408,7 +471,9 @@ a{
     minmax(0,1fr);
 }
 
+
 .about-card{
+
   width:100%;
   min-width:0;
 
@@ -420,12 +485,17 @@ a{
 
   position:relative;
 
+  overflow:hidden;
+
   overflow-wrap:anywhere;
 }
 
 .about-card:last-child{
   border-right:0;
 }
+
+
+/* COLORS */
 
 .about-card:nth-child(1){
   background:var(--yellow);
@@ -440,39 +510,58 @@ a{
   background:var(--paper);
 }
 
+
+/* CARD INDEX */
+
 .card-index{
+
   display:block;
 
+  margin-bottom:5rem;
+
   font-family:monospace;
+
   font-size:.75rem;
 
-  margin-bottom:5rem;
+  text-transform:uppercase;
 }
 
+
+/* CARD TITLE */
+
 .about-card h3{
+
   max-width:100%;
 
+  margin-bottom:1.5rem;
+
   font-size:clamp(1.7rem,3vw,2rem);
+
   line-height:.9;
 
   letter-spacing:-.05em;
 
   text-transform:uppercase;
 
-  margin-bottom:1.5rem;
-
   overflow-wrap:break-word;
 }
 
+
+/* LIST */
+
 .about-card ul{
-  list-style:none;
-  padding:0;
-  margin:0;
 
   max-width:100%;
+
+  list-style:none;
+
+  padding:0;
+  margin:0;
 }
 
+
 .about-card li{
+
   max-width:100%;
 
   border-top:2px solid currentColor;
@@ -484,7 +573,11 @@ a{
   overflow-wrap:anywhere;
 }
 
+
+/* PARAGRAPHS */
+
 .about-card p{
+
   max-width:100%;
 
   margin:.8rem 0;
@@ -500,12 +593,16 @@ a{
    ========================================================= */
 
 .research-list{
+
   display:grid;
-  grid-template-columns:minmax(0,1fr);
-  min-width:0;
+
+  grid-template-columns:
+    minmax(0,1fr);
 }
 
+
 .research-card{
+
   width:100%;
   min-width:0;
 
@@ -520,19 +617,29 @@ a{
 
   border-bottom:var(--line);
 
-  transition:.15s ease;
+  transition:
+    background .15s ease,
+    color .15s ease;
 }
+
 
 .research-card:last-child{
   border-bottom:0;
 }
 
+
 .research-card:hover{
+
   background:var(--black);
+
   color:var(--white);
 }
 
+
+/* NUMBER */
+
 .research-index{
+
   min-width:0;
 
   padding:1.25rem;
@@ -542,7 +649,11 @@ a{
   font-family:monospace;
 }
 
+
+/* CONTENT */
+
 .research-content{
+
   min-width:0;
 
   padding:1.25rem;
@@ -552,10 +663,13 @@ a{
   overflow-wrap:anywhere;
 }
 
+
 .research-content h3{
+
   max-width:100%;
 
   font-size:clamp(2rem,4vw,4.5rem);
+
   line-height:.85;
 
   letter-spacing:-.06em;
@@ -565,7 +679,9 @@ a{
   overflow-wrap:break-word;
 }
 
+
 .research-content p{
+
   max-width:100%;
 
   margin-top:1rem;
@@ -575,7 +691,11 @@ a{
   overflow-wrap:anywhere;
 }
 
+
+/* META */
+
 .research-meta{
+
   min-width:0;
 
   padding:1.25rem;
@@ -588,6 +708,7 @@ a{
   text-align:right;
 
   font-family:monospace;
+
   font-size:.8rem;
 
   text-transform:uppercase;
@@ -601,6 +722,7 @@ a{
    ========================================================= */
 
 .art-grid{
+
   display:grid;
 
   grid-template-columns:
@@ -609,30 +731,42 @@ a{
     minmax(0,1fr);
 }
 
+
 .art-domain{
+
   width:100%;
   min-width:0;
 
-  min-height:500px;
+  min-height:480px;
+
+  padding:1.5rem;
 
   border-right:var(--line);
 
   display:flex;
-  flex-direction:column;
-  justify-content:space-between;
 
-  padding:1.25rem;
+  flex-direction:column;
+
+  justify-content:space-between;
 
   position:relative;
 
   overflow:hidden;
 
-  transition:.15s ease;
+  transition:
+    background .15s ease,
+    color .15s ease;
 }
+
 
 .art-domain:last-child{
   border-right:0;
 }
+
+
+/* =========================================================
+   ART COLORS
+   ========================================================= */
 
 .art-domain:nth-child(1){
   background:var(--red);
@@ -647,37 +781,176 @@ a{
   color:var(--white);
 }
 
+
+/* =========================================================
+   ART LABEL
+   ========================================================= */
+
 .art-number{
+
+  display:block;
+
+  position:relative;
+
+  z-index:3;
+
   font-family:monospace;
-  font-size:.8rem;
+
+  font-size:.75rem;
+
+  text-transform:uppercase;
 }
 
-.domain-title{
-  max-width:100%;
 
-  font-size:clamp(4rem,8vw,9rem);
-  line-height:.75;
+/* =========================================================
+   ROTATED ART WORD
+   ========================================================= */
 
-  font-weight:900;
-
-  letter-spacing:-.08em;
-
-  text-transform:lowercase;
-
-  transform:rotate(-90deg);
-  transform-origin:left bottom;
+.art-copy{
 
   position:absolute;
 
-  left:1.25rem;
+  left:1.5rem;
   bottom:1.5rem;
 
-  white-space:nowrap;
+  width:calc(100% - 3rem);
+
+  height:75%;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  overflow:visible;
+
+  pointer-events:none;
 }
 
+
+.domain-title{
+
+  display:block;
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  transform-origin:
+    left bottom;
+
+  transform:
+    rotate(-90deg)
+    translateX(-100%);
+
+  white-space:nowrap;
+
+  font-size:clamp(5rem,9vw,10rem);
+
+  line-height:.72;
+
+  font-weight:900;
+
+  letter-spacing:-.09em;
+
+  text-transform:lowercase;
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   ART DESCRIPTION
+   ========================================================= */
+
+.domain-description{
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  max-width:230px;
+
+  font-size:.85rem;
+
+  line-height:1.2;
+
+  font-weight:700;
+
+  transform:
+    translateY(100%);
+
+  opacity:0;
+
+  transition:
+    opacity .15s ease,
+    transform .15s ease;
+}
+
+
+.art-domain:hover .domain-description{
+
+  opacity:1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   ART ARROW
+   ========================================================= */
+
+.art-arrow{
+
+  position:absolute;
+
+  right:1.5rem;
+  bottom:1.5rem;
+
+  width:52px;
+  height:52px;
+
+  border:3px solid currentColor;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  font-size:1.5rem;
+
+  font-weight:900;
+
+  pointer-events:none;
+
+  transition:
+    transform .15s ease,
+    background .15s ease,
+    color .15s ease;
+}
+
+
+/* =========================================================
+   ART HOVER
+   ========================================================= */
+
 .art-domain:hover{
+
   background:var(--black);
+
   color:var(--white);
+}
+
+
+.art-domain:hover .art-arrow{
+
+  background:var(--white);
+
+  color:var(--black);
+
+  transform:rotate(-45deg);
 }
 
 
@@ -686,6 +959,7 @@ a{
    ========================================================= */
 
 .contact-grid{
+
   display:grid;
 
   grid-template-columns:
@@ -695,24 +969,31 @@ a{
   min-height:450px;
 }
 
-.contact-statement{
-  min-width:0;
 
-  border-right:var(--line);
+.contact-statement{
+
+  min-width:0;
 
   padding:1.5rem;
 
+  border-right:var(--line);
+
   background:var(--black);
+
   color:var(--white);
 
   display:flex;
+
   align-items:flex-end;
 }
 
+
 .contact-statement h3{
+
   max-width:100%;
 
   font-size:clamp(4rem,8vw,9rem);
+
   line-height:.72;
 
   letter-spacing:-.08em;
@@ -720,27 +1001,42 @@ a{
   overflow-wrap:break-word;
 }
 
+
 .contact-info{
+
   min-width:0;
 
   padding:1.5rem;
 
   display:flex;
+
   flex-direction:column;
+
   justify-content:space-between;
 
   overflow:hidden;
 }
 
+
 .contact-label{
+
   font-family:monospace;
+
   font-size:.8rem;
+
+  text-transform:uppercase;
 }
 
+
 .email{
+
   display:block;
 
   max-width:100%;
+
+  padding-bottom:.5rem;
+
+  border-bottom:4px solid var(--black);
 
   font-size:clamp(1.2rem,3vw,3rem);
 
@@ -749,15 +1045,15 @@ a{
   letter-spacing:-.05em;
 
   word-break:break-word;
+
   overflow-wrap:anywhere;
-
-  border-bottom:4px solid var(--black);
-
-  padding-bottom:.5rem;
 }
 
+
 .location{
+
   font-size:1.5rem;
+
   font-weight:900;
 }
 
@@ -767,7 +1063,10 @@ a{
    ========================================================= */
 
 .footer{
+
   min-height:90px;
+
+  padding:1.25rem;
 
   display:grid;
 
@@ -777,13 +1076,13 @@ a{
 
   align-items:center;
 
-  padding:1.25rem;
-
   font-family:monospace;
+
   font-size:.75rem;
 
   text-transform:uppercase;
 }
+
 
 .footer-right{
   text-align:right;
@@ -795,6 +1094,7 @@ a{
    ========================================================= */
 
 #home-button{
+
   position:fixed;
 
   right:20px;
@@ -804,6 +1104,7 @@ a{
   height:60px;
 
   display:none;
+
   align-items:center;
   justify-content:center;
 
@@ -814,15 +1115,24 @@ a{
   color:var(--black);
 
   font-size:2rem;
+
   font-weight:900;
 
   cursor:pointer;
 
   z-index:999;
+
+  transition:
+    background .15s ease,
+    transform .15s ease;
 }
 
+
 #home-button:hover{
+
   background:var(--yellow);
+
+  transform:translateY(-3px);
 }
 
 
@@ -833,106 +1143,130 @@ a{
 @media(max-width:900px){
 
   .site{
+
     border-left:0;
     border-right:0;
   }
 
 
-  /* HERO */
+  /* HERO TOP */
 
   .hero-top{
+
     grid-template-columns:
       minmax(0,1fr)
       minmax(0,1fr);
   }
 
+
   .logo{
     grid-column:1;
   }
 
+
   .coordinates{
     display:none;
   }
+
 
   .year{
     grid-column:2;
   }
 
 
+  /* HERO */
+
   .hero-title{
+
     font-size:clamp(5rem,18vw,10rem);
+
     padding-top:4rem;
   }
+
 
   .hero-title span:last-child{
     margin-left:8vw;
   }
 
 
+  /* GEOMETRY */
+
   .hero-circle{
+
     width:38vw;
     height:38vw;
   }
 
+
   .hero-square{
+
     width:22vw;
     height:22vw;
   }
 
 
+  /* HERO BOTTOM */
+
   .hero-bottom{
-    grid-template-columns:minmax(0,1fr);
+
+    grid-template-columns:
+      minmax(0,1fr);
   }
 
+
   .hero-intro{
+
     grid-column:1;
 
     border-right:0;
+
     border-bottom:var(--line);
 
     min-height:120px;
   }
 
+
   .hero-nav{
+
     grid-column:1;
   }
 
 
-  /* SECTION HEAD */
+  /* SECTION */
 
   .section-head{
-    grid-template-columns:minmax(0,1fr);
+
+    min-height:140px;
   }
 
-  .section-number{
-    border-right:0;
-    border-bottom:var(--line);
-
-    min-height:50px;
-  }
 
   .section-title{
-    min-height:140px;
 
-    display:flex;
-    align-items:flex-end;
+    font-size:clamp(4rem,13vw,8rem);
 
-    font-size:clamp(4rem,12vw,8rem);
+    padding:1rem;
   }
 
 
   /* ABOUT */
 
   .about-grid{
-    grid-template-columns:minmax(0,1fr);
+
+    grid-template-columns:
+      minmax(0,1fr);
   }
 
+
   .about-card{
+
     border-right:0;
+
     border-bottom:var(--line);
   }
 
+
   .about-card:last-child{
+
     border-bottom:0;
   }
 
@@ -940,23 +1274,31 @@ a{
   /* RESEARCH */
 
   .research-card{
+
     grid-template-columns:
       60px
       minmax(0,1fr);
   }
 
+
   .research-index{
+
     grid-row:span 2;
   }
 
+
   .research-content{
+
     border-right:0;
   }
 
+
   .research-meta{
+
     border-top:2px solid currentColor;
 
     justify-content:flex-start;
+
     text-align:left;
 
     padding-top:.8rem;
@@ -966,38 +1308,61 @@ a{
   /* ART */
 
   .art-grid{
-    grid-template-columns:minmax(0,1fr);
+
+    grid-template-columns:
+      minmax(0,1fr);
   }
 
+
   .art-domain{
-    min-height:300px;
+
+    min-height:330px;
 
     border-right:0;
+
     border-bottom:var(--line);
   }
 
+
   .art-domain:last-child{
+
     border-bottom:0;
   }
 
-  .domain-title{
-    transform:none;
 
-    left:1.25rem;
-    bottom:1.25rem;
+  .art-copy{
+
+    height:72%;
+  }
+
+
+  .domain-title{
+
+    font-size:clamp(5rem,17vw,8rem);
+  }
+
+
+  .domain-description{
+
+    max-width:300px;
   }
 
 
   /* CONTACT */
 
   .contact-grid{
-    grid-template-columns:minmax(0,1fr);
+
+    grid-template-columns:
+      minmax(0,1fr);
   }
 
+
   .contact-statement{
+
     min-height:300px;
 
     border-right:0;
+
     border-bottom:var(--line);
   }
 
@@ -1005,14 +1370,19 @@ a{
   /* FOOTER */
 
   .footer{
-    grid-template-columns:minmax(0,1fr);
+
+    grid-template-columns:
+      minmax(0,1fr);
 
     gap:.5rem;
   }
 
+
   .footer-right{
+
     text-align:left;
   }
+
 }
 
 
@@ -1023,159 +1393,255 @@ a{
 @media(max-width:500px){
 
   .hero{
+
     min-height:100svh;
   }
 
 
   .hero-top{
+
     min-height:60px;
   }
 
 
   .hero-title{
+
     font-size:clamp(4.5rem,21vw,7rem);
+
     letter-spacing:-.09em;
   }
 
+
   .hero-title span:last-child{
+
     margin-left:7vw;
   }
 
 
   .hero-intro{
+
     font-size:1rem;
+
     line-height:1.15;
   }
 
 
   .hero-nav a{
+
     min-height:65px;
+
     font-size:.72rem;
   }
 
 
-  .section-number{
-    font-size:.7rem;
+  /* SECTION */
+
+  .section-head{
+
+    min-height:115px;
   }
 
+
   .section-title{
-    min-height:120px;
 
-    font-size:clamp(3rem,16vw,5rem);
+    min-height:115px;
 
-    padding:1rem;
+    padding:.9rem;
+
+    font-size:clamp(3.5rem,17vw,6rem);
 
     line-height:.82;
   }
 
 
+  /* ABOUT */
+
   .about-card{
+
     min-height:330px;
+
     padding:1.25rem;
   }
 
+
   .about-card h3{
+
     font-size:clamp(1.7rem,8vw,2.5rem);
   }
 
 
+  /* RESEARCH */
+
   .research-card{
+
     grid-template-columns:
       45px
       minmax(0,1fr);
   }
 
+
   .research-index{
+
     padding:.9rem;
   }
 
+
   .research-content{
+
     padding:1rem;
   }
 
+
   .research-content h3{
+
     font-size:clamp(2rem,10vw,3rem);
   }
 
+
   .research-content p{
+
     font-size:.9rem;
   }
 
+
   .research-meta{
+
     padding:1rem;
+
     font-size:.65rem;
   }
 
 
+  /* ART */
+
   .art-domain{
-    min-height:260px;
-  }
 
-  .domain-title{
-    font-size:clamp(4rem,17vw,7rem);
-  }
-
-
-  .contact-statement{
-    min-height:260px;
-  }
-
-  .contact-statement h3{
-    font-size:clamp(4rem,18vw,7rem);
-  }
-
-  .contact-info{
     min-height:300px;
+
     padding:1.25rem;
   }
 
+
+  .art-copy{
+
+    left:1.25rem;
+
+    bottom:1.25rem;
+
+    width:calc(100% - 2.5rem);
+
+    height:72%;
+  }
+
+
+  .domain-title{
+
+    font-size:clamp(4.5rem,20vw,7rem);
+  }
+
+
+  .domain-description{
+
+    max-width:75%;
+
+    font-size:.8rem;
+  }
+
+
+  .art-arrow{
+
+    right:1.25rem;
+
+    bottom:1.25rem;
+
+    width:46px;
+    height:46px;
+  }
+
+
+  /* CONTACT */
+
+  .contact-statement{
+
+    min-height:260px;
+  }
+
+
+  .contact-statement h3{
+
+    font-size:clamp(4rem,18vw,7rem);
+  }
+
+
+  .contact-info{
+
+    min-height:300px;
+
+    padding:1.25rem;
+  }
+
+
   .email{
+
     font-size:clamp(1.1rem,6vw,1.7rem);
   }
 
 
+  /* HOME */
+
   #home-button{
+
     width:50px;
     height:50px;
 
     right:12px;
     bottom:12px;
   }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="site">
 
 
-<!-- ======================================================
+<!-- =====================================================
      HERO
-     ====================================================== -->
+     ===================================================== -->
 
 <header class="hero" id="home">
 
+
   <div class="hero-top">
+
 
     <div class="logo">
       huncuti
     </div>
 
+
     <div class="coordinates">
       researcher / artist / cybercommunication
     </div>
+
 
     <div class="year">
       2026
     </div>
 
+
   </div>
 
 
+
   <div class="hero-main">
+
 
     <div class="hero-circle"></div>
 
@@ -1184,58 +1650,72 @@ a{
     <div class="hero-bar"></div>
 
 
+
     <h1 class="hero-title">
+
       <span>hun</span>
+
       <span>cuti</span>
+
     </h1>
+
 
 
     <div class="hero-bottom">
 
+
       <div class="hero-intro">
+
         <span id="typewriter-intro"></span>
+
       </div>
 
 
+
       <nav class="hero-nav">
+
 
         <a href="#find-out">
           01 / find out
         </a>
 
+
         <a href="#research">
           02 / research
         </a>
+
 
         <a href="#art">
           03 / art
         </a>
 
+
         <a href="#contact">
           04 / contact
         </a>
 
+
       </nav>
+
 
     </div>
 
+
   </div>
+
 
 </header>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      FIND OUT
-     ====================================================== -->
+     ===================================================== -->
 
 <section id="find-out" class="section">
 
-  <div class="section-head">
 
-    <div class="section-number">
-      01 — profile
-    </div>
+  <div class="section-head">
 
     <h2 class="section-title">
       find out
@@ -1244,39 +1724,49 @@ a{
   </div>
 
 
+
   <div class="about-grid">
 
 
     <article class="about-card">
 
+
       <span class="card-index">
         A / 01
       </span>
+
 
       <h3>
         focus<br>
         areas
       </h3>
 
+
       <ul>
+
 
         <li>
           cyberpsychology
         </li>
 
+
         <li>
-          emotion regulation / mindfulness
+          emotion regulation / mindfulness-based interventions
         </li>
+
 
         <li>
           creativity / intelligence / personality
         </li>
 
+
         <li>
-          digital biomarkers / AI healthcare
+          digital biomarkers / AI-driven healthcare
         </li>
 
+
       </ul>
+
 
     </article>
 
@@ -1284,13 +1774,16 @@ a{
 
     <article class="about-card">
 
+
       <span class="card-index">
         A / 02
       </span>
 
+
       <h3>
         education
       </h3>
+
 
       <p>
         master of psychology<br>
@@ -1298,11 +1791,13 @@ a{
         2020—2024
       </p>
 
+
       <p>
         bachelor of psychology<br>
         university of zagreb<br>
         2017—2020
       </p>
+
 
     </article>
 
@@ -1310,42 +1805,44 @@ a{
 
     <article class="about-card">
 
+
       <span class="card-index">
         A / 03
       </span>
 
+
       <h3>
-        method
+        approach
       </h3>
+
 
       <p>
         psychological research,
         digital culture,
         computational approaches,
         qualitative inquiry,
-        creative practice.
+        and creative practice.
       </p>
+
 
     </article>
 
 
   </div>
 
+
 </section>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      RESEARCH
-     ====================================================== -->
+     ===================================================== -->
 
 <section id="research" class="section">
 
-  <div class="section-head">
 
-    <div class="section-number">
-      02 — research
-    </div>
+  <div class="section-head">
 
     <h2 class="section-title">
       current,<br>
@@ -1356,14 +1853,17 @@ a{
   </div>
 
 
+
   <div class="research-list">
 
 
     <article class="research-card">
 
+
       <div class="research-index">
         01
       </div>
+
 
       <div class="research-content">
 
@@ -1372,16 +1872,22 @@ a{
           of Redditors
         </h3>
 
+
         <p>
-          qualitative research on a Reddit AITA database.
+          qualitative research on a Reddit
+          AITA database.
         </p>
 
       </div>
 
+
       <div class="research-meta">
+
         cyburger<br>
         2026 — present
+
       </div>
+
 
     </article>
 
@@ -1389,9 +1895,11 @@ a{
 
     <article class="research-card">
 
+
       <div class="research-index">
         02
       </div>
+
 
       <div class="research-content">
 
@@ -1401,6 +1909,7 @@ a{
           meta-analysis
         </h3>
 
+
         <p>
           comprehensive meta-analysis of
           mindfulness-based interventions
@@ -1409,10 +1918,14 @@ a{
 
       </div>
 
+
       <div class="research-meta">
+
         university of amsterdam<br>
         2024 — 2026
+
       </div>
+
 
     </article>
 
@@ -1420,16 +1933,19 @@ a{
 
     <article class="research-card">
 
+
       <div class="research-index">
         03
       </div>
+
 
       <div class="research-content">
 
         <h3>
           intelligence<br>
-          & creativity
+          &amp; creativity
         </h3>
+
 
         <p>
           supporting research on intelligence,
@@ -1439,10 +1955,14 @@ a{
 
       </div>
 
+
       <div class="research-meta">
+
         university of zagreb<br>
         2023 — present
+
       </div>
+
 
     </article>
 
@@ -1450,9 +1970,11 @@ a{
 
     <article class="research-card">
 
+
       <div class="research-index">
         04
       </div>
+
 
       <div class="research-content">
 
@@ -1460,6 +1982,7 @@ a{
           digital<br>
           biomarkers
         </h3>
+
 
         <p>
           research on digital biomarkers for
@@ -1469,31 +1992,33 @@ a{
 
       </div>
 
+
       <div class="research-meta">
+
         Vitafluence.ai<br>
         2023 — 2024
+
       </div>
+
 
     </article>
 
 
   </div>
 
+
 </section>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      ART
-     ====================================================== -->
+     ===================================================== -->
 
 <section id="art" class="section">
 
-  <div class="section-head">
 
-    <div class="section-number">
-      03 — practice
-    </div>
+  <div class="section-head">
 
     <h2 class="section-title">
       art
@@ -1502,73 +2027,148 @@ a{
   </div>
 
 
+
   <div class="art-grid">
 
 
-    <a href="visual.html" class="art-domain">
+    <!-- VISUAL -->
+
+    <a
+      href="visual.html"
+      class="art-domain"
+    >
+
 
       <span class="art-number">
-        01 / VISUAL
+        01 / visual
       </span>
 
-      <div class="domain-title">
-        visual
+
+      <div class="art-copy">
+
+
+        <span class="domain-title">
+          visual
+        </span>
+
+
+        <span class="domain-description">
+          images, experiments, composition,
+          digital and physical work.
+        </span>
+
+
       </div>
+
+
+      <span class="art-arrow">
+        ↗
+      </span>
+
 
     </a>
 
 
 
-    <a href="writing.html" class="art-domain">
+    <!-- WRITING -->
+
+    <a
+      href="writing.html"
+      class="art-domain"
+    >
+
 
       <span class="art-number">
-        02 / WRITING
+        02 / writing
       </span>
 
-      <div class="domain-title">
-        writing
+
+      <div class="art-copy">
+
+
+        <span class="domain-title">
+          writing
+        </span>
+
+
+        <span class="domain-description">
+          essays, fragments, observations,
+          language and thought.
+        </span>
+
+
       </div>
+
+
+      <span class="art-arrow">
+        ↗
+      </span>
+
 
     </a>
 
 
 
-    <a href="music.html" class="art-domain">
+    <!-- MUSIC -->
+
+    <a
+      href="music.html"
+      class="art-domain"
+    >
+
 
       <span class="art-number">
-        03 / MUSIC
+        03 / music
       </span>
 
-      <div class="domain-title">
-        music
+
+      <div class="art-copy">
+
+
+        <span class="domain-title">
+          music
+        </span>
+
+
+        <span class="domain-description">
+          sound, rhythm, experiments
+          and compositions.
+        </span>
+
+
       </div>
+
+
+      <span class="art-arrow">
+        ↗
+      </span>
+
 
     </a>
 
 
   </div>
 
+
 </section>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      CONTACT
-     ====================================================== -->
+     ===================================================== -->
 
 <section id="contact" class="section">
 
-  <div class="section-head">
 
-    <div class="section-number">
-      04 — communication
-    </div>
+  <div class="section-head">
 
     <h2 class="section-title">
       get in touch
     </h2>
 
   </div>
+
 
 
   <div class="contact-grid">
@@ -1587,9 +2187,11 @@ a{
 
     <div class="contact-info">
 
+
       <span class="contact-label">
-        DIRECT CHANNEL
+        direct channel
       </span>
+
 
       <a
         class="email"
@@ -1598,131 +2200,170 @@ a{
         lara.petrovic.xyz@gmail.com
       </a>
 
+
       <div class="location">
         CROATIA
       </div>
+
 
     </div>
 
 
   </div>
 
+
 </section>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      FOOTER
-     ====================================================== -->
+     ===================================================== -->
 
 <footer class="footer">
+
 
   <div>
     © 2026 huncuti
   </div>
 
+
   <div class="footer-right">
-    psychology / research / art
+    research / art / cybercommunication
   </div>
 
+
 </footer>
+
 
 </div>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      HOME BUTTON
-     ====================================================== -->
+     ===================================================== -->
 
-<button
-  id="home-button"
-  aria-label="Back to top"
->
+<div id="home-button">
   ↑
-</button>
+</div>
 
 
 
-<!-- ======================================================
+<!-- =====================================================
      JAVASCRIPT
-     ====================================================== -->
+     ===================================================== -->
 
 <script>
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+  'DOMContentLoaded',
+  function(){
+
+    /* -----------------------------------------------------
+       TYPEWRITER
+       ----------------------------------------------------- */
+
+    new Typed(
+      '#typewriter-intro',
+      {
+        strings:[
+          'researcher on cybercommunication'
+        ],
+
+        typeSpeed:50,
+        backSpeed:30,
+        backDelay:2000,
+        startDelay:500,
+
+        loop:true,
+
+        showCursor:false
+      }
+    );
 
 
-  /* -------------------------------------------------------
-     TYPEWRITER
-     ------------------------------------------------------- */
+    /* -----------------------------------------------------
+       HOME BUTTON
+       ----------------------------------------------------- */
 
-  new Typed("#typewriter-intro", {
-
-    strings:[
-      "researcher on cybercommunication",
-      "psychology × technology × culture",
-      "research / art / experimentation"
-    ],
-
-    typeSpeed:45,
-    backSpeed:25,
-    backDelay:1800,
-    startDelay:700,
-
-    loop:true,
-    showCursor:false
-
-  });
+    const homeButton =
+      document.getElementById('home-button');
 
 
+    function updateHomeButton(){
 
-  /* -------------------------------------------------------
-     HOME BUTTON
-     ------------------------------------------------------- */
+      if(window.scrollY > window.innerHeight * .8){
 
-  const homeButton =
-    document.getElementById("home-button");
+        homeButton.style.display='flex';
 
+      }else{
 
-  function updateHomeButton(){
+        homeButton.style.display='none';
 
-    if(window.scrollY > window.innerHeight * .8){
-
-      homeButton.style.display = "flex";
-
-    }else{
-
-      homeButton.style.display = "none";
+      }
 
     }
 
+
+    window.addEventListener(
+      'scroll',
+      updateHomeButton,
+      {passive:true}
+    );
+
+
+    updateHomeButton();
+
+
+    homeButton.addEventListener(
+      'click',
+      function(){
+
+        window.scrollTo({
+          top:0,
+          behavior:'smooth'
+        });
+
+      }
+    );
+
+
+    /* -----------------------------------------------------
+       ART KEYBOARD ACCESSIBILITY
+       ----------------------------------------------------- */
+
+    document
+      .querySelectorAll('.art-domain')
+      .forEach(function(item){
+
+        item.addEventListener(
+          'focus',
+          function(){
+
+            item.classList.add('keyboard-focus');
+
+          }
+        );
+
+        item.addEventListener(
+          'blur',
+          function(){
+
+            item.classList.remove('keyboard-focus');
+
+          }
+        );
+
+      });
+
+
   }
-
-
-  window.addEventListener(
-    "scroll",
-    updateHomeButton,
-    { passive:true }
-  );
-
-
-  updateHomeButton();
-
-
-  homeButton.addEventListener("click", () => {
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-
-  });
-
-
-});
+);
 
 </script>
 
+
 </body>
+
 </html>
