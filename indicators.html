@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lara Petrović — Portfolio</title>
+  <title>PORTFOLIO</title>
   <style>
     * {
       margin: 0;
@@ -38,6 +38,12 @@
       z-index: 10;
       white-space: nowrap;
       user-select: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero-title-container.visible {
+      opacity: 1;
     }
 
     .name {
@@ -174,12 +180,19 @@
       // Smooth easing (Lerp) towards the target expansion
       expansionFactor += (targetExpansion - expansionFactor) * 0.08;
 
+      // Dynamic central black circle radius
+      const currentCenterRadius = baseCenterRadius + (expansionFactor * 16);
+
+      // Check if mouse is over/inside the black circle
+      if (mouse.active && mouseDist <= currentCenterRadius) {
+        titleContainer.classList.add('visible');
+      } else {
+        titleContainer.classList.remove('visible');
+      }
+
       // Clear Canvas
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, width, height);
-
-      // Dynamic central black circle radius
-      const currentCenterRadius = baseCenterRadius + (expansionFactor * 16);
 
       // Subtle scaling of text container to match circle expansion
       const textScale = 1 + expansionFactor * 0.08;
