@@ -39,7 +39,7 @@
       white-space: nowrap;
       user-select: none;
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.4s ease;
     }
 
     .hero-title-container.visible {
@@ -47,7 +47,7 @@
     }
 
     .name {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -55,20 +55,67 @@
     }
 
     .subtitle {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 400;
       letter-spacing: 0.38em;
       text-transform: uppercase;
       margin-top: 6px;
       opacity: 0.75;
     }
+
+    /* Container for Static Section Text Placed Across Concentric Rings */
+    .ring-nav-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .ring-nav-item {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      color: #000000;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      text-decoration: none;
+      pointer-events: auto;
+      background-color: #ffffff;
+      padding: 2px 10px;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.1s linear;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .ring-nav-item.visible {
+      opacity: 1;
+    }
+
+    .ring-nav-item:hover {
+      background-color: #000000;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Center Circle Hover Title -->
   <div class="hero-title-container" id="titleContainer">
     <div class="name">LARA PETROVIĆ</div>
     <div class="subtitle">PORTFOLIO</div>
+  </div>
+
+  <!-- Still Navigation Labels on Every 2nd Ring -->
+  <div class="ring-nav-container">
+    <a href="#about" class="ring-nav-item" id="navAbout">ABOUT</a>
+    <a href="#research" class="ring-nav-item" id="navResearch">RESEARCH</a>
+    <a href="#art" class="ring-nav-item" id="navArt">ART</a>
+    <a href="#contact" class="ring-nav-item" id="navContact">CONTACT</a>
   </div>
 
   <canvas id="bauhausCanvas"></canvas>
@@ -78,12 +125,20 @@
     const ctx = canvas.getContext('2d');
     const titleContainer = document.getElementById('titleContainer');
 
+    // Section Nav Elements
+    const navItems = [
+      { el: document.getElementById('navAbout'), ringIndex: 2, angle: -Math.PI / 4 },    // Ring 2 (Top Right)
+      { el: document.getElementById('navResearch'), ringIndex: 4, angle: (3 * Math.PI) / 4 }, // Ring 4 (Bottom Left)
+      { el: document.getElementById('navArt'), ringIndex: 6, angle: - (3 * Math.PI) / 4 },   // Ring 6 (Top Left)
+      { el: document.getElementById('navContact'), ringIndex: 8, angle: Math.PI / 4 }    // Ring 8 (Bottom Right)
+    ];
+
     let width, height, centerX, centerY;
-    const baseCenterRadius = 105; // Enlarged to fit text elegantly
+    const baseCenterRadius = 105;
     
     // Mouse tracking & expansion target values
     const mouse = { x: -1000, y: -1000, active: false };
-    let expansionFactor = 0; // Smooth transition value (0 = normal, 1 = fully widened)
+    let expansionFactor = 0; // 0 = standard preview, 1 = fully widened concentric preview
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -105,11 +160,18 @@
       mouse.active = false;
     });
 
+    // Helper to calculate orbit radius for ring index
+    function getRingRadius(ringIndex, expansion) {
+      const baseSpacing = 26;
+      const baseR = baseCenterRadius + 30 + ringIndex * baseSpacing;
+      const widenedR = baseCenterRadius + 50 + ringIndex * (baseSpacing + 22);
+      return baseR + (widenedR - baseR) * expansion;
+    }
+
     // Dust-like Ant Particle
     class DustAnt {
       constructor(ringIndex) {
         this.ringIndex = ringIndex;
-        this.baseSpacing = 26;
         this.angle = Math.random() * Math.PI * 2;
         
         const direction = ringIndex % 2 === 0 ? 1 : -1;
@@ -119,18 +181,12 @@
         this.opacity = 0.65 + Math.random() * 0.35;
       }
 
-      getCurrentRadius(currentExpansion) {
-        const baseR = baseCenterRadius + 30 + this.ringIndex * this.baseSpacing;
-        const widenedR = baseCenterRadius + 50 + this.ringIndex * (this.baseSpacing + 22);
-        return baseR + (widenedR - baseR) * currentExpansion;
-      }
-
       update() {
         this.angle += this.speed;
       }
 
       draw(currentExpansion) {
-        const radius = this.getCurrentRadius(currentExpansion);
+        const radius = getRingRadius(this.ringIndex, currentExpansion);
         const x = centerX + Math.cos(this.angle) * radius;
         const y = centerY + Math.sin(this.angle) * radius;
 
@@ -152,7 +208,7 @@
     }
 
     // Population Setup
-    const totalRings = 12;
+    const totalRings = 10;
     const ants = [];
 
     for (let r = 0; r < totalRings; r++) {
@@ -164,12 +220,12 @@
 
     // Main Render Loop
     function render() {
-      // Calculate mouse proximity to center circle
+      // Calculate proximity to central circle to trigger widening
       const dx = mouse.x - centerX;
       const dy = mouse.y - centerY;
       const mouseDist = Math.sqrt(dx * dx + dy * dy);
       
-      const maxProximity = 500;
+      const maxProximity = 550;
       let targetExpansion = 0;
       
       if (mouse.active && mouseDist < maxProximity) {
@@ -177,47 +233,62 @@
         targetExpansion = Math.pow(targetExpansion, 0.8);
       }
 
-      // Smooth easing (Lerp) towards the target expansion
+      // Smooth easing towards target widening expansion
       expansionFactor += (targetExpansion - expansionFactor) * 0.08;
 
-      // Dynamic central black circle radius
       const currentCenterRadius = baseCenterRadius + (expansionFactor * 16);
 
-      // Check if mouse is over/inside the black circle
+      // 1. Toggle Center Title Text
       if (mouse.active && mouseDist <= currentCenterRadius) {
         titleContainer.classList.add('visible');
       } else {
         titleContainer.classList.remove('visible');
       }
 
+      // 2. Toggle & Position Static Ring Section Labels (Every 2nd ring)
+      navItems.forEach(item => {
+        if (expansionFactor > 0.15) {
+          const ringRadius = getRingRadius(item.ringIndex, expansionFactor);
+          const posX = centerX + Math.cos(item.angle) * ringRadius;
+          const posY = centerY + Math.sin(item.angle) * ringRadius;
+          
+          item.el.style.left = `${posX}px`;
+          item.el.style.top = `${posY}px`;
+          item.el.classList.add('visible');
+        } else {
+          item.el.classList.remove('visible');
+        }
+      });
+
       // Clear Canvas
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, width, height);
 
-      // Subtle scaling of text container to match circle expansion
       const textScale = 1 + expansionFactor * 0.08;
       titleContainer.style.transform = `translate(-50%, -50%) scale(${textScale})`;
 
-      // 1. Draw Widening Concentric Ring Lines
+      // 3. Draw Widening Concentric Ring Lines
       ctx.lineWidth = 1;
       for (let r = 0; r < totalRings; r++) {
-        const baseR = baseCenterRadius + 30 + r * 26;
-        const widenedR = baseCenterRadius + 50 + r * (26 + 22);
-        const currentR = baseR + (widenedR - baseR) * expansionFactor;
-
+        const currentR = getRingRadius(r, expansionFactor);
         ctx.beginPath();
         ctx.arc(centerX, centerY, currentR, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0, 0, 0, ${0.06 + expansionFactor * 0.04})`;
+        
+        // Highlight every 2nd ring where text sits
+        const isTextRing = navItems.some(n => n.ringIndex === r);
+        ctx.strokeStyle = isTextRing 
+          ? `rgba(0, 0, 0, ${0.18 + expansionFactor * 0.12})`
+          : `rgba(0, 0, 0, ${0.06 + expansionFactor * 0.04})`;
         ctx.stroke();
       }
 
-      // 2. Draw Dust Ants on Widening Paths
+      // 4. Draw Ants Moving in Background
       ants.forEach(ant => {
         ant.update();
         ant.draw(expansionFactor);
       });
 
-      // 3. Focal Center Black Circle
+      // 5. Focal Center Black Circle
       ctx.beginPath();
       ctx.arc(centerX, centerY, currentCenterRadius, 0, Math.PI * 2);
       ctx.fillStyle = '#000000';
