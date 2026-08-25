@@ -141,6 +141,10 @@ a{
   display:flex;
 
   align-items:center;
+
+  justify-content:flex-end;
+
+  padding:0;
 }
 
 
@@ -149,6 +153,8 @@ a{
   display:flex;
 
   align-items:center;
+
+  justify-content:flex-end;
 
   padding:0 1.25rem;
 
@@ -161,6 +167,8 @@ a{
   text-transform:uppercase;
 
   overflow-wrap:anywhere;
+
+  text-align:right;
 }
 
 
@@ -217,10 +225,22 @@ a{
   overflow-wrap:break-word;
 }
 
+
 .hero-title span{
+
   display:block;
 
   max-width:100%;
+}
+
+
+/*
+   ASYMMETRIC HUN / CUTI COMPOSITION
+*/
+
+.hero-title span:last-child{
+
+  margin-left:12vw;
 }
 
 
@@ -228,17 +248,24 @@ a{
    HERO GEOMETRY
    ========================================================= */
 
+/*
+   Red circle removed.
+   Yellow bar removed.
+   Blue square retained.
+*/
 
 .hero-square{
 
   position:absolute;
 
   width:min(15vw,230px);
+
   height:min(15vw,230px);
 
   background:var(--blue);
 
   left:4%;
+
   bottom:12%;
 
   z-index:0;
@@ -265,6 +292,10 @@ a{
 }
 
 
+/* =========================================================
+   HERO INTRO
+   ========================================================= */
+
 .hero-intro{
 
   min-width:0;
@@ -277,6 +308,10 @@ a{
 
   align-items:center;
 
+  justify-content:flex-end;
+
+  text-align:right;
+
   font-size:1.35rem;
 
   font-weight:700;
@@ -284,6 +319,18 @@ a{
   overflow-wrap:anywhere;
 }
 
+
+.hero-intro span{
+
+  max-width:100%;
+
+  overflow-wrap:anywhere;
+}
+
+
+/* =========================================================
+   HERO NAV
+   ========================================================= */
 
 .hero-nav{
 
@@ -326,15 +373,20 @@ a{
 
 
 .hero-nav a:nth-child(2n){
+
   border-right:0;
 }
 
+
 .hero-nav a:nth-child(3),
 .hero-nav a:nth-child(4){
+
   border-bottom:0;
 }
 
+
 .hero-nav a:hover{
+
   background:var(--black);
 
   color:var(--white);
@@ -429,7 +481,9 @@ a{
   overflow-wrap:anywhere;
 }
 
+
 .about-card:last-child{
+
   border-right:0;
 }
 
@@ -437,21 +491,28 @@ a{
 /* COLORS */
 
 .about-card:nth-child(1){
+
   background:var(--yellow);
 }
 
+
 .about-card:nth-child(2){
+
   background:var(--blue);
 
   color:var(--white);
 }
 
+
 .about-card:nth-child(3){
+
   background:var(--paper);
 }
 
 
-/* CARD INDEX */
+/* =========================================================
+   CARD INDEX
+   ========================================================= */
 
 .card-index{
 
@@ -467,7 +528,9 @@ a{
 }
 
 
-/* CARD TITLE */
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
 
 .about-card h3{
 
@@ -487,7 +550,9 @@ a{
 }
 
 
-/* LIST */
+/* =========================================================
+   LIST
+   ========================================================= */
 
 .about-card ul{
 
@@ -515,7 +580,9 @@ a{
 }
 
 
-/* PARAGRAPHS */
+/* =========================================================
+   PARAGRAPHS
+   ========================================================= */
 
 .about-card p{
 
@@ -566,6 +633,7 @@ a{
 
 
 .research-card:last-child{
+
   border-bottom:0;
 }
 
@@ -578,7 +646,9 @@ a{
 }
 
 
-/* NUMBER */
+/* =========================================================
+   RESEARCH NUMBER
+   ========================================================= */
 
 .research-index{
 
@@ -592,7 +662,9 @@ a{
 }
 
 
-/* CONTENT */
+/* =========================================================
+   RESEARCH CONTENT
+   ========================================================= */
 
 .research-content{
 
@@ -634,7 +706,9 @@ a{
 }
 
 
-/* META */
+/* =========================================================
+   RESEARCH META
+   ========================================================= */
 
 .research-meta{
 
@@ -704,6 +778,7 @@ a{
 
 
 .art-domain:last-child{
+
   border-right:0;
 }
 
@@ -713,14 +788,19 @@ a{
    ========================================================= */
 
 .art-domain:nth-child(1){
+
   background:var(--red);
 }
 
+
 .art-domain:nth-child(2){
+
   background:var(--yellow);
 }
 
+
 .art-domain:nth-child(3){
+
   background:var(--blue);
 
   color:var(--white);
@@ -737,7 +817,7 @@ a{
 
   position:relative;
 
-  z-index:5;
+  z-index:10;
 
   font-family:monospace;
 
@@ -748,46 +828,24 @@ a{
 
 
 /* =========================================================
-   ART COPY
+   ART DOMAIN TITLE
    ========================================================= */
 
-.art-copy{
+/*
+   IMPORTANT FIX:
+   The domain title is positioned directly against
+   .art-domain. No .art-copy wrapper is used.
+*/
+
+.domain-title{
 
   position:absolute;
 
   left:1.5rem;
 
-  right:1.5rem;
-
   bottom:1.5rem;
 
-  height:calc(100% - 6rem);
-
-  display:flex;
-
-  align-items:flex-end;
-
-  overflow:visible;
-
-  pointer-events:none;
-
-  z-index:2;
-}
-
-
-/* =========================================================
-   ART DOMAIN TITLE
-   ========================================================= */
-
-.domain-title{
-
   display:block;
-
-  position:absolute;
-
-  left:0;
-
-  bottom:0;
 
   transform-origin:left bottom;
 
@@ -808,44 +866,6 @@ a{
   pointer-events:none;
 
   z-index:3;
-}
-
-
-/* =========================================================
-   ART DESCRIPTION
-   ========================================================= */
-
-.domain-description{
-
-  position:absolute;
-
-  left:0;
-
-  bottom:0;
-
-  max-width:230px;
-
-  font-size:.85rem;
-
-  line-height:1.2;
-
-  font-weight:700;
-
-  transform:translateY(100%);
-
-  opacity:0;
-
-  transition:
-    opacity .15s ease,
-    transform .15s ease;
-}
-
-
-.art-domain:hover .domain-description{
-
-  opacity:1;
-
-  transform:translateY(0);
 }
 
 
@@ -879,7 +899,7 @@ a{
 
   pointer-events:none;
 
-  z-index:5;
+  z-index:10;
 
   transition:
     transform .15s ease,
@@ -1041,6 +1061,7 @@ a{
 
 
 .footer-right{
+
   text-align:right;
 }
 
@@ -1119,13 +1140,23 @@ a{
   }
 
 
-  /* GEOMETRY */
+  .hero-title span:last-child{
+
+    margin-left:8vw;
+  }
+
+
+  /* BLUE SQUARE */
 
   .hero-square{
 
     width:22vw;
 
     height:22vw;
+
+    left:5%;
+
+    bottom:14%;
   }
 
 
@@ -1147,6 +1178,10 @@ a{
     border-bottom:var(--line);
 
     min-height:120px;
+
+    justify-content:flex-end;
+
+    text-align:right;
   }
 
 
@@ -1254,31 +1289,18 @@ a{
   }
 
 
-  .art-copy{
+  .domain-title{
 
     left:1.5rem;
 
-    right:1.5rem;
-
     bottom:1.5rem;
-
-    height:calc(100% - 5rem);
-  }
-
-
-  .domain-title{
 
     font-size:clamp(5rem,17vw,8rem);
 
-    transform:rotate(-90deg);
+    transform:
+      rotate(-90deg);
 
     transform-origin:left bottom;
-  }
-
-
-  .domain-description{
-
-    max-width:300px;
   }
 
 
@@ -1354,11 +1376,45 @@ a{
   }
 
 
+  .hero-title span:last-child{
+
+    margin-left:7vw;
+  }
+
+
+  /* BLUE SQUARE */
+
+  .hero-square{
+
+    width:22vw;
+
+    height:22vw;
+
+    left:5%;
+
+    bottom:15%;
+  }
+
+
+  /* HERO INTRO */
+
   .hero-intro{
 
     font-size:1rem;
 
     line-height:1.15;
+
+    justify-content:flex-end;
+
+    text-align:right;
+
+    padding:1rem;
+  }
+
+
+  .hero-intro span{
+
+    max-width:85%;
   }
 
 
@@ -1458,33 +1514,18 @@ a{
   }
 
 
-  .art-copy{
+  .domain-title{
 
     left:1.25rem;
 
-    right:1.25rem;
-
     bottom:1.25rem;
-
-    height:calc(100% - 4.5rem);
-  }
-
-
-  .domain-title{
 
     font-size:clamp(4.5rem,20vw,7rem);
 
-    transform:rotate(-90deg);
+    transform:
+      rotate(-90deg);
 
     transform-origin:left bottom;
-  }
-
-
-  .domain-description{
-
-    max-width:75%;
-
-    font-size:.8rem;
   }
 
 
@@ -1561,6 +1602,8 @@ a{
 <header class="hero" id="home">
 
 
+  <!-- TOP BAR -->
+
   <div class="hero-top">
 
     <div class="logo">
@@ -1571,12 +1614,18 @@ a{
 
 
 
+  <!-- HERO MAIN -->
+
   <div class="hero-main">
 
+
+    <!-- BLUE SQUARE -->
 
     <div class="hero-square"></div>
 
 
+
+    <!-- HERO TITLE -->
 
     <h1 class="hero-title">
 
@@ -1588,8 +1637,12 @@ a{
 
 
 
+    <!-- HERO BOTTOM -->
+
     <div class="hero-bottom">
 
+
+      <!-- INTRO -->
 
       <div class="hero-intro">
 
@@ -1599,28 +1652,25 @@ a{
 
 
 
-      <nav class="hero-nav">
+      <!-- NAVIGATION -->
 
+      <nav class="hero-nav">
 
         <a href="#find-out">
           01 / find out
         </a>
 
-
         <a href="#research">
           02 / research
         </a>
-
 
         <a href="#art">
           03 / art
         </a>
 
-
         <a href="#contact">
           04 / contact
         </a>
-
 
       </nav>
 
@@ -1671,26 +1721,21 @@ a{
 
       <ul>
 
-
         <li>
           cyberpsychology
         </li>
-
 
         <li>
           emotion regulation/mindfulness-based interventions
         </li>
 
-
         <li>
           creativity/intelligence/personality
         </li>
 
-
         <li>
           digital biomarkers/AI-driven healthcare
         </li>
-
 
       </ul>
 
@@ -1842,7 +1887,6 @@ a{
           on emotion regulation.
         </p>
 
-
       </div>
 
 
@@ -1880,7 +1924,6 @@ a{
           across multiple phases.
         </p>
 
-
       </div>
 
 
@@ -1917,7 +1960,6 @@ a{
           neuropsychiatric conditions and
           AI-driven healthcare solutions.
         </p>
-
 
       </div>
 
@@ -1960,94 +2002,82 @@ a{
   <div class="art-grid">
 
 
-    <!-- VISUAL -->
+    <!-- =================================================
+         VISUAL
+         ================================================= -->
 
     <a
       href="visual.html"
       class="art-domain"
     >
 
-
       <span class="art-number">
         01 / visual
       </span>
 
 
-      <div class="art-copy">
-
-        <span class="domain-title">
-          visual
-        </span>
-
-      </div>
+      <span class="domain-title">
+        visual
+      </span>
 
 
       <span class="art-arrow">
         ↗
       </span>
 
-
     </a>
 
 
 
-    <!-- WRITING -->
+    <!-- =================================================
+         WRITING
+         ================================================= -->
 
     <a
       href="writing.html"
       class="art-domain"
     >
 
-
       <span class="art-number">
         02 / writing
       </span>
 
 
-      <div class="art-copy">
-
-        <span class="domain-title">
-          writing
-        </span>
-
-      </div>
+      <span class="domain-title">
+        writing
+      </span>
 
 
       <span class="art-arrow">
         ↗
       </span>
 
-
     </a>
 
 
 
-    <!-- MUSIC -->
+    <!-- =================================================
+         MUSIC
+         ================================================= -->
 
     <a
       href="music.html"
       class="art-domain"
     >
 
-
       <span class="art-number">
         03 / music
       </span>
 
 
-      <div class="art-copy">
-
-        <span class="domain-title">
-          music
-        </span>
-
-      </div>
+      <span class="domain-title">
+        music
+      </span>
 
 
       <span class="art-arrow">
         ↗
       </span>
-
 
     </a>
 
@@ -2160,13 +2190,15 @@ document.addEventListener(
   'DOMContentLoaded',
   function(){
 
-    /* -----------------------------------------------------
+
+    /* =====================================================
        TYPEWRITER
-       ----------------------------------------------------- */
+       ===================================================== */
 
     new Typed(
       '#typewriter-intro',
       {
+
         strings:[
           'researcher on cybercommunication'
         ],
@@ -2182,13 +2214,14 @@ document.addEventListener(
         loop:true,
 
         showCursor:false
+
       }
     );
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        HOME BUTTON
-       ----------------------------------------------------- */
+       ===================================================== */
 
     const homeButton =
       document.getElementById('home-button');
@@ -2196,7 +2229,10 @@ document.addEventListener(
 
     function updateHomeButton(){
 
-      if(window.scrollY > window.innerHeight * .8){
+      if(
+        window.scrollY >
+        window.innerHeight * .8
+      ){
 
         homeButton.style.display='flex';
 
@@ -2212,7 +2248,9 @@ document.addEventListener(
     window.addEventListener(
       'scroll',
       updateHomeButton,
-      {passive:true}
+      {
+        passive:true
+      }
     );
 
 
@@ -2224,41 +2262,15 @@ document.addEventListener(
       function(){
 
         window.scrollTo({
+
           top:0,
+
           behavior:'smooth'
+
         });
 
       }
     );
-
-
-    /* -----------------------------------------------------
-       ART KEYBOARD ACCESSIBILITY
-       ----------------------------------------------------- */
-
-    document
-      .querySelectorAll('.art-domain')
-      .forEach(function(item){
-
-        item.addEventListener(
-          'focus',
-          function(){
-
-            item.classList.add('keyboard-focus');
-
-          }
-        );
-
-        item.addEventListener(
-          'blur',
-          function(){
-
-            item.classList.remove('keyboard-focus');
-
-          }
-        );
-
-      });
 
 
   }
