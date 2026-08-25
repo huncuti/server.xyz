@@ -62,44 +62,6 @@
       margin-top: 6px;
       opacity: 0.75;
     }
-
-    /* Container for Static Section Text Placed Across Concentric Rings */
-    .ring-nav-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .ring-nav-item {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      color: #000000;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      text-decoration: none;
-      pointer-events: auto;
-      background-color: #ffffff;
-      padding: 2px 10px;
-      opacity: 0;
-      transition: opacity 0.5s ease, transform 0.1s linear;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .ring-nav-item.visible {
-      opacity: 1;
-    }
-
-    .ring-nav-item:hover {
-      background-color: #000000;
-      color: #ffffff;
-    }
   </style>
 </head>
 <body>
@@ -110,14 +72,6 @@
     <div class="subtitle">PORTFOLIO</div>
   </div>
 
-  <!-- Still Navigation Labels on Every 2nd Ring -->
-  <div class="ring-nav-container">
-    <a href="#about" class="ring-nav-item" id="navAbout">ABOUT</a>
-    <a href="#research" class="ring-nav-item" id="navResearch">RESEARCH</a>
-    <a href="#art" class="ring-nav-item" id="navArt">ART</a>
-    <a href="#contact" class="ring-nav-item" id="navContact">CONTACT</a>
-  </div>
-
   <canvas id="bauhausCanvas"></canvas>
 
   <script>
@@ -125,20 +79,20 @@
     const ctx = canvas.getContext('2d');
     const titleContainer = document.getElementById('titleContainer');
 
-    // Section Nav Elements
-    const navItems = [
-      { el: document.getElementById('navAbout'), ringIndex: 2, angle: -Math.PI / 4 },    // Ring 2 (Top Right)
-      { el: document.getElementById('navResearch'), ringIndex: 4, angle: (3 * Math.PI) / 4 }, // Ring 4 (Bottom Left)
-      { el: document.getElementById('navArt'), ringIndex: 6, angle: - (3 * Math.PI) / 4 },   // Ring 6 (Top Left)
-      { el: document.getElementById('navContact'), ringIndex: 8, angle: Math.PI / 4 }    // Ring 8 (Bottom Right)
-    ];
-
     let width, height, centerX, centerY;
-    const baseCenterRadius = 105;
+    const baseCenterRadius = 90;
     
-    // Mouse tracking & expansion target values
+    // Mouse tracking & expansion state
     const mouse = { x: -1000, y: -1000, active: false };
-    let expansionFactor = 0; // 0 = standard preview, 1 = fully widened concentric preview
+    let expansionFactor = 0; // 0 = default, 1 = fully expanded across screen
+
+    // Section Nav Config mapped to every 2nd concentric ring
+    const navSections = [
+      { label: "ABOUT", ringIndex: 2, angle: -Math.PI * 0.75, url: "#about" },
+      { label: "RESEARCH", ringIndex: 4, angle: -Math.PI * 0.25, url: "#research" },
+      { label: "ART", ringIndex: 6, angle: Math.PI * 0.25, url: "#art" },
+      { label: "CONTACT", ringIndex: 8, angle: Math.PI * 0.75, url: "#contact" }
+    ];
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -149,7 +103,7 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Track mouse movement
+    // Track mouse
     window.addEventListener('mousemove', (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
@@ -160,12 +114,32 @@
       mouse.active = false;
     });
 
-    // Helper to calculate orbit radius for ring index
+    // Handle clicks on curved text links
+    canvas.addEventListener('click', (e) => {
+      if (expansionFactor < 0.9) return;
+      
+      navSections.forEach(sec => {
+        const radius = getRingRadius(sec.ringIndex, expansionFactor);
+        const px = centerX + Math.cos(sec.angle) * radius;
+        const py = centerY + Math.sin(sec.angle) * radius;
+        const dist = Math.hypot(e.clientX - px, e.clientY - py);
+
+        if (dist < 40) {
+          window.location.hash = sec.url;
+        }
+      });
+    });
+
+    // Dynamic ring spacing to fit the entire screen upon full expansion
     function getRingRadius(ringIndex, expansion) {
-      const baseSpacing = 26;
-      const baseR = baseCenterRadius + 30 + ringIndex * baseSpacing;
-      const widenedR = baseCenterRadius + 50 + ringIndex * (baseSpacing + 22);
-      return baseR + (widenedR - baseR) * expansion;
+      const maxScreenRadius = Math.hypot(centerX, centerY);
+      const totalRings = 10;
+      
+      // Default rest radius spacing vs screen-filling expansion spacing
+      const baseR = baseCenterRadius + 25 + ringIndex * 22;
+      const targetR = baseCenterRadius + 30 + (ringIndex / totalRings) * (maxScreenRadius - baseCenterRadius - 50);
+      
+      return baseR + (targetR - baseR) * expansion;
     }
 
     // Dust-like Ant Particle
@@ -207,58 +181,69 @@
       }
     }
 
-    // Population Setup
+    // Ant Population
     const totalRings = 10;
     const ants = [];
 
     for (let r = 0; r < totalRings; r++) {
-      const antsInRing = 22 + r * 14;
+      const antsInRing = 20 + r * 16;
       for (let i = 0; i < antsInRing; i++) {
         ants.push(new DustAnt(r));
       }
     }
 
-    // Main Render Loop
+    // Helper: Render Curved Text along Circle Arcs
+    function drawCurvedText(text, radius, centerAngle, opacity) {
+      ctx.save();
+      ctx.font = "700 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+      ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const letterSpacing = 0.035; // Angle gap per character relative to radius
+      const totalAngle = text.length * letterSpacing;
+      let startAngle = centerAngle - totalAngle / 2;
+
+      for (let i = 0; i < text.length; i++) {
+        const charAngle = startAngle + i * letterSpacing;
+        const x = centerX + Math.cos(charAngle) * radius;
+        const y = centerY + Math.sin(charAngle) * radius;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(charAngle + Math.PI / 2);
+        ctx.fillText(text[i], 0, 0);
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+
+    // Main Animation Loop
     function render() {
-      // Calculate proximity to central circle to trigger widening
+      // Calculate cursor distance to center circle
       const dx = mouse.x - centerX;
       const dy = mouse.y - centerY;
-      const mouseDist = Math.sqrt(dx * dx + dy * dy);
+      const mouseDist = Math.hypot(dx, dy);
       
-      const maxProximity = 550;
+      const maxProximity = 500;
       let targetExpansion = 0;
       
       if (mouse.active && mouseDist < maxProximity) {
         targetExpansion = 1 - (mouseDist / maxProximity);
-        targetExpansion = Math.pow(targetExpansion, 0.8);
+        targetExpansion = Math.pow(targetExpansion, 0.7);
       }
 
-      // Smooth easing towards target widening expansion
-      expansionFactor += (targetExpansion - expansionFactor) * 0.08;
+      // Smooth easing (Lerp) towards screen-filling expansion
+      expansionFactor += (targetExpansion - expansionFactor) * 0.07;
 
-      const currentCenterRadius = baseCenterRadius + (expansionFactor * 16);
+      const currentCenterRadius = baseCenterRadius + (expansionFactor * 14);
 
-      // 1. Toggle Center Title Text
-      if (mouse.active && mouseDist <= currentCenterRadius) {
+      // Toggle Hover Title Visibility inside Center Circle
+      if (mouse.active && mouseDist <= currentCenterRadius && expansionFactor < 0.8) {
         titleContainer.classList.add('visible');
       } else {
         titleContainer.classList.remove('visible');
       }
-
-      // 2. Toggle & Position Static Ring Section Labels (Every 2nd ring)
-      navItems.forEach(item => {
-        if (expansionFactor > 0.15) {
-          const ringRadius = getRingRadius(item.ringIndex, expansionFactor);
-          const posX = centerX + Math.cos(item.angle) * ringRadius;
-          const posY = centerY + Math.sin(item.angle) * ringRadius;
-          
-          item.el.style.left = `${posX}px`;
-          item.el.style.top = `${posY}px`;
-          item.el.classList.add('visible');
-        } else {
-          item.el.classList.remove('visible');
-        }
-      });
 
       // Clear Canvas
       ctx.fillStyle = '#ffffff';
@@ -267,28 +252,38 @@
       const textScale = 1 + expansionFactor * 0.08;
       titleContainer.style.transform = `translate(-50%, -50%) scale(${textScale})`;
 
-      // 3. Draw Widening Concentric Ring Lines
+      // 1. Draw Concentric Guide Rings
       ctx.lineWidth = 1;
       for (let r = 0; r < totalRings; r++) {
         const currentR = getRingRadius(r, expansionFactor);
         ctx.beginPath();
         ctx.arc(centerX, centerY, currentR, 0, Math.PI * 2);
         
-        // Highlight every 2nd ring where text sits
-        const isTextRing = navItems.some(n => n.ringIndex === r);
+        const isTextRing = navSections.some(sec => sec.ringIndex === r);
         ctx.strokeStyle = isTextRing 
-          ? `rgba(0, 0, 0, ${0.18 + expansionFactor * 0.12})`
-          : `rgba(0, 0, 0, ${0.06 + expansionFactor * 0.04})`;
+          ? `rgba(0, 0, 0, ${0.1 + expansionFactor * 0.15})`
+          : `rgba(0, 0, 0, ${0.05 + expansionFactor * 0.04})`;
         ctx.stroke();
       }
 
-      // 4. Draw Ants Moving in Background
+      // 2. Draw Moving Ants in Background
       ants.forEach(ant => {
         ant.update();
         ant.draw(expansionFactor);
       });
 
-      // 5. Focal Center Black Circle
+      // 3. Draw Curved Section Text ONLY when almost fully expanded (> 85%)
+      if (expansionFactor > 0.85) {
+        // Fade in smoothly as expansion reaches 1.0
+        const textOpacity = Math.min(1, (expansionFactor - 0.85) / 0.15);
+        
+        navSections.forEach(sec => {
+          const radius = getRingRadius(sec.ringIndex, expansionFactor);
+          drawCurvedText(sec.label, radius, sec.angle, textOpacity);
+        });
+      }
+
+      // 4. Focal Center Black Circle
       ctx.beginPath();
       ctx.arc(centerX, centerY, currentCenterRadius, 0, Math.PI * 2);
       ctx.fillStyle = '#000000';
