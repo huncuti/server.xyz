@@ -1,11 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Walking Circle</title>
+  <title>lara petrovic</title>
 
   <style>
     * {
@@ -22,15 +21,31 @@
     }
 
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
+      font-family: Helvetica, Arial, sans-serif;
+      color: #fff;
+    }
+
+    .name {
+      position: fixed;
+      top: 24px;
+      left: 28px;
+
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+
+      z-index: 10;
+      pointer-events: none;
     }
 
     canvas {
-      width: min(90vw, 900px);
-      height: min(90vw, 900px);
+      position: fixed;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
       display: block;
       cursor: none;
     }
@@ -39,332 +54,323 @@
 
 <body>
 
-<canvas id="canvas"></canvas>
+  <div class="name">lara petrovic</div>
 
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+  <canvas id="canvas"></canvas>
 
-let W = 0;
-let H = 0;
-let cx = 0;
-let cy = 0;
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-const mouse = {
-  x: 0,
-  y: 0,
-  targetX: 0,
-  targetY: 0
-};
+    let W;
+    let H;
+    let cx;
+    let cy;
 
-let rotation = 0;
-let targetRotation = 0;
+    const mouse = {
+      x: 0,
+      y: 0,
+      targetX: 0,
+      targetY: 0
+    };
 
-const people = [];
+    let rotation = 0;
+    let targetRotation = 0;
 
-/*
-  Create people around the circle.
-*/
-const PEOPLE_COUNT = 22;
+    const people = [];
 
-for (let i = 0; i < PEOPLE_COUNT; i++) {
-  people.push({
-    angle: (Math.PI * 2 / PEOPLE_COUNT) * i,
-    speed: 0.002 + Math.random() * 0.0015,
-    size: 0.75 + Math.random() * 0.45,
-    offset: Math.random() * 1000,
-    direction: Math.random() > 0.5 ? 1 : -1
-  });
-}
+    const PEOPLE_COUNT = 24;
 
+    for (let i = 0; i < PEOPLE_COUNT; i++) {
+      people.push({
+        angle: (Math.PI * 2 / PEOPLE_COUNT) * i,
+        speed: 0.0004 + Math.random() * 0.0005,
+        size: 0.75 + Math.random() * 0.35,
+        offset: Math.random() * 1000,
+        direction: Math.random() > 0.5 ? 1 : -1
+      });
+    }
 
-/* -----------------------------
-   Resize
------------------------------ */
 
-function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // -------------------------
+    // Resize
+    // -------------------------
 
-  const size = Math.min(
-    window.innerWidth * 0.9,
-    window.innerHeight * 0.9,
-    900
-  );
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-  canvas.style.width = size + "px";
-  canvas.style.height = size + "px";
+      W = window.innerWidth;
+      H = window.innerHeight;
 
-  canvas.width = size * dpr;
-  canvas.height = size * dpr;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
 
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
 
-  W = size;
-  H = size;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  cx = W / 2;
-  cy = H / 2;
-}
+      cx = W / 2;
+      cy = H / 2;
+    }
 
-window.addEventListener("resize", resize);
-resize();
+    window.addEventListener("resize", resize);
 
+    resize();
 
-/* -----------------------------
-   Mouse
------------------------------ */
 
-window.addEventListener("mousemove", e => {
-  const rect = canvas.getBoundingClientRect();
+    // -------------------------
+    // Mouse
+    // -------------------------
 
-  mouse.targetX =
-    (e.clientX - rect.left) / rect.width - 0.5;
+    window.addEventListener("mousemove", (event) => {
+      mouse.targetX =
+        event.clientX / window.innerWidth - 0.5;
 
-  mouse.targetY =
-    (e.clientY - rect.top) / rect.height - 0.5;
-});
+      mouse.targetY =
+        event.clientY / window.innerHeight - 0.5;
+    });
 
 
-/* -----------------------------
-   Draw person
------------------------------ */
+    // -------------------------
+    // Person
+    // -------------------------
 
-function drawPerson(person, x, y, scale, alpha, walking) {
+    function drawPerson(person, x, y, scale, alpha) {
 
-  ctx.save();
+      ctx.save();
 
-  ctx.translate(x, y);
-  ctx.scale(scale, scale);
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
 
-  ctx.globalAlpha = alpha;
-  ctx.fillStyle = "#000";
-  ctx.strokeStyle = "#000";
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = "#fff";
+      ctx.strokeStyle = "#fff";
 
-  /*
-    Walking animation.
-  */
-  const t =
-    performance.now() * 0.008 * person.direction +
-    person.offset;
+      const t =
+        performance.now() * 0.004 * person.direction +
+        person.offset;
 
-  const step = Math.sin(t) * 7;
-  const step2 = Math.sin(t + Math.PI) * 7;
+      const step = Math.sin(t) * 6;
+      const step2 = Math.sin(t + Math.PI) * 6;
 
-  /*
-    Body
-  */
-  ctx.beginPath();
-  ctx.ellipse(0, -30, 10, 13, 0, 0, Math.PI * 2);
-  ctx.fill();
 
-  /*
-    Torso
-  */
-  ctx.beginPath();
-  ctx.roundRect(-9, -18, 18, 34, 5);
-  ctx.fill();
+      // Head
 
-  /*
-    Arms
-  */
-  ctx.lineWidth = 5;
-  ctx.lineCap = "round";
+      ctx.beginPath();
 
-  ctx.beginPath();
+      ctx.arc(
+        0,
+        -30,
+        8,
+        0,
+        Math.PI * 2
+      );
 
-  ctx.moveTo(-7, -12);
-  ctx.lineTo(-15, 2 + step * 0.35);
+      ctx.fill();
 
-  ctx.moveTo(7, -12);
-  ctx.lineTo(15, 2 + step2 * 0.35);
 
-  ctx.stroke();
+      // Body
 
-  /*
-    Legs
-  */
-  ctx.lineWidth = 7;
+      ctx.beginPath();
 
-  ctx.beginPath();
+      ctx.roundRect(
+        -8,
+        -20,
+        16,
+        34,
+        5
+      );
 
-  ctx.moveTo(-5, 15);
-  ctx.lineTo(-8 + step, 39);
+      ctx.fill();
 
-  ctx.moveTo(5, 15);
-  ctx.lineTo(8 + step2, 39);
 
-  ctx.stroke();
+      // Arms
 
-  /*
-    Feet
-  */
-  ctx.lineWidth = 5;
+      ctx.lineWidth = 4;
+      ctx.lineCap = "round";
 
-  ctx.beginPath();
+      ctx.beginPath();
 
-  ctx.moveTo(-8 + step, 39);
-  ctx.lineTo(-15 + step, 39);
+      ctx.moveTo(-6, -12);
+      ctx.lineTo(-14, 2 + step * 0.3);
 
-  ctx.moveTo(8 + step2, 39);
-  ctx.lineTo(15 + step2, 39);
+      ctx.moveTo(6, -12);
+      ctx.lineTo(14, 2 + step2 * 0.3);
 
-  ctx.stroke();
+      ctx.stroke();
 
-  ctx.restore();
-}
 
+      // Legs
 
-/* -----------------------------
-   Main animation
------------------------------ */
-
-function animate(time) {
-
-  requestAnimationFrame(animate);
-
-  /*
-    Smooth mouse movement.
-  */
-  mouse.x += (mouse.targetX - mouse.x) * 0.06;
-  mouse.y += (mouse.targetY - mouse.y) * 0.06;
-
-  /*
-    Mouse controls rotation.
-  */
-  targetRotation =
-    mouse.x * Math.PI * 0.8;
-
-  rotation +=
-    (targetRotation - rotation) * 0.04;
-
-  /*
-    Background
-  */
-  ctx.clearRect(0, 0, W, H);
-
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, W, H);
-
-
-  /*
-    Circle dimensions.
-  */
-  const radius =
-    Math.min(W, H) * 0.34;
-
-  /*
-    Central black dot.
-  */
-  const dotSize =
-    Math.min(W, H) * 0.035;
-
-  ctx.beginPath();
-  ctx.arc(
-    cx,
-    cy,
-    dotSize,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle = "#000";
-  ctx.fill();
-
-
-  /*
-    Calculate people positions.
-
-    We fake depth using sin(angle):
-    people at the front are larger,
-    people at the back are smaller.
-  */
-  const renderedPeople = people
-    .map(person => {
-
-      const angle =
-        person.angle +
-        rotation +
-        time * person.speed * person.direction;
-
-      const depth =
-        Math.sin(angle);
-
-      const x =
-        cx +
-        Math.cos(angle) * radius;
-
-      const y =
-        cy +
-        Math.sin(angle) *
-        radius *
-        0.42;
-
-      /*
-        Perspective scale.
-      */
-      const perspective =
-        0.55 + (depth + 1) * 0.28;
-
-      /*
-        Back people become lighter.
-      */
-      const alpha =
-        0.35 + (depth + 1) * 0.32;
-
-      return {
-        person,
-        x,
-        y,
-        scale: perspective * person.size,
-        alpha,
-        depth
-      };
-    })
-    /*
-      Sort by depth so people in front
-      render over people in the back.
-    */
-    .sort((a, b) => a.depth - b.depth);
-
-
-  /*
-    Draw people.
-  */
-  renderedPeople.forEach(p => {
-
-    drawPerson(
-      p.person,
-      p.x,
-      p.y,
-      p.scale,
-      p.alpha,
-      true
-    );
-
-  });
-
-
-  /*
-    Draw the central dot again so it
-    always stays visually dominant.
-  */
-  ctx.beginPath();
-
-  ctx.arc(
-    cx,
-    cy,
-    dotSize,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle = "#000";
-  ctx.fill();
-}
-
-requestAnimationFrame(animate);
-</script>
+      ctx.lineWidth = 6;
+
+      ctx.beginPath();
+
+      ctx.moveTo(-4, 13);
+      ctx.lineTo(-7 + step, 38);
+
+      ctx.moveTo(4, 13);
+      ctx.lineTo(7 + step2, 38);
+
+      ctx.stroke();
+
+
+      // Feet
+
+      ctx.lineWidth = 4;
+
+      ctx.beginPath();
+
+      ctx.moveTo(-7 + step, 38);
+      ctx.lineTo(-14 + step, 38);
+
+      ctx.moveTo(7 + step2, 38);
+      ctx.lineTo(14 + step2, 38);
+
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+
+    // -------------------------
+    // Animation
+    // -------------------------
+
+    function animate(time) {
+
+      requestAnimationFrame(animate);
+
+      // Smooth mouse
+
+      mouse.x +=
+        (mouse.targetX - mouse.x) * 0.05;
+
+      mouse.y +=
+        (mouse.targetY - mouse.y) * 0.05;
+
+
+      // Mouse controls rotation
+
+      targetRotation =
+        mouse.x * Math.PI * 0.7;
+
+      rotation +=
+        (targetRotation - rotation) * 0.035;
+
+
+      // Black background
+
+      ctx.clearRect(0, 0, W, H);
+
+      ctx.fillStyle = "#000";
+
+      ctx.fillRect(
+        0,
+        0,
+        W,
+        H
+      );
+
+
+      // Circle
+
+      const radius =
+        Math.min(W, H) * 0.34;
+
+
+      // People
+
+      const renderedPeople = people
+        .map(person => {
+
+          const angle =
+            person.angle +
+            rotation +
+            time * person.speed * person.direction;
+
+          const depth =
+            Math.sin(angle);
+
+
+          const x =
+            cx +
+            Math.cos(angle) * radius;
+
+
+          const y =
+            cy +
+            Math.sin(angle) *
+            radius *
+            0.42;
+
+
+          // Perspective
+
+          const perspective =
+            0.45 +
+            (depth + 1) * 0.35;
+
+
+          const alpha =
+            0.35 +
+            (depth + 1) * 0.32;
+
+
+          return {
+            person,
+            x,
+            y,
+            scale:
+              perspective * person.size,
+            alpha,
+            depth
+          };
+
+        })
+
+        .sort((a, b) =>
+          a.depth - b.depth
+        );
+
+
+      // Draw people
+
+      renderedPeople.forEach(p => {
+
+        drawPerson(
+          p.person,
+          p.x,
+          p.y,
+          p.scale,
+          p.alpha
+        );
+
+      });
+
+
+      // Central black dot
+
+      ctx.beginPath();
+
+      ctx.arc(
+        cx,
+        cy,
+        Math.min(W, H) * 0.018,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fillStyle = "#000";
+
+      ctx.fill();
+    }
+
+
+    requestAnimationFrame(animate);
+
+  </script>
 
 </body>
 </html>
-```
