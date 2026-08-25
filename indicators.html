@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bauhaus Interactive Expanding Orbits</title>
+  <title>Lara Petrović — Portfolio</title>
   <style>
     * {
       margin: 0;
@@ -16,7 +16,7 @@
       height: 100%;
       overflow: hidden;
       background-color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     canvas {
@@ -25,18 +25,55 @@
       height: 100vh;
       cursor: crosshair;
     }
+
+    /* Centered Text Overlay inside the Black Circle */
+    .hero-title-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      text-align: center;
+      color: #ffffff;
+      z-index: 10;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      opacity: 0.75;
+    }
   </style>
 </head>
 <body>
+
+  <div class="hero-title-container" id="titleContainer">
+    <div class="name">LARA PETROVIĆ</div>
+    <div class="subtitle">PORTFOLIO</div>
+  </div>
 
   <canvas id="bauhausCanvas"></canvas>
 
   <script>
     const canvas = document.getElementById('bauhausCanvas');
     const ctx = canvas.getContext('2d');
+    const titleContainer = document.getElementById('titleContainer');
 
     let width, height, centerX, centerY;
-    const baseCenterRadius = 55;
+    const baseCenterRadius = 105; // Enlarged to fit text elegantly
     
     // Mouse tracking & expansion target values
     const mouse = { x: -1000, y: -1000, active: false };
@@ -66,7 +103,7 @@
     class DustAnt {
       constructor(ringIndex) {
         this.ringIndex = ringIndex;
-        this.baseSpacing = 28;
+        this.baseSpacing = 26;
         this.angle = Math.random() * Math.PI * 2;
         
         const direction = ringIndex % 2 === 0 ? 1 : -1;
@@ -77,9 +114,8 @@
       }
 
       getCurrentRadius(currentExpansion) {
-        // Base distance vs widened distance per concentric ring
         const baseR = baseCenterRadius + 30 + this.ringIndex * this.baseSpacing;
-        const widenedR = baseCenterRadius + 45 + this.ringIndex * (this.baseSpacing + 22);
+        const widenedR = baseCenterRadius + 50 + this.ringIndex * (this.baseSpacing + 22);
         return baseR + (widenedR - baseR) * currentExpansion;
       }
 
@@ -114,7 +150,7 @@
     const ants = [];
 
     for (let r = 0; r < totalRings; r++) {
-      const antsInRing = 18 + r * 14;
+      const antsInRing = 22 + r * 14;
       for (let i = 0; i < antsInRing; i++) {
         ants.push(new DustAnt(r));
       }
@@ -127,14 +163,12 @@
       const dy = mouse.y - centerY;
       const mouseDist = Math.sqrt(dx * dx + dy * dy);
       
-      // Target expansion triggers when mouse drifts near or inside outer rings (< 450px radius)
-      const maxProximity = 450;
+      const maxProximity = 500;
       let targetExpansion = 0;
       
       if (mouse.active && mouseDist < maxProximity) {
-        // Smooth scaling effect based on how close the cursor is to the center
         targetExpansion = 1 - (mouseDist / maxProximity);
-        targetExpansion = Math.pow(targetExpansion, 0.8); // Curved response curve
+        targetExpansion = Math.pow(targetExpansion, 0.8);
       }
 
       // Smooth easing (Lerp) towards the target expansion
@@ -144,14 +178,18 @@
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, width, height);
 
-      // Dynamic central black circle radius (expands slightly when drifting near)
-      const currentCenterRadius = baseCenterRadius + (expansionFactor * 12);
+      // Dynamic central black circle radius
+      const currentCenterRadius = baseCenterRadius + (expansionFactor * 16);
+
+      // Subtle scaling of text container to match circle expansion
+      const textScale = 1 + expansionFactor * 0.08;
+      titleContainer.style.transform = `translate(-50%, -50%) scale(${textScale})`;
 
       // 1. Draw Widening Concentric Ring Lines
       ctx.lineWidth = 1;
       for (let r = 0; r < totalRings; r++) {
-        const baseR = baseCenterRadius + 30 + r * 28;
-        const widenedR = baseCenterRadius + 45 + r * (28 + 22);
+        const baseR = baseCenterRadius + 30 + r * 26;
+        const widenedR = baseCenterRadius + 50 + r * (26 + 22);
         const currentR = baseR + (widenedR - baseR) * expansionFactor;
 
         ctx.beginPath();
