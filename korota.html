@@ -236,7 +236,54 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-  /* ===== Poem 29 centered blocks ===== */
+  /* ===== Centered block layout for selected poems ===== */
+.poem-centered-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.poem-centered-layout .poem-number {
+  flex: 0 0 2rem;
+  color: #888;
+  font-weight: bold;
+  text-align: left;
+}
+.poem-centered-layout .poem-centered-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  align-items: center;
+}
+.poem-centered-layout .poem-centered-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 600px;
+  text-align: center;
+}
+.poem-centered-layout .poem-centered-block p {
+  margin: 0;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+@media(max-width:768px) {
+  .poem-centered-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .poem-centered-layout .poem-centered-columns {
+    align-items: flex-start;
+  }
+  .poem-centered-layout .poem-centered-block {
+    max-width: 100%;
+    text-align: left;
+  }
+}
+
+/* ===== Poem 29 centered blocks ===== */
 #poem-29 {
   display: flex;
   align-items: flex-start;
@@ -413,6 +460,11 @@ a{color:inherit;text-decoration:none;}
 .poem-text p {
   margin-bottom: 0;      /* remove paragraph spacing inside poems */
 }
+
+/* Larger spacing between poems; line spacing inside each poem stays unchanged */
+.post-content > .poem {
+  margin-bottom: 3rem;
+}
 </style>
 </head>
 <body>
@@ -453,7 +505,10 @@ a{color:inherit;text-decoration:none;}
     <h3>BIJES</h3>
 
     <!-- paragraphs 11–18 centered -->
-<div class="poem"><div class="poem-number">11</div><div class="poem-text justify">da im flora bude čitava
+<div class="poem poem-centered-layout" id="poem-11">
+  <div class="poem-number">11</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>da im flora bude čitava
 
 da im kose ne skaču
 
@@ -477,11 +532,14 @@ koju skrivamo da bi nas
 
 posvojile ruke koje su nas
 
-stvorile da imamo svoje</div></div>
+stvorile da imamo svoje</p></div>
+  </div>
+</div>
 
-<div class="poem" id="poem-12">
+<div class="poem poem-centered-layout" id="poem-12">
   <div class="poem-number">12</div>
-  <div class="poem-12-columns"><p>piće je radnja
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>piće je radnja
       ne, vi ste slabi
       miris jučerja zaklanja sunce
       u pokušaju zdravlja ću se otrovati
@@ -496,10 +554,13 @@ stvorile da imamo svoje</div></div>
       snažno tapkamo prema uspjehu
       novac u slavi u dominaciji
       društvo je gotovo siroče –
-      krivi oci i mrtve majke</p>
-    </div>
+      krivi oci i mrtve majke</p></div>
+  </div>
 </div>
-<div class="poem"><div class="poem-number">13</div><div class="poem-text justify">dobar dan, imate poziv
+<div class="poem poem-centered-layout" id="poem-13">
+  <div class="poem-number">13</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>dobar dan, imate poziv
 
 pornografski skok u svijesti
 
@@ -531,9 +592,14 @@ evo Putin mutira po svijetu
 
 ali njemu se oprašta
 
-faličan je i ne prostači</div></div>
+faličan je i ne prostači</p></div>
+  </div>
+</div>
 
-<div class="poem"><div class="poem-number">14</div><div class="poem-text justify">Heretik je´n reče:
+<div class="poem poem-centered-layout" id="poem-14">
+  <div class="poem-number">14</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>Heretik je´n reče:
 
 čednost je vrlina čiji okus gnuša
 
@@ -541,9 +607,14 @@ fakat o postojanosti genitalija
 
 a Đurđa će mu na to:
 
-jezik prigriz´o!</div></div>
+jezik prigriz´o!</p></div>
+  </div>
+</div>
 
-<div class="poem"><div class="poem-number">15</div><div class="poem-text justify">čije vlasništvo je moj rad?
+<div class="poem poem-centered-layout" id="poem-15">
+  <div class="poem-number">15</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>čije vlasništvo je moj rad?
 
 želim EU sufinanciran projekt!
 
@@ -561,10 +632,14 @@ pa se zbrojite i postanite šeste!
 
 žbakače!
 
-prožvačite tržište rada!</div></div>
+prožvačite tržište rada!</p></div>
+  </div>
+</div>
 
-<div class="poem"><div class="poem-number">16</div><div class="poem-text justify">
-ulicama hodaju utvare čije čelo viče:
+<div class="poem poem-centered-layout" id="poem-16">
+  <div class="poem-number">16</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>ulicama hodaju utvare čije čelo viče:
 
 da!
 
@@ -582,10 +657,14 @@ utvare su uporne, jarci
 
 rogovima rahleći narativ
 
-ostat će na slobodi</div></div>
+ostat će na slobodi</p></div>
+  </div>
+</div>
 
-<div class="poem"><div class="poem-number">17</div><div class="poem-text justify">
-bezglavo hodamo u 
+<div class="poem poem-centered-layout" id="poem-17">
+  <div class="poem-number">17</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>bezglavo hodamo u 
 
 sintetičkoj tvorbi mutiranih stanica
 
@@ -599,10 +678,14 @@ klinika daje ime za svaki naš izlet
 
 pritom zaboravljajući da je kao lektiru
 
-propisala – Šoljana!</div></div>
+propisala – Šoljana!</p></div>
+  </div>
+</div>
 
-<div class="poem"><div class="poem-number">18</div><div class="poem-text justify">
-prljavim čipovima umijesili su
+<div class="poem poem-centered-layout" id="poem-18">
+  <div class="poem-number">18</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>prljavim čipovima umijesili su
 
 robotske prste da bi
 
@@ -630,7 +713,9 @@ tarantelu i kao jedinu glazbu
 
 ostaviti svoj smijeh
 
-na naše krive noge</div></div>
+na naše krive noge</p></div>
+  </div>
+</div>
 
 <div class="poem"><div class="poem-number">19</div><div class="poem-text justify">vidite gospođo vi ste ovdje da čekate a mi da vam izbrišemo pamćenje nemojte se sjećati jer nema vremena uskoro će Božić a vi ste tako lijepi u crvenom jeste li sigurni da ste na pravoj adresi evo i sustav je pao možete li ponovno kako to mislite pa zvučite baš normalno unutra više niste znate ne znate da strahovi dolaze na javu ako ih puno promatrate kao mi vas ovo je slobodan prostor za kaveze ste sami potpisali pušite previše a i pišete do kasno ovdje je raspored takav da ste bolje čim utoplite krevet gospođo Marta vi s druge strane ne slušate i glasni ste Martine ne čupajte žice Martine to nije gitara Martine popravit ćemo vȃs Martine ušutite želite li nazad Martine sjetite se samo Martin je tamo</div></div>
 
@@ -736,7 +821,10 @@ na naše krive noge</div></div>
 
     <h3>DEPRESIJA</h3>
 
-    <div class="poem"><div class="poem-number">21</div><div class="poem-text justify">u vrevi dimnih stolica 
+    <div class="poem poem-centered-layout" id="poem-21">
+  <div class="poem-number">21</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>u vrevi dimnih stolica 
 
 dolazim na pijanističku sesiju
 
@@ -764,8 +852,13 @@ klizi hrptom laži
 
 i nestaje u mrmoru 
 
-moje reprodukcije</div></div>
-    <div class="poem"><div class="poem-number">22</div><div class="poem-text justify">otvaram grlo da bih pustila jad
+moje reprodukcije</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-22">
+  <div class="poem-number">22</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>otvaram grlo da bih pustila jad
 
 usne mi pucaju dok iz mene teče tišina
 
@@ -775,8 +868,13 @@ zvuk se odbija od
 
 javu koja je mora
 
-koja je moja koja sam ja</div></div>
-    <div class="poem"><div class="poem-number">23</div><div class="poem-text justify">sjećaš li se samoglasnika?
+koja je moja koja sam ja</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-23">
+  <div class="poem-number">23</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>sjećaš li se samoglasnika?
 
 prštali su s nama a ja sam 
 
@@ -796,7 +894,9 @@ na desno rame stavljam težinu svijeta
 
 u meni je bol koji čeka da procvjeta
 
-danas, danas je proljeće</div></div>
+danas, danas je proljeće</p></div>
+  </div>
+</div>
 <div class="poem" id="poem-24">
   <div class="poem-number">24</div>
   <div class="poem-24-columns">
@@ -815,7 +915,10 @@ danas, danas je proljeće</div></div>
 
   </div>
 </div>
-    <div class="poem"><div class="poem-number">25</div><div class="poem-text justify">izlaziš na krivim stanicama
+    <div class="poem poem-centered-layout" id="poem-25">
+  <div class="poem-number">25</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>izlaziš na krivim stanicama
 
 ne vjerujem što čujem, ali čekam
 
@@ -847,8 +950,13 @@ svoje komadiće lijepim
 
 nepažljivo i krivim rukama
 
-dobro sam</div></div>
-    <div class="poem"><div class="poem-number">26</div><div class="poem-text justify">nasred oktogona smo
+dobro sam</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-26">
+  <div class="poem-number">26</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>nasred oktogona smo
 
 prsti ti mirišu moju kosu
 
@@ -872,8 +980,13 @@ pogledima kradu napoj želju mene
 
 koliko god gledala gore
 
-oktogona nema</div></div>
-<div class="poem"><div class="poem-number">27</div><div class="poem-text justify">zakrabuljene sjene predaka vrište mu u očima
+oktogona nema</p></div>
+  </div>
+</div>
+<div class="poem poem-centered-layout" id="poem-27">
+  <div class="poem-number">27</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>zakrabuljene sjene predaka vrište mu u očima
 
 vapaje smo čuli i ostali gluhi
 
@@ -893,8 +1006,13 @@ sad kad ih ima, ispravlja tuđa
 
 kao da je zaboravio
 
-kao da je izbrisao</div></div>
-    <div class="poem"><div class="poem-number">28</div><div class="poem-text justify">u snovima si mi prijatelj
+kao da je izbrisao</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-28">
+  <div class="poem-number">28</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>u snovima si mi prijatelj
 
 pronalazimo toteme za usporedbu
 
@@ -912,7 +1030,9 @@ glupa sam što sam ušla
 
 igra je ubijanje
 
-moja istina: probudim se</div></div>
+moja istina: probudim se</p></div>
+  </div>
+</div>
 <div class="poem" id="poem-29">
   <div class="poem-number">29</div>
   <div class="poem-29-columns">
@@ -971,7 +1091,10 @@ moja istina: probudim se</div></div>
 
     <h3>POMIRENJE</h3>
 
-    <div class="poem"><div class="poem-number">30</div><div class="poem-text justify">slobodnolebdeće nožice kao šestar
+    <div class="poem poem-centered-layout" id="poem-30">
+  <div class="poem-number">30</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>slobodnolebdeće nožice kao šestar
 
 okružuju naše Jerihone koji
 
@@ -991,8 +1114,13 @@ prevelik jer smeta jer je
 
 čovjek mjera svemu pa tako
 
-i drugima i ne sebi</div></div>
-    <div class="poem"><div class="poem-number">31</div><div class="poem-text justify">mislili smo da male smrti znače nešto francusko, prosto
+i drugima i ne sebi</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-31">
+  <div class="poem-number">31</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>mislili smo da male smrti znače nešto francusko, prosto
 
 i da su plahte bijele nakon pranja
 
@@ -1018,8 +1146,13 @@ postavlja samo jedno pitanje:
 
 misliš li i dalje da te netko gleda
 
-ili zoveš to moralom?</div></div>
-    <div class="poem"><div class="poem-number">32</div><div class="poem-text justify">kad sam ju optužila 
+ili zoveš to moralom?</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-32">
+  <div class="poem-number">32</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>kad sam ju optužila 
 
 za ubijanje sinapsi
 
@@ -1037,8 +1170,13 @@ ispravcima nemoguće prirode?
 
 odsjeci mi dakle glavu
 
-da i ja jedem kolače</div></div>
-    <div class="poem"><div class="poem-number">33</div><div class="poem-text justify">kao počasni Vennovi članovi
+da i ja jedem kolače</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-33">
+  <div class="poem-number">33</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>kao počasni Vennovi članovi
 
 slijedimo putanju svojih kruga
 
@@ -1052,15 +1190,25 @@ revizija dijaloga je zabranjena
 
 pa ljudi su uvijek 
 
-Isti</div></div>
-    <div class="poem"><div class="poem-number">34</div><div class="poem-text justify">smisao je dobro naći ni u čemu
+Isti</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-34">
+  <div class="poem-number">34</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>smisao je dobro naći ni u čemu
 
 male smrti za male prinčeve:
 
 1. boe ne jedu čitave slonove
 
-2. postoje samo šeširi</div></div>
-    <div class="poem"><div class="poem-number">35</div><div class="poem-text justify">obodi su obadi koji ne mogu protiv sebe
+2. postoje samo šeširi</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-35">
+  <div class="poem-number">35</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>obodi su obadi koji ne mogu protiv sebe
 
 kojeg su naučili jer su im rekli
 
@@ -1076,8 +1224,13 @@ ostavljanje odrješite odluke
 
 odlutati u oduzimanje 
 
-ili ostati za obod</div></div>
-    <div class="poem"><div class="poem-number">36</div><div class="poem-text justify">nađi malu dvokolicu pa proklinji dokolicu
+ili ostati za obod</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-36">
+  <div class="poem-number">36</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>nađi malu dvokolicu pa proklinji dokolicu
 
 okreni se oko osi i slušaj njihov pljesak
 
@@ -1093,8 +1246,13 @@ nastavio s kotrljanjem
 
 gospodine, vi ste buha!
 
-buha u ovom cirkusu!</div></div>
-    <div class="poem"><div class="poem-number">37</div><div class="poem-text justify">stupam po ravnoj zemlji
+buha u ovom cirkusu!</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-37">
+  <div class="poem-number">37</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>stupam po ravnoj zemlji
 
 i dođem do kraja ploče
 
@@ -1124,8 +1282,13 @@ ili
 
 osvojio sam dno!
 
-svejedno</div></div>
-    <div class="poem"><div class="poem-number">38</div><div class="poem-text justify">što ako su vizije
+svejedno</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-38">
+  <div class="poem-number">38</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>što ako su vizije
 
 upravo one bobice istine
 
@@ -1147,8 +1310,13 @@ neočekivana sila koja 
 
 se iznenada pojavljuje
 
-i rešava stvar?</div></div>
-    <div class="poem"><div class="poem-number">39</div><div class="poem-text justify">u minijaturi umjetnost znači
+i rešava stvar?</p></div>
+  </div>
+</div>
+    <div class="poem poem-centered-layout" id="poem-39">
+  <div class="poem-number">39</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>u minijaturi umjetnost znači
 
 osjećati sve osjet dišem
 
@@ -1168,8 +1336,13 @@ koje slapim svaki dan znajući da će
 
 doći turisti kojima ću moći reći:
 
-nisam više bolestan!</div></div>
-  <div class="poem"><div class="poem-number">40</div><div class="poem-text justify">dragi doktore,
+nisam više bolestan!</p></div>
+  </div>
+</div>
+  <div class="poem poem-centered-layout" id="poem-40">
+  <div class="poem-number">40</div>
+  <div class="poem-centered-columns">
+    <div class="poem-centered-block"><p>dragi doktore,
 
 ja se budim mokar i bez daha
 
@@ -1221,7 +1394,9 @@ ja u snove vjerujem
 
 već samo da me ne gledate
 
-baš toliko svisoka</div></div>
+baš toliko svisoka</p></div>
+  </div>
+</div>
 
   </article>
 </main>
